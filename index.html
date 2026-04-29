@@ -10,151 +10,104 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html, body {
-  height: 100%;
-  background: #ffffff;
-  color: #111111;
-  font-family: 'Plus Jakarta Sans', 'Segoe UI', system-ui, sans-serif;
-  font-size: 15px;
-  -webkit-font-smoothing: antialiased;
-  overscroll-behavior: none;
-}
+html, body { height: 100%; background: #fff; color: #111; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; font-size: 15px; -webkit-font-smoothing: antialiased; overscroll-behavior: none; }
 .screen { display: none; flex-direction: column; height: 100dvh; overflow: hidden; }
 .screen.active { display: flex; }
 .scroll-body { flex: 1; overflow-y: auto; overflow-x: hidden; -webkit-overflow-scrolling: touch; padding-bottom: 76px; }
 .scroll-body::-webkit-scrollbar { width: 3px; }
-.scroll-body::-webkit-scrollbar-thumb { background: #cccccc; border-radius: 3px; }
-
-/* NAV */
-.bottom-nav {
-position: fixed; bottom: 0; left: 0; right: 0; height: 60px;
-background: rgba(255,255,255,0.96);
-border-top: 1px solid #e0e0e0;
-backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-display: flex; align-items: center; justify-content: space-around;
-z-index: 100; padding-bottom: env(safe-area-inset-bottom);
-}
-.nav-btn {
-display: flex; flex-direction: column; align-items: center; gap: 3px;
-background: none; border: none; cursor: pointer;
-color: #999999;
-font-family: ‘Plus Jakarta Sans’, sans-serif;
-font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
-padding: 6px 20px; -webkit-tap-highlight-color: transparent; transition: color .15s;
-}
-.nav-btn.active { color: #000000; }
-.nav-btn:active { color: #000000; }
-.icon-home { width: 20px; height: 18px; display: flex; flex-direction: column; align-items: center; }
-.icon-home::before { content: ‘’; width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-bottom: 8px solid currentColor; }
-.icon-home::after { content: ‘’; width: 13px; height: 8px; background: currentColor; clip-path: polygon(0 0,100% 0,100% 100%,62% 100%,62% 45%,38% 45%,38% 100%,0 100%); }
-.icon-theory { width: 20px; height: 18px; display: flex; flex-direction: column; justify-content: center; gap: 3px; }
-.icon-theory span { display: block; height: 2px; background: currentColor; border-radius: 1px; }
-.icon-theory span:nth-child(1) { width: 100%; }
-.icon-theory span:nth-child(2) { width: 70%; }
-.icon-theory span:nth-child(3) { width: 85%; }
-
-/* HOME */
-.home-header { padding: 48px 20px 24px; border-bottom: 2px solid #000000; }
-.home-kicker { font-size: 10px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: #999999; margin-bottom: 8px; }
-.home-title { font-size: 40px; font-weight: 800; color: #000000; line-height: 1; letter-spacing: -.02em; }
-.home-sub { font-size: 12px; font-weight: 500; color: #999999; margin-top: 8px; }
+.scroll-body::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
+.bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; height: 60px; background: rgba(255,255,255,0.96); border-top: 1px solid #e0e0e0; backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); display: flex; align-items: center; justify-content: space-around; z-index: 100; padding-bottom: env(safe-area-inset-bottom); }
+.nav-btn { display: flex; flex-direction: column; align-items: center; gap: 3px; background: none; border: none; cursor: pointer; color: #999; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 6px 16px; -webkit-tap-highlight-color: transparent; transition: color .15s; }
+.nav-btn.active { color: #000; }
+.nav-btn:active { color: #000; }
+.nav-icon { width: 22px; height: 20px; display: flex; align-items: center; justify-content: center; }
+.home-header { padding: 48px 20px 24px; border-bottom: 2px solid #000; }
+.home-kicker { font-size: 10px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: #999; margin-bottom: 8px; }
+.home-title { font-size: 40px; font-weight: 800; color: #000; line-height: 1; letter-spacing: -.02em; }
+.home-sub { font-size: 12px; font-weight: 500; color: #999; margin-top: 8px; }
 .cof-wrap { padding: 20px 14px 8px; }
-.grid-label { font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #999999; margin-bottom: 12px; padding: 0 2px; }
+.grid-label { font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #999; margin-bottom: 12px; padding: 0 2px; }
+.fav-section { padding: 16px 14px 0; border-bottom: 1px solid #e0e0e0; }
+.fav-label { font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #999; margin-bottom: 10px; padding: 0 2px; }
+.fav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px; }
+.fav-card { background: #fff; border: 1.5px solid #000; border-radius: 10px; padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.fav-card:active { background: #f5f5f5; }
+.fav-name { font-size: 15px; font-weight: 800; color: #000; }
+.fav-remove { font-size: 16px; color: #ccc; background: none; border: none; cursor: pointer; padding: 0 0 0 8px; -webkit-tap-highlight-color: transparent; flex-shrink: 0; }
 .key-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.key-card { background: #ffffff; border: 1.5px solid #e0e0e0; border-radius: 10px; padding: 14px 14px 12px; }
+.key-card { background: #fff; border: 1.5px solid #e0e0e0; border-radius: 10px; padding: 14px 14px 12px; }
 .kc-major-btn, .kc-minor-btn { display: block; width: 100%; text-align: left; background: none; border: none; cursor: pointer; -webkit-tap-highlight-color: transparent; padding: 0; }
-.kc-major { font-size: 18px; font-weight: 800; color: #000000; line-height: 1.2; transition: color .1s; }
+.kc-major { font-size: 18px; font-weight: 800; color: #000; line-height: 1.2; transition: color .1s; }
 .kc-major-btn:active .kc-major { color: #0070c0; }
-.kc-sig { font-size: 10px; font-weight: 500; color: #999999; margin-top: 2px; }
+.kc-sig { font-size: 10px; font-weight: 500; color: #999; margin-top: 2px; }
 .kc-div { border: none; border-top: 1px solid #e0e0e0; margin: 10px 0 9px; }
-.kc-minor { font-size: 13px; font-weight: 600; color: #555555; transition: color .1s; }
+.kc-minor { font-size: 13px; font-weight: 600; color: #555; transition: color .1s; }
 .kc-minor-btn:active .kc-minor { color: #0070c0; }
-
-/* KEY VIEW */
-.kv-header { padding: 28px 20px 16px; border-bottom: 2px solid #000000; }
-.kv-kicker { font-size: 10px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: #999999; margin-bottom: 5px; }
-.kv-name { font-size: 34px; font-weight: 800; color: #000000; line-height: 1; letter-spacing: -.02em; }
-
-/* CHORD MAP */
+.kc-fav-btn { font-size: 14px; color: #ddd; background: none; border: none; cursor: pointer; -webkit-tap-highlight-color: transparent; padding: 2px 4px; transition: color .1s; flex-shrink: 0; }
+.kc-fav-btn.starred { color: #f59e0b; }
+.kv-header { padding: 24px 20px 14px; border-bottom: 2px solid #000; display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.kv-header-left { flex: 1; }
+.kv-kicker { font-size: 10px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: #999; margin-bottom: 5px; }
+.kv-name { font-size: 34px; font-weight: 800; color: #000; line-height: 1; letter-spacing: -.02em; }
+.kv-transpose { display: flex; flex-direction: column; align-items: center; gap: 4px; flex-shrink: 0; padding-top: 4px; }
+.kv-transpose-label { font-size: 8px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #ccc; }
+.kv-transpose-btns { display: flex; gap: 4px; }
+.kv-transpose-btn { width: 32px; height: 32px; border-radius: 8px; border: 1.5px solid #e0e0e0; background: #f5f5f5; font-size: 16px; font-weight: 700; color: #555; cursor: pointer; display: flex; align-items: center; justify-content: center; -webkit-tap-highlight-color: transparent; }
+.kv-transpose-btn:active { background: #000; color: #fff; border-color: #000; }
 .chord-map-section { padding: 16px 12px 0; border-bottom: 1px solid #e0e0e0; }
-.sec-label { font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #999999; margin-bottom: 10px; padding: 0 2px; }
+.sec-label { font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #999; margin-bottom: 10px; padding: 0 2px; }
 .map-controls { display: flex; gap: 5px; margin-bottom: 12px; flex-wrap: wrap; }
-.map-tog {
-font-family: ‘Plus Jakarta Sans’, sans-serif; font-size: 10px; font-weight: 700; letter-spacing: .06em;
-padding: 5px 12px; border-radius: 6px; border: 1.5px solid #e0e0e0;
-background: #f5f5f5; color: #999999; cursor: pointer; -webkit-tap-highlight-color: transparent; transition: all .1s;
-}
-.map-tog.active-triad  { background: rgba(0,112,192,0.07); border-color: rgba(0,112,192,0.25); color: #0070c0; }
-.map-tog.active-seventh{ background: rgba(180,83,9,0.07);  border-color: rgba(180,83,9,0.25);  color: #b45309; }
-.map-tog.active-ninth  { background: rgba(124,58,237,0.07); border-color: rgba(124,58,237,0.25); color: #7c3aed; }
-.fing-tog {
-font-family: ‘Plus Jakarta Sans’, sans-serif; font-size: 10px; font-weight: 700; letter-spacing: .06em;
-padding: 5px 12px; border-radius: 6px; border: 1.5px solid #e0e0e0;
-background: #f5f5f5; color: #999999; cursor: pointer; -webkit-tap-highlight-color: transparent; transition: all .1s;
-}
-.fing-tog.active { background: #000000; border-color: #000000; color: #ffffff; }
-
-/* CHORD MAP GRID — key fix, no overflow */
+.fing-tog { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: .06em; padding: 5px 12px; border-radius: 6px; border: 1.5px solid #e0e0e0; background: #f5f5f5; color: #999; cursor: pointer; -webkit-tap-highlight-color: transparent; transition: all .1s; }
+.fing-tog.active { background: #000; border-color: #000; color: #fff; }
 .chord-map-row { display: grid; grid-template-columns: repeat(7,1fr); gap: 4px; padding: 0 2px 14px; width: 100%; }
-.chord-card {
-display: flex; flex-direction: column; align-items: center;
-border-radius: 8px; border: 1.5px solid #e0e0e0; background: #ffffff;
-cursor: pointer; -webkit-tap-highlight-color: transparent;
-transition: border-color .12s, background .12s; overflow: hidden; position: relative; width: 100%;
-}
-.chord-card.selected { border-color: #000000; background: #f5f5f5; }
-.chord-card.selected::after { content: ‘’; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: #000000; }
-.cc-sym { font-size: clamp(11px,2.8vw,18px); font-weight: 800; color: #000000; line-height: 1; padding: 8px 2px 4px; white-space: nowrap; text-align: center; width: 100%; }
-.cc-meta { font-size: clamp(7px,1.5vw,9px); font-weight: 700; letter-spacing: .03em; text-transform: uppercase; color: #999999; padding: 0 2px 4px; text-align: center; line-height: 1.4; width: 100%; }
+.chord-card { display: flex; flex-direction: column; align-items: center; border-radius: 8px; border: 1.5px solid #e0e0e0; background: #fff; cursor: pointer; -webkit-tap-highlight-color: transparent; transition: border-color .12s, background .12s; overflow: hidden; position: relative; width: 100%; }
+.chord-card.selected { border-color: #000; background: #f5f5f5; }
+.chord-card.selected::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: #000; }
+.cc-sym { font-size: clamp(11px,2.8vw,18px); font-weight: 800; color: #000; line-height: 1; padding: 8px 2px 4px; white-space: nowrap; text-align: center; width: 100%; }
+.cc-meta { font-size: clamp(7px,1.5vw,9px); font-weight: 700; letter-spacing: .03em; text-transform: uppercase; color: #999; padding: 0 2px 4px; text-align: center; line-height: 1.4; width: 100%; }
 .cc-notes-wrap { width: 100%; border-top: 1px solid #e0e0e0; padding: 5px 2px 7px; display: flex; flex-direction: column; gap: 2px; align-items: center; }
 .cc-note-row { display: flex; justify-content: center; flex-wrap: wrap; gap: 1px; width: 100%; }
-.cc-note { font-size: clamp(8px,1.9vw,11px); font-weight: 700; color: #555555; white-space: nowrap; line-height: 1.3; }
-.cc-note.root-note    { color: #000000; }
+.cc-note { font-size: clamp(8px,1.9vw,11px); font-weight: 700; color: #555; white-space: nowrap; line-height: 1.3; }
+.cc-note.root-note { color: #000; }
 .cc-note.seventh-note { color: #b45309; }
-.cc-note.ninth-note   { color: #7c3aed; }
-.cc-note-sep { font-size: 8px; color: #999999; line-height: 1.3; }
-.cc-row-label { font-size: 7px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #999999; text-align: center; margin-top: 2px; }
-.cc-row-label.lbl-7 { color: #b45309; opacity: .9; }
-.cc-row-label.lbl-9 { color: #7c3aed; opacity: .9; }
+.cc-note.ninth-note { color: #7c3aed; }
+.cc-note-sep { font-size: 8px; color: #bbb; line-height: 1.3; }
+.cc-row-label { font-size: 7px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; text-align: center; margin-top: 2px; }
+.cc-row-label.lbl-7 { color: #b45309; }
+.cc-row-label.lbl-9 { color: #7c3aed; }
 .map-legend { display: flex; gap: 14px; padding: 0 14px 12px; flex-wrap: wrap; }
-.legend-item { display: flex; align-items: center; gap: 5px; font-size: 9px; font-weight: 700; color: #999999; letter-spacing: .06em; text-transform: uppercase; }
+.legend-item { display: flex; align-items: center; gap: 5px; font-size: 9px; font-weight: 700; color: #999; letter-spacing: .06em; text-transform: uppercase; }
 .leg-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
 .leg-dot.triad { background: #0070c0; }
-.leg-dot.sev   { background: #b45309; }
-.leg-dot.nin   { background: #7c3aed; }
-
-/* CHORD PANEL */
-.chord-panel { margin: 0 12px; border: 1.5px solid #cccccc; border-top: none; border-radius: 0 0 10px 10px; background: #ffffff; display: none; overflow: hidden; }
+.leg-dot.sev { background: #b45309; }
+.leg-dot.nin { background: #7c3aed; }
+.chord-panel { margin: 0 12px; border: 1.5px solid #ccc; border-top: none; border-radius: 0 0 10px 10px; background: #fff; display: none; overflow: hidden; }
 .chord-panel.open { display: block; }
 .cp-body { padding: 16px; }
 .cp-row1 { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 14px; }
-.cp-name { font-size: 28px; font-weight: 800; color: #000000; line-height: 1; letter-spacing: -.02em; }
-.cp-qual { font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #999999; }
+.cp-name { font-size: 28px; font-weight: 800; color: #000; line-height: 1; letter-spacing: -.02em; }
+.cp-qual { font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #999; }
 .cp-toggles { display: flex; gap: 5px; margin-bottom: 14px; }
-.cp-tog {
-font-family: ‘Plus Jakarta Sans’, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: .06em;
-padding: 6px 14px; border-radius: 6px; border: 1.5px solid #e0e0e0;
-background: #f5f5f5; color: #555555; cursor: pointer; -webkit-tap-highlight-color: transparent; transition: all .1s;
-}
-.cp-tog.on-triad   { background: rgba(0,112,192,0.07);  border-color: rgba(0,112,192,0.25);  color: #0070c0; }
-.cp-tog.on-seventh { background: rgba(180,83,9,0.07);   border-color: rgba(180,83,9,0.25);   color: #b45309; }
-.cp-tog.on-ninth   { background: rgba(124,58,237,0.07); border-color: rgba(124,58,237,0.25); color: #7c3aed; }
+.cp-tog { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: .06em; padding: 6px 14px; border-radius: 6px; border: 1.5px solid #e0e0e0; background: #f5f5f5; color: #555; cursor: pointer; -webkit-tap-highlight-color: transparent; transition: all .1s; }
+.cp-tog.on-triad { background: rgba(0,112,192,0.07); border-color: rgba(0,112,192,0.25); color: #0070c0; }
+.cp-tog.on-seventh { background: rgba(180,83,9,0.07); border-color: rgba(180,83,9,0.25); color: #b45309; }
+.cp-tog.on-ninth { background: rgba(124,58,237,0.07); border-color: rgba(124,58,237,0.25); color: #7c3aed; }
 .cp-tones { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; align-items: center; }
 .chip { font-size: 16px; font-weight: 800; padding: 5px 11px; border-radius: 7px; line-height: 1.2; }
-.chip.triad { background: rgba(0,112,192,0.07);  color: #0070c0; border: 1.5px solid rgba(0,112,192,0.25); }
-.chip.ext   { background: rgba(180,83,9,0.07);   color: #b45309; border: 1.5px solid rgba(180,83,9,0.25); }
-.chip.nin   { background: rgba(124,58,237,0.07); color: #7c3aed; border: 1.5px solid rgba(124,58,237,0.25); }
-.chip-plus  { font-size: 13px; font-weight: 700; color: #999999; padding: 0 2px; }
+.chip.triad { background: rgba(0,112,192,0.07); color: #0070c0; border: 1.5px solid rgba(0,112,192,0.25); }
+.chip.ext { background: rgba(180,83,9,0.07); color: #b45309; border: 1.5px solid rgba(180,83,9,0.25); }
+.chip.nin { background: rgba(124,58,237,0.07); color: #7c3aed; border: 1.5px solid rgba(124,58,237,0.25); }
+.chip-plus { font-size: 13px; font-weight: 700; color: #999; padding: 0 2px; }
 .cp-keys-row { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 14px; align-items: center; }
-.cp-keys-label { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #999999; margin-right: 4px; flex-shrink: 0; }
-.cp-key-pill { font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 5px; border: 1.5px solid #e0e0e0; background: #f5f5f5; color: #555555; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.cp-keys-label { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #999; margin-right: 4px; flex-shrink: 0; }
+.cp-key-pill { font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 5px; border: 1.5px solid #e0e0e0; background: #f5f5f5; color: #555; cursor: pointer; -webkit-tap-highlight-color: transparent; }
 .cp-key-pill:active { border-color: #0070c0; color: #0070c0; }
 .cp-hr { border: none; border-top: 1px solid #e0e0e0; margin: 12px 0; }
-.cp-sublabel { font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #999999; margin-bottom: 9px; }
+.cp-sublabel { font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #999; margin-bottom: 9px; }
 .cp-invs { display: flex; flex-direction: column; gap: 7px; }
 .cp-inv { display: flex; align-items: baseline; }
-.inv-label { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #999999; min-width: 88px; flex-shrink: 0; }
-.inv-notes { font-size: 15px; font-weight: 600; color: #555555; }
+.inv-label { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #999; min-width: 88px; flex-shrink: 0; }
+.inv-notes { font-size: 15px; font-weight: 600; color: #555; }
 .mode-flag { margin-top: 12px; padding: 10px 12px; border-left: 3px solid rgba(6,95,70,0.22); background: rgba(6,95,70,0.07); border-radius: 0 8px 8px 0; }
 .mode-flag-label { font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #065f46; opacity: .8; margin-bottom: 3px; }
 .mode-flag-text { font-size: 14px; font-weight: 700; color: #065f46; }
@@ -162,551 +115,631 @@ background: #f5f5f5; color: #555555; cursor: pointer; -webkit-tap-highlight-colo
 .harm-flag { margin-top: 10px; padding: 10px 12px; border-left: 3px solid rgba(109,40,217,0.20); background: rgba(109,40,217,0.06); border-radius: 0 8px 8px 0; }
 .harm-label { font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #6d28d9; opacity: .8; margin-bottom: 4px; }
 .harm-text { font-size: 14px; font-weight: 600; color: #6d28d9; line-height: 1.5; }
-
-/* VOICINGS */
 .voicing-wrap { background: #f2f2f2; border-top: 1px solid #e0e0e0; padding: 14px 16px 16px; }
 .vc-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
-.vc-title { font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #999999; }
-.vc-badge { font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #999999; border: 1.5px solid #cccccc; border-radius: 4px; padding: 2px 7px; }
+.vc-title { font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #999; }
+.vc-badge { font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #999; border: 1.5px solid #ccc; border-radius: 4px; padding: 2px 7px; }
 .vc-list { display: flex; flex-direction: column; gap: 8px; }
-.vc-card { background: #ffffff; border: 1.5px solid #e0e0e0; border-radius: 9px; padding: 11px 13px 11px 16px; position: relative; overflow: hidden; }
-.vc-card::before { content: ‘’; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: #0070c0; border-radius: 9px 0 0 9px; }
+.vc-card { background: #fff; border: 1.5px solid #e0e0e0; border-radius: 9px; padding: 11px 13px 11px 16px; position: relative; overflow: hidden; }
+.vc-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: #0070c0; border-radius: 9px 0 0 9px; }
 .vc-card.yours::before { background: #b45309; }
-.vc-name { font-size: 13px; font-weight: 700; color: #111111; margin-bottom: 8px; display: flex; align-items: center; gap: 7px; }
+.vc-name { font-size: 13px; font-weight: 700; color: #111; margin-bottom: 8px; display: flex; align-items: center; gap: 7px; }
 .vc-tag { font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #b45309; background: rgba(180,83,9,0.07); border: 1px solid rgba(180,83,9,0.25); border-radius: 4px; padding: 2px 6px; }
 .vc-hands { display: flex; flex-direction: column; gap: 5px; }
 .vc-hand { display: flex; align-items: baseline; gap: 10px; }
-.vc-hand-lbl { font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #999999; min-width: 20px; flex-shrink: 0; }
-.vc-hand-notes { font-size: 16px; font-weight: 700; color: #555555; letter-spacing: .04em; line-height: 1.2; }
-.vc-tip { font-size: 10px; font-weight: 500; color: #999999; margin-top: 7px; line-height: 1.55; }
-
-/* ARPEGGIOS */
+.vc-hand-lbl { font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #999; min-width: 20px; flex-shrink: 0; }
+.vc-hand-notes { font-size: 16px; font-weight: 700; color: #555; letter-spacing: .04em; line-height: 1.2; }
+.vc-tip { font-size: 10px; font-weight: 500; color: #999; margin-top: 7px; line-height: 1.55; }
 .arp-wrap { background: #f5f5f5; border-top: 1px solid #e0e0e0; padding: 14px 16px 16px; }
 .arp-header { margin-bottom: 12px; }
-.arp-title { font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #999999; }
+.arp-title { font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #999; }
 .arp-list { display: flex; flex-direction: column; gap: 7px; }
-.arp-card { background: #ffffff; border: 1.5px solid #e0e0e0; border-radius: 9px; padding: 11px 13px 11px 16px; position: relative; overflow: hidden; }
-.arp-card::before { content: ‘’; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: #065f46; border-radius: 9px 0 0 9px; }
-.arp-name { font-size: 13px; font-weight: 700; color: #111111; margin-bottom: 5px; }
-.arp-seq { font-size: 14px; font-weight: 700; color: #555555; letter-spacing: .03em; line-height: 1.4; margin-bottom: 4px; }
-.arp-tip { font-size: 10px; font-weight: 500; color: #999999; line-height: 1.55; }
-
-/* PROGRESSIONS */
+.arp-card { background: #fff; border: 1.5px solid #e0e0e0; border-radius: 9px; padding: 11px 13px 11px 16px; position: relative; overflow: hidden; }
+.arp-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: #065f46; border-radius: 9px 0 0 9px; }
+.arp-name { font-size: 13px; font-weight: 700; color: #111; margin-bottom: 5px; }
+.arp-seq { font-size: 14px; font-weight: 700; color: #555; letter-spacing: .03em; line-height: 1.4; margin-bottom: 4px; }
+.arp-tip { font-size: 10px; font-weight: 500; color: #999; line-height: 1.55; }
 .prog-wrap { padding: 18px 16px 0; border-bottom: 1px solid #e0e0e0; }
 .prog-list { display: flex; flex-direction: column; margin-bottom: 18px; }
-.prog-row { display: flex; flex-direction: column; padding: 11px 0; border-bottom: 1px solid #e0e0e0; }
+.prog-row { display: flex; flex-direction: column; border-bottom: 1px solid #e0e0e0; }
 .prog-row:last-child { border-bottom: none; }
+.prog-summary { display: flex; flex-direction: column; padding: 11px 0; cursor: pointer; -webkit-tap-highlight-color: transparent; }
 .prog-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 3px; }
-.prog-roman { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #999999; }
-.prog-feel { font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 2px 7px; border-radius: 4px; border: 1.5px solid #e0e0e0; background: #f5f5f5; color: #999999; }
-.prog-chords { font-size: 19px; font-weight: 800; color: #111111; letter-spacing: -.01em; line-height: 1.3; margin-bottom: 5px; }
+.prog-roman { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #999; }
+.prog-feel { font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 2px 7px; border-radius: 4px; border: 1.5px solid #e0e0e0; background: #f5f5f5; color: #999; }
+.prog-chords { font-size: 19px; font-weight: 800; color: #111; letter-spacing: -.01em; line-height: 1.3; }
+.prog-expand-hint { font-size: 10px; font-weight: 600; color: #bbb; margin-top: 4px; }
+.prog-detail { display: none; padding: 0 0 12px; }
+.prog-detail.open { display: block; }
 .passing-row { display: flex; flex-wrap: wrap; gap: 5px; align-items: center; }
 .pass-label { font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #9f1239; opacity: .8; flex-shrink: 0; }
 .pass-item { font-size: 11px; font-weight: 700; color: #9f1239; background: rgba(159,18,57,0.06); border: 1px solid rgba(159,18,57,0.20); border-radius: 4px; padding: 2px 7px; }
-
-/* RELATED */
+.songs-wrap { padding: 18px 16px 0; border-bottom: 1px solid #e0e0e0; }
+.songs-list { display: flex; flex-direction: column; margin-bottom: 18px; }
+.song-row { display: flex; align-items: baseline; gap: 10px; padding: 8px 0; border-bottom: 1px solid #f0f0f0; }
+.song-row:last-child { border-bottom: none; }
+.song-num { font-size: 10px; font-weight: 700; color: #ccc; min-width: 16px; flex-shrink: 0; }
+.song-title { font-size: 14px; font-weight: 700; color: #111; flex: 1; }
+.song-artist { font-size: 12px; font-weight: 500; color: #999; }
 .related-wrap { padding: 18px 16px 0; }
 .related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 20px; }
-.rel-card { border: 1.5px solid #e0e0e0; border-radius: 9px; padding: 12px 28px 12px 14px; cursor: pointer; -webkit-tap-highlight-color: transparent; background: #ffffff; position: relative; }
-.rel-card::after { content: ‘›’; position: absolute; right: 12px; top: 50%; transform: translateY(-50%); font-size: 18px; font-weight: 700; color: #999999; }
+.rel-card { border: 1.5px solid #e0e0e0; border-radius: 9px; padding: 12px 28px 12px 14px; cursor: pointer; -webkit-tap-highlight-color: transparent; background: #fff; position: relative; }
+.rel-card::after { content: '›'; position: absolute; right: 12px; top: 50%; transform: translateY(-50%); font-size: 18px; font-weight: 700; color: #999; }
 .rel-card:active { background: #f5f5f5; }
-.rel-relation { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #999999; margin-bottom: 3px; }
-.rel-name { font-size: 16px; font-weight: 700; color: #000000; }
-
-/* ══════════════════════════════════════
-THEORY SCREEN
-══════════════════════════════════════ */
-.theory-header { padding: 48px 20px 24px; border-bottom: 2px solid #000000; }
-.theory-kicker { font-size: 10px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: #999999; margin-bottom: 8px; }
-.theory-title { font-size: 36px; font-weight: 800; color: #000000; line-height: 1; letter-spacing: -.02em; }
-.theory-sub { font-size: 12px; font-weight: 500; color: #999999; margin-top: 8px; line-height: 1.5; }
-.theory-index { padding: 16px 16px 0; border-bottom: 1px solid #e0e0e0; }
-.theory-index-label { font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #999999; margin-bottom: 10px; }
+.rel-relation { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #999; margin-bottom: 3px; }
+.rel-name { font-size: 16px; font-weight: 700; color: #000; }
+.back-to-top { position: fixed; bottom: 72px; right: 16px; width: 40px; height: 40px; border-radius: 50%; background: #000; border: none; cursor: pointer; display: none; align-items: center; justify-content: center; z-index: 99; box-shadow: 0 2px 8px rgba(0,0,0,0.2); -webkit-tap-highlight-color: transparent; }
+.back-to-top.visible { display: flex; }
+.theory-header { padding: 48px 20px 24px; border-bottom: 2px solid #000; }
+.theory-kicker { font-size: 10px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: #999; margin-bottom: 8px; }
+.theory-title { font-size: 36px; font-weight: 800; color: #000; line-height: 1; letter-spacing: -.02em; }
+.theory-sub { font-size: 12px; font-weight: 500; color: #999; margin-top: 8px; line-height: 1.5; }
+.theory-index { padding: 16px 16px 0; }
+.theory-index-label { font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #999; margin-bottom: 10px; }
 .theory-index-list { display: flex; flex-direction: column; margin-bottom: 16px; }
 .theory-index-item { display: flex; align-items: center; justify-content: space-between; padding: 11px 0; border-bottom: 1px solid #e0e0e0; cursor: pointer; -webkit-tap-highlight-color: transparent; }
 .theory-index-item:last-child { border-bottom: none; }
 .theory-index-item:active { opacity: .6; }
-.tii-num { font-size: 10px; font-weight: 700; color: #999999; min-width: 22px; }
-.tii-name { font-size: 15px; font-weight: 700; color: #000000; flex: 1; padding: 0 10px; }
-.tii-arrow { font-size: 18px; font-weight: 700; color: #999999; }
+.tii-num { font-size: 10px; font-weight: 700; color: #999; min-width: 22px; }
+.tii-name { font-size: 15px; font-weight: 700; color: #000; flex: 1; padding: 0 10px; }
+.tii-arrow { font-size: 18px; font-weight: 700; color: #999; }
 .theory-body { padding: 0 16px 8px; }
 .theory-chapter { display: none; padding-top: 20px; }
 .theory-chapter.open { display: block; }
-.chapter-back { display: flex; align-items: center; gap: 8px; background: none; border: none; cursor: pointer; -webkit-tap-highlight-color: transparent; padding: 0 0 16px; font-family: ‘Plus Jakarta Sans’, sans-serif; font-size: 11px; font-weight: 700; color: #999999; letter-spacing: .06em; text-transform: uppercase; }
-.chapter-back::before { content: ‘←’; font-size: 14px; }
-.chapter-back:active { color: #000000; }
-.chapter-title { font-size: 26px; font-weight: 800; color: #000000; letter-spacing: -.02em; margin-bottom: 6px; }
-.chapter-intro { font-size: 14px; font-weight: 500; color: #555555; line-height: 1.65; margin-bottom: 20px; }
-.concept-card { background: #ffffff; border: 1.5px solid #e0e0e0; border-radius: 10px; margin-bottom: 12px; overflow: hidden; }
+.chapter-back { display: flex; align-items: center; gap: 8px; background: none; border: none; cursor: pointer; -webkit-tap-highlight-color: transparent; padding: 0 0 16px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 11px; font-weight: 700; color: #999; letter-spacing: .06em; text-transform: uppercase; }
+.chapter-back::before { content: '←'; font-size: 14px; }
+.chapter-back:active { color: #000; }
+.chapter-title { font-size: 26px; font-weight: 800; color: #000; letter-spacing: -.02em; margin-bottom: 6px; }
+.chapter-intro { font-size: 14px; font-weight: 500; color: #555; line-height: 1.65; margin-bottom: 20px; }
+.concept-card { background: #fff; border: 1.5px solid #e0e0e0; border-radius: 10px; margin-bottom: 12px; overflow: hidden; }
 .concept-header { padding: 13px 16px; cursor: pointer; -webkit-tap-highlight-color: transparent; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 .concept-header:active { background: #f5f5f5; }
-.concept-title { font-size: 15px; font-weight: 700; color: #000000; }
-.concept-toggle { font-size: 18px; font-weight: 400; color: #999999; transition: transform .2s; flex-shrink: 0; }
+.concept-title { font-size: 15px; font-weight: 700; color: #000; }
+.concept-toggle { font-size: 18px; font-weight: 400; color: #999; transition: transform .2s; flex-shrink: 0; }
 .concept-toggle.open { transform: rotate(45deg); }
 .concept-body { display: none; padding: 0 16px 14px; border-top: 1px solid #e0e0e0; }
 .concept-body.open { display: block; }
-.concept-body p { font-size: 13px; font-weight: 500; color: #555555; line-height: 1.7; margin-top: 10px; }
-.concept-body strong { font-weight: 700; color: #111111; }
+.concept-body p { font-size: 13px; font-weight: 500; color: #555; line-height: 1.7; margin-top: 10px; }
+.concept-body strong { font-weight: 700; color: #111; }
 .concept-example { background: #f5f5f5; border-radius: 7px; padding: 10px 12px; margin-top: 10px; }
-.concept-example-label { font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #999999; margin-bottom: 5px; }
-.concept-example-text { font-size: 13px; font-weight: 700; color: #111111; line-height: 1.6; }
+.concept-example-label { font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #999; margin-bottom: 5px; }
+.concept-example-text { font-size: 13px; font-weight: 700; color: #111; line-height: 1.6; }
 .concept-tip { margin-top: 10px; padding: 9px 12px; border-left: 3px solid rgba(0,112,192,0.25); background: rgba(0,112,192,0.07); border-radius: 0 7px 7px 0; }
 .concept-tip-label { font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #0070c0; margin-bottom: 3px; }
 .concept-tip-text { font-size: 12px; font-weight: 600; color: #0070c0; line-height: 1.5; }
 .interval-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 12px; }
-.interval-table th { font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #999999; text-align: left; padding: 5px 6px; border-bottom: 2px solid #cccccc; }
-.interval-table td { padding: 6px 6px; border-bottom: 1px solid #e0e0e0; color: #555555; font-weight: 500; vertical-align: top; }
-.interval-table td:first-child { font-weight: 700; color: #111111; white-space: nowrap; }
+.interval-table th { font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #999; text-align: left; padding: 5px 6px; border-bottom: 2px solid #ccc; }
+.interval-table td { padding: 6px 6px; border-bottom: 1px solid #e0e0e0; color: #555; font-weight: 500; vertical-align: top; }
+.interval-table td:first-child { font-weight: 700; color: #111; white-space: nowrap; }
 .interval-table tr:last-child td { border-bottom: none; }
 .formula-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
-.f-step { font-size: 13px; font-weight: 800; color: #000000; background: #f5f5f5; border: 1.5px solid #e0e0e0; border-radius: 6px; padding: 4px 9px; white-space: nowrap; }
-.f-sep { font-size: 11px; color: #999999; font-weight: 700; }
+.f-step { font-size: 13px; font-weight: 800; color: #000; background: #f5f5f5; border: 1.5px solid #e0e0e0; border-radius: 6px; padding: 4px 9px; white-space: nowrap; }
+.f-sep { font-size: 11px; color: #999; font-weight: 700; }
+.builder-header { padding: 48px 20px 20px; border-bottom: 2px solid #000; }
+.builder-kicker { font-size: 10px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: #999; margin-bottom: 8px; }
+.builder-title { font-size: 36px; font-weight: 800; color: #000; line-height: 1; letter-spacing: -.02em; }
+.builder-sub { font-size: 12px; font-weight: 500; color: #999; margin-top: 8px; }
+.builder-tape-wrap { padding: 14px 14px 0; border-bottom: 1px solid #e0e0e0; }
+.builder-tape-label { font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #999; margin-bottom: 8px; }
+.builder-tape { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 14px; min-height: 62px; align-items: center; scrollbar-width: none; }
+.builder-tape::-webkit-scrollbar { display: none; }
+.builder-tape-empty { font-size: 13px; font-weight: 500; color: #ccc; padding: 0 4px; }
+.tape-chord { display: flex; flex-direction: column; align-items: center; gap: 2px; background: #fff; border: 1.5px solid #000; border-radius: 8px; padding: 6px 10px; flex-shrink: 0; position: relative; }
+.tape-chord.pivot-marker { border-color: #0070c0; }
+.tape-chord-sym { font-size: 16px; font-weight: 800; color: #000; line-height: 1; }
+.tape-chord-key { font-size: 8px; font-weight: 600; color: #999; letter-spacing: .04em; }
+.tape-chord-ext { font-size: 9px; font-weight: 700; color: #b45309; }
+.tape-chord-remove { position: absolute; top: -6px; right: -6px; width: 16px; height: 16px; border-radius: 50%; background: #999; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 9px; color: #fff; font-weight: 700; -webkit-tap-highlight-color: transparent; }
+.builder-actions { display: flex; gap: 8px; padding: 12px 14px; border-bottom: 1px solid #e0e0e0; flex-wrap: wrap; }
+.builder-btn { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: .06em; padding: 7px 14px; border-radius: 7px; border: 1.5px solid #e0e0e0; background: #f5f5f5; color: #555; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.builder-btn.primary { background: #000; border-color: #000; color: #fff; }
+.builder-btn.danger { background: rgba(159,18,57,0.06); border-color: rgba(159,18,57,0.25); color: #9f1239; }
+.builder-btn:active { opacity: .7; }
+.builder-key-picker { padding: 14px 14px 0; border-bottom: 1px solid #e0e0e0; }
+.builder-key-label { font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #999; margin-bottom: 8px; }
+.builder-key-row { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 14px; scrollbar-width: none; }
+.builder-key-row::-webkit-scrollbar { display: none; }
+.bk-pill { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 11px; font-weight: 700; padding: 5px 11px; border-radius: 6px; border: 1.5px solid #e0e0e0; background: #fff; color: #555; cursor: pointer; white-space: nowrap; -webkit-tap-highlight-color: transparent; flex-shrink: 0; }
+.bk-pill.active { background: #000; border-color: #000; color: #fff; }
+.builder-chord-section { padding: 14px 12px 0; border-bottom: 1px solid #e0e0e0; }
+.builder-chord-label { font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #999; margin-bottom: 10px; padding: 0 2px; }
+.builder-ext-row { display: flex; gap: 5px; margin-bottom: 10px; }
+.bext-tog { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: .06em; padding: 4px 10px; border-radius: 5px; border: 1.5px solid #e0e0e0; background: #f5f5f5; color: #999; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.bext-tog.active { background: #000; border-color: #000; color: #fff; }
+.builder-recs { padding: 14px 14px 0; border-bottom: 1px solid #e0e0e0; }
+.recs-label { font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #999; margin-bottom: 10px; }
+.rec-group { margin-bottom: 12px; }
+.rec-group-title { font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #999; margin-bottom: 6px; }
+.rec-pills { display: flex; gap: 6px; flex-wrap: wrap; }
+.rec-pill { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; font-weight: 800; padding: 5px 12px; border-radius: 7px; border: 1.5px solid #e0e0e0; background: #fff; color: #111; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.rec-pill.pivot { border-color: rgba(0,112,192,0.35); color: #0070c0; background: rgba(0,112,192,0.05); }
+.rec-pill:active { background: #f5f5f5; }
+.builder-saved { padding: 14px 14px 0; }
+.saved-label { font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #999; margin-bottom: 10px; }
+.saved-empty { font-size: 13px; font-weight: 500; color: #ccc; margin-bottom: 16px; }
+.saved-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+.saved-card { background: #fff; border: 1.5px solid #e0e0e0; border-radius: 9px; padding: 12px 40px 12px 14px; position: relative; }
+.saved-card-name { font-size: 15px; font-weight: 700; color: #000; margin-bottom: 4px; }
+.saved-card-chords { font-size: 13px; font-weight: 600; color: #555; line-height: 1.4; margin-bottom: 6px; }
+.saved-card-meta { font-size: 10px; font-weight: 500; color: #bbb; }
+.saved-card-del { position: absolute; top: 12px; right: 12px; background: none; border: none; cursor: pointer; font-size: 16px; color: #ccc; -webkit-tap-highlight-color: transparent; }
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 200; display: none; align-items: center; justify-content: center; padding: 20px; }
+.modal-overlay.open { display: flex; }
+.modal-box { background: #fff; border-radius: 14px; padding: 24px; width: 100%; max-width: 340px; }
+.modal-title { font-size: 18px; font-weight: 800; color: #000; margin-bottom: 14px; }
+.modal-input { width: 100%; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 15px; font-weight: 600; padding: 10px 12px; border: 1.5px solid #e0e0e0; border-radius: 8px; outline: none; color: #111; }
+.modal-input:focus { border-color: #000; }
+.modal-btns { display: flex; gap: 8px; margin-top: 14px; }
+.modal-btn { flex: 1; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; font-weight: 700; padding: 10px; border-radius: 8px; border: 1.5px solid #e0e0e0; background: #f5f5f5; color: #555; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.modal-btn.confirm { background: #000; border-color: #000; color: #fff; }
 </style>
-
 </head>
 <body>
-
-<!-- HOME -->
-
 <div id="screen-home" class="screen active">
   <div class="scroll-body">
-    <div class="home-header">
-      <div class="home-kicker">Piano Reference</div>
-      <div class="home-title">Key Hub</div>
-      <div class="home-sub">24 keys · Circle of Fifths · Tap to enter</div>
-    </div>
-    <div class="cof-wrap">
-      <div class="grid-label">Major / Relative minor</div>
-      <div class="key-grid" id="key-grid"></div>
-    </div>
+    <div class="home-header"><div class="home-kicker">Piano Reference</div><div class="home-title">Key Hub</div><div class="home-sub">24 keys · Circle of Fifths · Tap to enter</div></div>
+    <div id="fav-section" class="fav-section" style="display:none"><div class="fav-label">Favourites</div><div class="fav-grid" id="fav-grid"></div></div>
+    <div class="cof-wrap"><div class="grid-label">Major / Relative minor</div><div class="key-grid" id="key-grid"></div></div>
   </div>
   <nav class="bottom-nav">
-    <button class="nav-btn active" id="nav-home" onclick="showScreen('home')"><div class="icon-home"></div>Keys</button>
-    <button class="nav-btn" id="nav-theory" onclick="showScreen('theory')"><div class="icon-theory"><span></span><span></span><span></span></div>Theory</button>
+    <button class="nav-btn active" onclick="showScreen('home')"><div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M3 12L12 3l9 9"/><path d="M9 21V12h6v9"/></svg></div>Keys</button>
+    <button class="nav-btn" onclick="showScreen('builder')"><div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M17.5 14v6M14.5 17h6"/></svg></div>Build</button>
+    <button class="nav-btn" onclick="showScreen('theory')"><div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="15" y2="12"/><line x1="3" y1="18" x2="18" y2="18"/></svg></div>Theory</button>
   </nav>
 </div>
-
-<!-- KEY VIEW -->
 
 <div id="screen-key" class="screen">
   <div class="scroll-body" id="key-scroll">
     <div class="kv-header">
-      <div class="kv-kicker" id="kv-kicker"></div>
-      <div class="kv-name" id="kv-name"></div>
+      <div class="kv-header-left"><div class="kv-kicker" id="kv-kicker"></div><div class="kv-name" id="kv-name"></div></div>
+      <div class="kv-transpose"><div class="kv-transpose-label">Transpose</div><div class="kv-transpose-btns"><button class="kv-transpose-btn" onclick="transposeKey(-1)">&#9837;</button><button class="kv-transpose-btn" onclick="transposeKey(1)">&#9839;</button></div></div>
     </div>
     <div class="chord-map-section">
       <div class="sec-label">Chord Map — tap any chord to expand</div>
-      <div class="map-controls">
-        <button class="map-tog active-triad" id="tog-triad" onclick="setMapExt(0)">Triads</button>
-        <button class="map-tog" id="tog-seventh" onclick="setMapExt(1)">+ 7ths</button>
-        <button class="map-tog" id="tog-ninth" onclick="setMapExt(2)">+ 9ths</button>
-        <button class="fing-tog active" data-hand="rh" onclick="setHand('rh')">RH</button>
-        <button class="fing-tog" data-hand="lh" onclick="setHand('lh')">LH</button>
-      </div>
+      <div class="map-controls"><button class="fing-tog active" data-hand="rh" onclick="setHand('rh')">RH</button><button class="fing-tog" data-hand="lh" onclick="setHand('lh')">LH</button></div>
       <div class="chord-map-row" id="chord-map-row"></div>
-      <div class="map-legend">
-        <div class="legend-item"><div class="leg-dot triad"></div>Triad</div>
-        <div class="legend-item"><div class="leg-dot sev"></div>7th</div>
-        <div class="legend-item"><div class="leg-dot nin"></div>9th</div>
-      </div>
+      <div class="map-legend"><div class="legend-item"><div class="leg-dot triad"></div>Triad</div><div class="legend-item"><div class="leg-dot sev"></div>7th</div><div class="legend-item"><div class="leg-dot nin"></div>9th</div></div>
     </div>
     <div class="chord-panel" id="chord-panel"></div>
-    <div class="prog-wrap">
-      <div class="sec-label">Progressions</div>
-      <div class="prog-list" id="prog-list"></div>
-    </div>
-    <div class="related-wrap">
-      <div class="sec-label">Related Keys</div>
-      <div class="related-grid" id="related-grid"></div>
-    </div>
+    <div class="prog-wrap"><div class="sec-label">Progressions — tap to see passing notes</div><div class="prog-list" id="prog-list"></div></div>
+    <div class="songs-wrap"><div class="sec-label">Songs in this key</div><div class="songs-list" id="songs-list"></div></div>
+    <div class="related-wrap"><div class="sec-label">Related Keys</div><div class="related-grid" id="related-grid"></div></div>
   </div>
+  <button class="back-to-top" id="back-to-top" onclick="document.getElementById('key-scroll').scrollTo({top:0,behavior:'smooth'})"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
   <nav class="bottom-nav">
-    <button class="nav-btn" onclick="showScreen('home')"><div class="icon-home"></div>Keys</button>
-    <button class="nav-btn" onclick="showScreen('theory')"><div class="icon-theory"><span></span><span></span><span></span></div>Theory</button>
+    <button class="nav-btn" onclick="showScreen('home')"><div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M3 12L12 3l9 9"/><path d="M9 21V12h6v9"/></svg></div>Keys</button>
+    <button class="nav-btn" onclick="showScreen('builder')"><div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M17.5 14v6M14.5 17h6"/></svg></div>Build</button>
+    <button class="nav-btn" onclick="showScreen('theory')"><div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="15" y2="12"/><line x1="3" y1="18" x2="18" y2="18"/></svg></div>Theory</button>
   </nav>
 </div>
 
-<!-- THEORY -->
+<div id="screen-builder" class="screen">
+  <div class="scroll-body" id="builder-scroll">
+    <div class="builder-header"><div class="builder-kicker">Progression Builder</div><div class="builder-title">Build</div><div class="builder-sub">Pick a key · tap chords to build · pivot to a new key mid-progression</div></div>
+    <div class="builder-tape-wrap"><div class="builder-tape-label">Your progression</div><div class="builder-tape" id="builder-tape"><span class="builder-tape-empty">Tap a chord below to start</span></div></div>
+    <div class="builder-actions"><button class="builder-btn primary" onclick="saveProgression()">Save</button><button class="builder-btn" onclick="undoLast()">Undo</button><button class="builder-btn danger" onclick="clearProgression()">Clear</button></div>
+    <div class="builder-key-picker"><div class="builder-key-label">Key</div><div class="builder-key-row" id="builder-key-row"></div></div>
+    <div class="builder-chord-section">
+      <div class="builder-chord-label">Tap a chord to add it</div>
+      <div class="builder-ext-row"><button class="bext-tog active" data-ext="0" onclick="setBuilderExt(0)">Triad</button><button class="bext-tog" data-ext="1" onclick="setBuilderExt(1)">7th</button><button class="bext-tog" data-ext="2" onclick="setBuilderExt(2)">9th</button></div>
+      <div class="chord-map-row" id="builder-chord-map" style="margin-bottom:14px"></div>
+    </div>
+    <div class="builder-recs" id="builder-recs" style="display:none"><div class="recs-label">Recommendations</div><div id="builder-recs-content"></div></div>
+    <div class="builder-saved"><div class="saved-label">Saved Progressions</div><div id="saved-list-wrap"></div></div>
+  </div>
+  <nav class="bottom-nav">
+    <button class="nav-btn" onclick="showScreen('home')"><div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M3 12L12 3l9 9"/><path d="M9 21V12h6v9"/></svg></div>Keys</button>
+    <button class="nav-btn active" onclick="showScreen('builder')"><div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M17.5 14v6M14.5 17h6"/></svg></div>Build</button>
+    <button class="nav-btn" onclick="showScreen('theory')"><div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="15" y2="12"/><line x1="3" y1="18" x2="18" y2="18"/></svg></div>Theory</button>
+  </nav>
+</div>
 
 <div id="screen-theory" class="screen">
   <div class="scroll-body" id="theory-scroll">
-    <div class="theory-header">
-      <div class="theory-kicker">Music Theory</div>
-      <div class="theory-title">The Knowledge</div>
-      <div class="theory-sub">The concepts behind everything in Key Hub — from first principles to jazz harmony.</div>
-    </div>
+    <div class="theory-header"><div class="theory-kicker">Music Theory</div><div class="theory-title">The Knowledge</div><div class="theory-sub">The concepts behind everything in Key Hub — from first principles to jazz harmony.</div></div>
     <div id="theory-index-wrap">
-      <div class="theory-index">
-        <div class="theory-index-label">Chapters</div>
-        <div class="theory-index-list">
-          <div class="theory-index-item" onclick="openChapter('intervals')"><span class="tii-num">01</span><span class="tii-name">Intervals &amp; Semitones</span><span class="tii-arrow">›</span></div>
-          <div class="theory-index-item" onclick="openChapter('scales')"><span class="tii-num">02</span><span class="tii-name">Scales &amp; Key Signatures</span><span class="tii-arrow">›</span></div>
-          <div class="theory-index-item" onclick="openChapter('chords')"><span class="tii-num">03</span><span class="tii-name">Chord Construction</span><span class="tii-arrow">›</span></div>
-          <div class="theory-index-item" onclick="openChapter('harmony')"><span class="tii-num">04</span><span class="tii-name">Harmony &amp; Function</span><span class="tii-arrow">›</span></div>
-          <div class="theory-index-item" onclick="openChapter('modes')"><span class="tii-num">05</span><span class="tii-name">Modes</span><span class="tii-arrow">›</span></div>
-          <div class="theory-index-item" onclick="openChapter('voicings')"><span class="tii-num">06</span><span class="tii-name">Voicings &amp; Inversions</span><span class="tii-arrow">›</span></div>
-          <div class="theory-index-item" onclick="openChapter('progressions')"><span class="tii-num">07</span><span class="tii-name">Progressions &amp; Movement</span><span class="tii-arrow">›</span></div>
-          <div class="theory-index-item" onclick="openChapter('modulation')"><span class="tii-num">08</span><span class="tii-name">Modulation &amp; Pivot Chords</span><span class="tii-arrow">›</span></div>
-        </div>
-      </div>
+      <div class="theory-index"><div class="theory-index-label">Chapters</div><div class="theory-index-list">
+        <div class="theory-index-item" onclick="openChapter('intervals')"><span class="tii-num">01</span><span class="tii-name">Intervals &amp; Semitones</span><span class="tii-arrow">›</span></div>
+        <div class="theory-index-item" onclick="openChapter('scales')"><span class="tii-num">02</span><span class="tii-name">Scales &amp; Key Signatures</span><span class="tii-arrow">›</span></div>
+        <div class="theory-index-item" onclick="openChapter('chords')"><span class="tii-num">03</span><span class="tii-name">Chord Construction</span><span class="tii-arrow">›</span></div>
+        <div class="theory-index-item" onclick="openChapter('harmony')"><span class="tii-num">04</span><span class="tii-name">Harmony &amp; Function</span><span class="tii-arrow">›</span></div>
+        <div class="theory-index-item" onclick="openChapter('modes')"><span class="tii-num">05</span><span class="tii-name">Modes</span><span class="tii-arrow">›</span></div>
+        <div class="theory-index-item" onclick="openChapter('voicings')"><span class="tii-num">06</span><span class="tii-name">Voicings &amp; Inversions</span><span class="tii-arrow">›</span></div>
+        <div class="theory-index-item" onclick="openChapter('progressions')"><span class="tii-num">07</span><span class="tii-name">Progressions &amp; Movement</span><span class="tii-arrow">›</span></div>
+        <div class="theory-index-item" onclick="openChapter('modulation')"><span class="tii-num">08</span><span class="tii-name">Modulation &amp; Pivot Chords</span><span class="tii-arrow">›</span></div>
+      </div></div>
     </div>
     <div class="theory-body">
-
-```
-  <div class="theory-chapter" id="ch-intervals">
-    <button class="chapter-back" onclick="closeChapter()">All chapters</button>
-    <div class="chapter-title">Intervals &amp; Semitones</div>
-    <div class="chapter-intro">An interval is the distance between two notes. Everything in music theory — scales, chords, harmony — is built from intervals. Understanding them gives you the underlying logic of why things sound the way they do.</div>
-    <div class="concept-card">
-      <div class="concept-header" onclick="toggleConcept(this)"><span class="concept-title">What is a semitone?</span><span class="concept-toggle">+</span></div>
-      <div class="concept-body">
-        <p>A <strong>semitone</strong> (half step) is the smallest interval in Western music — the distance between any two adjacent piano keys including black keys. C to C# is one semitone. E to F is one semitone (no black key between them). There are 12 semitones in an octave.</p>
-        <p>A <strong>tone</strong> (whole step) is two semitones. C to D is a tone. Most scale steps are tones with a few semitone exceptions — which gives each scale its character.</p>
-        <div class="concept-example"><div class="concept-example-label">On the piano</div><div class="concept-example-text">C → C# = 1 semitone<br>C → D = 2 semitones (1 tone)<br>C → E = 4 semitones (2 tones)<br>C → G = 7 semitones</div></div>
-      </div>
+      <div class="theory-chapter" id="ch-intervals"><button class="chapter-back" onclick="closeChapter()">All chapters</button><div class="chapter-title">Intervals &amp; Semitones</div><div class="chapter-intro">An interval is the distance between two notes. Everything in music theory is built from intervals.</div><div class="concept-card"><div class="concept-header" onclick="toggleConcept(this)"><span class="concept-title">What is a semitone?</span><span class="concept-toggle">+</span></div><div class="concept-body"><p>A <strong>semitone</strong> is the smallest interval in Western music — the distance between any two adjacent piano keys. There are 12 semitones in an octave. A <strong>tone</strong> is two semitones.</p><div class="concept-example"><div class="concept-example-label">On the piano</div><div class="concept-example-text">C→C# = 1st · C→D = 2nd · C→E = 4st · C→G = 7st</div></div></div></div><div class="concept-card"><div class="concept-header" onclick="toggleConcept(this)"><span class="concept-title">Named intervals</span><span class="concept-toggle">+</span></div><div class="concept-body"><table class="interval-table"><tr><th>Name</th><th>Semitones</th><th>Feel</th></tr><tr><td>Minor 2nd</td><td>1</td><td>Dissonant, tense</td></tr><tr><td>Major 2nd</td><td>2</td><td>Stepwise motion</td></tr><tr><td>Minor 3rd</td><td>3</td><td>Minor quality — darker</td></tr><tr><td>Major 3rd</td><td>4</td><td>Major quality — bright</td></tr><tr><td>Perfect 4th</td><td>5</td><td>Open, suspended</td></tr><tr><td>Tritone</td><td>6</td><td>Maximum tension</td></tr><tr><td>Perfect 5th</td><td>7</td><td>Most stable after octave</td></tr><tr><td>Minor 7th</td><td>10</td><td>Dominant chord colour</td></tr><tr><td>Major 7th</td><td>11</td><td>Dreamy, near resolution</td></tr><tr><td>Octave</td><td>12</td><td>Perfect consonance</td></tr></table></div></div><div class="concept-card"><div class="concept-header" onclick="toggleConcept(this)"><span class="concept-title">The tritone</span><span class="concept-toggle">+</span></div><div class="concept-body"><p>6 semitones — divides the octave exactly in half. In G7, the tritone between B and F wants to resolve: B up to C, F down to E. This is why V7→I sounds inevitable.</p><div class="concept-example"><div class="concept-example-label">G7 → C major</div><div class="concept-example-text">B (3rd of G7) → C &nbsp;·&nbsp; F (7th of G7) → E</div></div></div></div></div>
+      <div class="theory-chapter" id="ch-scales"><button class="chapter-back" onclick="closeChapter()">All chapters</button><div class="chapter-title">Scales &amp; Key Signatures</div><div class="chapter-intro">A scale is a specific sequence of intervals. The pattern determines its sound and character.</div><div class="concept-card"><div class="concept-header" onclick="toggleConcept(this)"><span class="concept-title">The major scale formula</span><span class="concept-toggle">+</span></div><div class="concept-body"><div class="formula-row"><span class="f-step">T</span><span class="f-sep">–</span><span class="f-step">T</span><span class="f-sep">–</span><span class="f-step">S</span><span class="f-sep">–</span><span class="f-step">T</span><span class="f-sep">–</span><span class="f-step">T</span><span class="f-sep">–</span><span class="f-step">T</span><span class="f-sep">–</span><span class="f-step">S</span></div><p>C major: C D E F G A B C. Semitones between degrees 3–4 and 7–8. Any other root needs sharps or flats to preserve this pattern.</p><div class="concept-tip"><div class="concept-tip-label">Circle of Fifths</div><div class="concept-tip-text">Each step clockwise adds one sharp. Each step anticlockwise adds one flat.</div></div></div></div><div class="concept-card"><div class="concept-header" onclick="toggleConcept(this)"><span class="concept-title">Natural minor &amp; relative minor</span><span class="concept-toggle">+</span></div><div class="concept-body"><div class="formula-row"><span class="f-step">T</span><span class="f-sep">–</span><span class="f-step">S</span><span class="f-sep">–</span><span class="f-step">T</span><span class="f-sep">–</span><span class="f-step">T</span><span class="f-sep">–</span><span class="f-step">S</span><span class="f-sep">–</span><span class="f-step">T</span><span class="f-sep">–</span><span class="f-step">T</span></div><p>A minor uses the same notes as C major but starts from A. Every major key has a <strong>relative minor</strong> on its 6th degree sharing the same key signature.</p></div></div><div class="concept-card"><div class="concept-header" onclick="toggleConcept(this)"><span class="concept-title">Harmonic minor — why the V chord matters</span><span class="concept-toggle">+</span></div><div class="concept-body"><p>In natural minor, v is minor — weak pull to i. Raising the 7th degree by a semitone creates harmonic minor, making V dominant (V7) with strong resolution.</p><div class="concept-example"><div class="concept-example-label">G minor</div><div class="concept-example-text">Natural: G A Bb C D Eb F<br>Harmonic: G A Bb C D Eb <strong>F#</strong><br>V = D7 → strong pull to Gm</div></div></div></div></div>
+      <div class="theory-chapter" id="ch-chords"><button class="chapter-back" onclick="closeChapter()">All chapters</button><div class="chapter-title">Chord Construction</div><div class="chapter-intro">Chords are built by stacking thirds. The type of third at each position determines quality.</div><div class="concept-card"><div class="concept-header" onclick="toggleConcept(this)"><span class="concept-title">Triads</span><span class="concept-toggle">+</span></div><div class="concept-body"><table class="interval-table"><tr><th>Type</th><th>Structure</th><th>Example</th></tr><tr><td>Major</td><td>Root + maj3rd + perf5th</td><td>C E G</td></tr><tr><td>Minor</td><td>Root + min3rd + perf5th</td><td>C Eb G</td></tr><tr><td>Diminished</td><td>Root + min3rd + dim5th</td><td>C Eb Gb</td></tr></table></div></div><div class="concept-card"><div class="concept-header" onclick="toggleConcept(this)"><span class="concept-title">7th chords</span><span class="concept-toggle">+</span></div><div class="concept-body"><table class="interval-table"><tr><th>Type</th><th>Where it appears</th></tr><tr><td>Major 7th</td><td>I and IV in major</td></tr><tr><td>Dominant 7th</td><td>V in major; harmonic minor V</td></tr><tr><td>Minor 7th</td><td>ii, iii, vi in major; i, iv in minor</td></tr><tr><td>Half-dim</td><td>vii° in major; ii° in minor</td></tr></table></div></div><div class="concept-card"><div class="concept-header" onclick="toggleConcept(this)"><span class="concept-title">Extensions: 9ths and beyond</span><span class="concept-toggle">+</span></div><div class="concept-body"><p>The 9th is the same pitch class as the 2nd, an octave higher. In jazz, omit the 5th — root, 3rd, 7th, 9th tell the full story with maximum space.</p><div class="concept-example"><div class="concept-example-label">Gm9 practical voicing</div><div class="concept-example-text">LH: G F (root + 7th) · RH: Bb A (3rd + 9th)</div></div></div></div></div>
+      <div class="theory-chapter" id="ch-harmony"><button class="chapter-back" onclick="closeChapter()">All chapters</button><div class="chapter-title">Harmony &amp; Function</div><div class="chapter-intro">Harmonic function describes the role a chord plays in relation to the key centre.</div><div class="concept-card"><div class="concept-header" onclick="toggleConcept(this)"><span class="concept-title">Tonic, Subdominant, Dominant</span><span class="concept-toggle">+</span></div><div class="concept-body"><p><strong>Tonic (T)</strong> — home. Rest and resolution. I, vi, iii in major.</p><p><strong>Dominant (D)</strong> — maximum tension, strong pull toward tonic. V and V7.</p><p><strong>Subdominant (SD)</strong> — gentle departure from tonic. IV and ii.</p><div class="concept-example"><div class="concept-example-label">Three-function cycle</div><div class="concept-example-text">T → SD → D → T &nbsp;=&nbsp; C → F → G → C</div></div></div></div><div class="concept-card"><div class="concept-header" onclick="toggleConcept(this)"><span class="concept-title">The ii–V–I</span><span class="concept-toggle">+</span></div><div class="concept-body"><p>The most important progression in jazz. In C: <strong>Dm7 – G7 – Cmaj7</strong>. Roots move by 4ths (D→G→C) — the strongest root motion in tonal music.</p><div class="concept-tip"><div class="concept-tip-label">Practice tip</div><div class="concept-tip-text">Learn ii–V–I in all 12 keys. It appears in almost every jazz standard.</div></div></div></div><div class="concept-card"><div class="concept-header" onclick="toggleConcept(this)"><span class="concept-title">Voice leading</span><span class="concept-toggle">+</span></div><div class="concept-body"><p>Each note moves by the smallest interval possible. The guide tones (3rd and 7th) are key. In Dm7→G7→Cmaj7: 7th of Dm7 (C) steps to 3rd of G7 (B); 7th of G7 (F) steps to 3rd of Cmaj7 (E).</p></div></div></div>
+      <div class="theory-chapter" id="ch-modes"><button class="chapter-back" onclick="closeChapter()">All chapters</button><div class="chapter-title">Modes</div><div class="chapter-intro">Modes are scales derived from the major scale by starting on a different degree. Same notes, different tonal centre, different character.</div><div class="concept-card"><div class="concept-header" onclick="toggleConcept(this)"><span class="concept-title">The seven modes</span><span class="concept-toggle">+</span></div><div class="concept-body"><table class="interval-table"><tr><th>Mode</th><th>Degree</th><th>Character</th></tr><tr><td>Ionian</td><td>I</td><td>The major scale. Bright.</td></tr><tr><td>Dorian</td><td>II</td><td>Minor + raised 6th. Jazzy.</td></tr><tr><td>Phrygian</td><td>III</td><td>Minor + flat 2nd. Dark, Spanish.</td></tr><tr><td>Lydian</td><td>IV</td><td>Major + raised 4th. Dreamy.</td></tr><tr><td>Mixolydian</td><td>V</td><td>Major + flat 7th. Bluesy.</td></tr><tr><td>Aeolian</td><td>VI</td><td>Natural minor. Introspective.</td></tr><tr><td>Locrian</td><td>VII</td><td>Diminished feel. Unstable.</td></tr></table><div class="concept-tip"><div class="concept-tip-label">In Key Hub</div><div class="concept-tip-text">Tap any chord card and look at the green Mode flag — shows the mode starting on that root.</div></div></div></div><div class="concept-card"><div class="concept-header" onclick="toggleConcept(this)"><span class="concept-title">Modal vs. tonal playing</span><span class="concept-toggle">+</span></div><div class="concept-body"><p><strong>Tonal</strong>: always moving toward or away from home. Tension and resolution.<br><strong>Modal</strong>: stay on one chord and explore the colour of the mode. Miles Davis's "So What" — D Dorian and Eb Dorian, eight bars each.</p></div></div></div>
+      <div class="theory-chapter" id="ch-voicings"><button class="chapter-back" onclick="closeChapter()">All chapters</button><div class="chapter-title">Voicings &amp; Inversions</div><div class="chapter-intro">Same chord, different voicing = completely different feel.</div><div class="concept-card"><div class="concept-header" onclick="toggleConcept(this)"><span class="concept-title">Inversions</span><span class="concept-toggle">+</span></div><div class="concept-body"><table class="interval-table"><tr><th>Position</th><th>Lowest note</th><th>Example (C)</th></tr><tr><td>Root position</td><td>Root</td><td>C E G</td></tr><tr><td>1st inversion</td><td>3rd</td><td>E G C</td></tr><tr><td>2nd inversion</td><td>5th</td><td>G C E</td></tr></table><p>Use inversions for smooth bass movement — bass by step sounds more connected.</p></div></div><div class="concept-card"><div class="concept-header" onclick="toggleConcept(this)"><span class="concept-title">Shell voicings</span><span class="concept-toggle">+</span></div><div class="concept-body"><p>Root, 3rd, 7th only. The 5th is omitted. Root and 7th in LH define the frame; 3rd in RH determines quality. Extensions sit above.</p><div class="concept-tip"><div class="concept-tip-label">Your voicing</div><div class="concept-tip-text">LH: root alone. RH: 7th–9th–3rd–5th. All colour in a tight RH cluster above a grounded LH root.</div></div></div></div><div class="concept-card"><div class="concept-header" onclick="toggleConcept(this)"><span class="concept-title">Drop-2 and quartal voicings</span><span class="concept-toggle">+</span></div><div class="concept-body"><p><strong>Drop-2</strong>: drop the second-highest note of a close voicing down an octave. Opens the sound.<br><strong>Quartal</strong>: stack fourths instead of thirds. Ambiguous, modern — McCoy Tyner, Herbie Hancock.</p></div></div></div>
+      <div class="theory-chapter" id="ch-progressions"><button class="chapter-back" onclick="closeChapter()">All chapters</button><div class="chapter-title">Progressions &amp; Movement</div><div class="chapter-intro">Tension, resolution, and bass movement determine how a progression feels.</div><div class="concept-card"><div class="concept-header" onclick="toggleConcept(this)"><span class="concept-title">Root motion by interval</span><span class="concept-toggle">+</span></div><div class="concept-body"><table class="interval-table"><tr><th>Motion</th><th>Feel</th><th>Example</th></tr><tr><td>Down a 5th</td><td>Strongest resolution</td><td>G → C</td></tr><tr><td>Down a 3rd</td><td>Smooth, tonic-function</td><td>C → Am</td></tr><tr><td>Up a step</td><td>Forward momentum</td><td>C → Dm</td></tr><tr><td>Down a semitone</td><td>Chromatic tension</td><td>Db → C</td></tr></table></div></div><div class="concept-card"><div class="concept-header" onclick="toggleConcept(this)"><span class="concept-title">Passing notes</span><span class="concept-toggle">+</span></div><div class="concept-body"><p>Non-chord tones that fill stepwise movement between chords. <strong>Diatonic</strong> = gentle; <strong>Chromatic</strong> = tension and bebop. The chromatic approach: approach the root or 3rd of the next chord by a semitone.</p><div class="concept-tip"><div class="concept-tip-label">In Key Hub</div><div class="concept-tip-text">Tap any progression to expand and see the passing notes between each chord pair.</div></div></div></div><div class="concept-card"><div class="concept-header" onclick="toggleConcept(this)"><span class="concept-title">Cadences</span><span class="concept-toggle">+</span></div><div class="concept-body"><table class="interval-table"><tr><th>Cadence</th><th>Movement</th><th>Feel</th></tr><tr><td>Perfect</td><td>V → I</td><td>Complete resolution</td></tr><tr><td>Plagal</td><td>IV → I</td><td>"Amen." Soft, final</td></tr><tr><td>Imperfect</td><td>anything → V</td><td>A question mark</td></tr><tr><td>Deceptive</td><td>V → vi</td><td>Expected I, gets vi</td></tr></table></div></div></div>
+      <div class="theory-chapter" id="ch-modulation"><button class="chapter-back" onclick="closeChapter()">All chapters</button><div class="chapter-title">Modulation &amp; Pivot Chords</div><div class="chapter-intro">Moving from one key to another. Done well, it sounds purposeful and surprising at the same time.</div><div class="concept-card"><div class="concept-header" onclick="toggleConcept(this)"><span class="concept-title">What is a pivot chord?</span><span class="concept-toggle">+</span></div><div class="concept-body"><p>A chord that belongs to both keys. You play it with one meaning, reinterpret it in the new key, and move on. The listener hears no seam.</p><div class="concept-example"><div class="concept-example-label">C major → G major</div><div class="concept-example-text">Am = vi in C major (tonic)<br>Am = ii in G major (subdominant)<br>Play Am → D7 → G. Done.</div></div></div></div><div class="concept-card"><div class="concept-header" onclick="toggleConcept(this)"><span class="concept-title">Using Key Hub for modulation</span><span class="concept-toggle">+</span></div><div class="concept-body"><p>Tap a chord and see <strong>Also in</strong> pills — those are your pivot chords. The Roman numeral tells you its function in the new key. Tap to jump there.</p><div class="concept-tip"><div class="concept-tip-label">Try it</div><div class="concept-tip-text">C Major → tap Am → tap "A Minor" pill. Am was vi, now it's i. That's a modulation.</div></div></div></div><div class="concept-card"><div class="concept-header" onclick="toggleConcept(this)"><span class="concept-title">In the Progression Builder</span><span class="concept-toggle">+</span></div><div class="concept-body"><p>The Recommendations section shows <strong>Pivot to new key</strong> options based on your last chord. Tap one and the builder switches to the new key, marking the pivot point on your progression tape.</p></div></div></div>
     </div>
-    <div class="concept-card">
-      <div class="concept-header" onclick="toggleConcept(this)"><span class="concept-title">Named intervals</span><span class="concept-toggle">+</span></div>
-      <div class="concept-body">
-        <p>Every interval has a name based on how many scale steps it spans and its exact size in semitones.</p>
-        <table class="interval-table">
-          <tr><th>Name</th><th>Semitones</th><th>Sound / feel</th></tr>
-          <tr><td>Minor 2nd</td><td>1</td><td>Dissonant, tense. The semitone clash.</td></tr>
-          <tr><td>Major 2nd</td><td>2</td><td>Adjacent scale notes. Stepwise motion.</td></tr>
-          <tr><td>Minor 3rd</td><td>3</td><td>The minor chord quality. Darker, introspective.</td></tr>
-          <tr><td>Major 3rd</td><td>4</td><td>The major chord quality. Bright, stable.</td></tr>
-          <tr><td>Perfect 4th</td><td>5</td><td>Open, suspended. Strong but not final.</td></tr>
-          <tr><td>Tritone</td><td>6</td><td>Extremely tense. The dominant 7th's defining interval.</td></tr>
-          <tr><td>Perfect 5th</td><td>7</td><td>Most stable interval after the octave.</td></tr>
-          <tr><td>Minor 6th</td><td>8</td><td>Bittersweet, emotional.</td></tr>
-          <tr><td>Major 6th</td><td>9</td><td>Sweet, singable. The 9th chord's backbone.</td></tr>
-          <tr><td>Minor 7th</td><td>10</td><td>Dominant chord colour. Jazz and blues.</td></tr>
-          <tr><td>Major 7th</td><td>11</td><td>Dreamy tension, one semitone from resolution.</td></tr>
-          <tr><td>Octave</td><td>12</td><td>Same note, higher register. Perfect consonance.</td></tr>
-        </table>
-        <div class="concept-tip"><div class="concept-tip-label">Why it matters</div><div class="concept-tip-text">When you tap a chord in Key Hub and see the triad notes highlighted, you're seeing stacked 3rds — major or minor — which determine the chord's quality.</div></div>
-      </div>
-    </div>
-    <div class="concept-card">
-      <div class="concept-header" onclick="toggleConcept(this)"><span class="concept-title">The tritone</span><span class="concept-toggle">+</span></div>
-      <div class="concept-body">
-        <p>The <strong>tritone</strong> (6 semitones) divides the octave exactly in half. Its two notes want to resolve — either inward or outward by semitone.</p>
-        <p>In a dominant 7th chord (e.g. G7), the tritone sits between the 3rd (B) and the 7th (F). B wants to resolve up to C, F wants to resolve down to E. This is why V7 → I sounds so inevitable.</p>
-        <div class="concept-example"><div class="concept-example-label">G7 tritone resolution → C major</div><div class="concept-example-text">B (3rd of G7) → C (root of C)<br>F (7th of G7) → E (3rd of C)</div></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="theory-chapter" id="ch-scales">
-    <button class="chapter-back" onclick="closeChapter()">All chapters</button>
-    <div class="chapter-title">Scales &amp; Key Signatures</div>
-    <div class="chapter-intro">A scale is a specific sequence of intervals. The pattern of tones and semitones determines the scale's sound. The key signature tells you which notes are sharpened or flattened to maintain that pattern from a given root.</div>
-    <div class="concept-card">
-      <div class="concept-header" onclick="toggleConcept(this)"><span class="concept-title">The major scale formula</span><span class="concept-toggle">+</span></div>
-      <div class="concept-body">
-        <p>Every major scale follows the same pattern of tones (T) and semitones (S):</p>
-        <div class="formula-row"><span class="f-step">T</span><span class="f-sep">–</span><span class="f-step">T</span><span class="f-sep">–</span><span class="f-step">S</span><span class="f-sep">–</span><span class="f-step">T</span><span class="f-sep">–</span><span class="f-step">T</span><span class="f-sep">–</span><span class="f-step">T</span><span class="f-sep">–</span><span class="f-step">S</span></div>
-        <p>Starting from C: C–D–E–F–G–A–B–C. The semitones fall between degrees 3–4 and 7–8. Any other root requires sharps or flats to preserve this pattern.</p>
-        <div class="concept-tip"><div class="concept-tip-label">Circle of Fifths</div><div class="concept-tip-text">Each step clockwise adds one sharp. Each step anticlockwise adds one flat. This is the order Key Hub uses for all 24 keys.</div></div>
-      </div>
-    </div>
-    <div class="concept-card">
-      <div class="concept-header" onclick="toggleConcept(this)"><span class="concept-title">The natural minor scale</span><span class="concept-toggle">+</span></div>
-      <div class="concept-body">
-        <p>The natural minor scale has its 3rd, 6th, and 7th degrees each one semitone lower than major:</p>
-        <div class="formula-row"><span class="f-step">T</span><span class="f-sep">–</span><span class="f-step">S</span><span class="f-sep">–</span><span class="f-step">T</span><span class="f-sep">–</span><span class="f-step">T</span><span class="f-sep">–</span><span class="f-step">S</span><span class="f-sep">–</span><span class="f-step">T</span><span class="f-sep">–</span><span class="f-step">T</span></div>
-        <p>A minor: A–B–C–D–E–F–G–A. It uses the same notes as C major but starts from A. Every major key has a <strong>relative minor</strong> on its 6th degree sharing the same key signature.</p>
-        <div class="concept-example"><div class="concept-example-label">Relative pairs</div><div class="concept-example-text">C major ↔ A minor · G major ↔ E minor · F major ↔ D minor</div></div>
-      </div>
-    </div>
-    <div class="concept-card">
-      <div class="concept-header" onclick="toggleConcept(this)"><span class="concept-title">Harmonic minor — why the V chord matters</span><span class="concept-toggle">+</span></div>
-      <div class="concept-body">
-        <p>In natural minor, the V chord is minor — it lacks the strong pull toward i. Raising the 7th degree by one semitone creates the <strong>harmonic minor scale</strong>, turning v into a dominant V or V7 with the same powerful resolution as in major keys.</p>
-        <div class="concept-example"><div class="concept-example-label">G minor — natural vs harmonic</div><div class="concept-example-text">Natural: G A Bb C D Eb F<br>Harmonic: G A Bb C D Eb <strong>F#</strong><br><br>Natural v = Dm (weak pull)<br>Harmonic V = D / D7 (strong pull → Gm)</div></div>
-        <div class="concept-tip"><div class="concept-tip-label">In Key Hub</div><div class="concept-tip-text">Every minor key's v chord shows a purple flag with the harmonic minor alternative.</div></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="theory-chapter" id="ch-chords">
-    <button class="chapter-back" onclick="closeChapter()">All chapters</button>
-    <div class="chapter-title">Chord Construction</div>
-    <div class="chapter-intro">Chords are built by stacking thirds on top of a root note. The exact type of third at each position determines the chord's quality.</div>
-    <div class="concept-card">
-      <div class="concept-header" onclick="toggleConcept(this)"><span class="concept-title">Triads: the four types</span><span class="concept-toggle">+</span></div>
-      <div class="concept-body">
-        <table class="interval-table">
-          <tr><th>Type</th><th>Structure</th><th>Example</th></tr>
-          <tr><td>Major</td><td>Root + major 3rd (4st) + perfect 5th (7st)</td><td>C E G</td></tr>
-          <tr><td>Minor</td><td>Root + minor 3rd (3st) + perfect 5th (7st)</td><td>C Eb G</td></tr>
-          <tr><td>Diminished</td><td>Root + minor 3rd (3st) + diminished 5th (6st)</td><td>C Eb Gb</td></tr>
-          <tr><td>Augmented</td><td>Root + major 3rd (4st) + augmented 5th (8st)</td><td>C E G#</td></tr>
-        </table>
-      </div>
-    </div>
-    <div class="concept-card">
-      <div class="concept-header" onclick="toggleConcept(this)"><span class="concept-title">7th chords</span><span class="concept-toggle">+</span></div>
-      <div class="concept-body">
-        <p>Add a 4th note — another 3rd above the 5th — and you get a <strong>7th chord</strong>.</p>
-        <table class="interval-table">
-          <tr><th>Type</th><th>Structure</th><th>Where it appears</th></tr>
-          <tr><td>Major 7th (maj7)</td><td>Major triad + major 7th</td><td>I and IV in major</td></tr>
-          <tr><td>Dominant 7th (7)</td><td>Major triad + minor 7th</td><td>V in major; harmonic minor V</td></tr>
-          <tr><td>Minor 7th (m7)</td><td>Minor triad + minor 7th</td><td>ii, iii, vi in major; i, iv in minor</td></tr>
-          <tr><td>Half-dim (m7b5)</td><td>Diminished triad + minor 7th</td><td>vii° in major; ii° in minor</td></tr>
-        </table>
-        <div class="concept-tip"><div class="concept-tip-label">In Key Hub</div><div class="concept-tip-text">Toggle "+ 7ths" on the chord map to see the 7th note for every chord at a glance.</div></div>
-      </div>
-    </div>
-    <div class="concept-card">
-      <div class="concept-header" onclick="toggleConcept(this)"><span class="concept-title">9th chords and extensions</span><span class="concept-toggle">+</span></div>
-      <div class="concept-body">
-        <p>Continue stacking thirds and you get extensions: 9th, 11th, 13th. The 9th is the same pitch class as the 2nd, just an octave higher. Extensions add colour without changing fundamental harmonic function.</p>
-        <p>In jazz it's common to <strong>omit the 5th</strong> when adding extensions — it adds little harmonic information. Root, 3rd, 7th, and 9th give the full picture with maximum space.</p>
-        <div class="concept-example"><div class="concept-example-label">Gm9 — full vs. practical</div><div class="concept-example-text">Full: G Bb D F A<br>Practical: G Bb F A (drop the 5th D)<br>Shell + 9th: LH G F / RH Bb A</div></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="theory-chapter" id="ch-harmony">
-    <button class="chapter-back" onclick="closeChapter()">All chapters</button>
-    <div class="chapter-title">Harmony &amp; Function</div>
-    <div class="chapter-intro">Harmonic function describes the role a chord plays in relation to the key centre. Every chord has a gravitational pull — toward rest, away from rest, or in between.</div>
-    <div class="concept-card">
-      <div class="concept-header" onclick="toggleConcept(this)"><span class="concept-title">Tonic, Subdominant, Dominant</span><span class="concept-toggle">+</span></div>
-      <div class="concept-body">
-        <p><strong>Tonic (T)</strong> — home. The point of rest and resolution. In C major, I (C), vi (Am) and iii (Em) are tonic function — they share notes with I and feel stable.</p>
-        <p><strong>Dominant (D)</strong> — maximum tension, strong pull toward tonic. V7 is the most powerful — the tritone in G7 (B and F) pulls irresistibly to C.</p>
-        <p><strong>Subdominant (SD)</strong> — departure from tonic without dominant's pull. IV and ii. They move harmony away from home gently, often preceding dominant.</p>
-        <div class="concept-example"><div class="concept-example-label">The three-function cycle</div><div class="concept-example-text">T → SD → D → T<br>C → F → G → C<br>(departure → tension → resolution)</div></div>
-      </div>
-    </div>
-    <div class="concept-card">
-      <div class="concept-header" onclick="toggleConcept(this)"><span class="concept-title">Roman numerals and diatonic chords</span><span class="concept-toggle">+</span></div>
-      <div class="concept-body">
-        <p>Roman numerals describe a chord's scale position regardless of key. Uppercase = major, lowercase = minor, ° = diminished. The diatonic chord qualities in any major scale always follow:</p>
-        <div class="formula-row"><span class="f-step">I</span><span class="f-sep">ii</span><span class="f-step">iii</span><span class="f-sep">IV</span><span class="f-step">V</span><span class="f-sep">vi</span><span class="f-step">vii°</span></div>
-        <div class="formula-row" style="margin-top:4px"><span class="f-step" style="font-size:11px">Maj</span><span class="f-sep">min</span><span class="f-step" style="font-size:11px">min</span><span class="f-sep">Maj</span><span class="f-step" style="font-size:11px">Maj</span><span class="f-sep">min</span><span class="f-step" style="font-size:11px">dim</span></div>
-        <p>This pattern is identical in every major key. ii–V–I works the same way in C, G, Db — just different note names.</p>
-      </div>
-    </div>
-    <div class="concept-card">
-      <div class="concept-header" onclick="toggleConcept(this)"><span class="concept-title">The ii–V–I progression</span><span class="concept-toggle">+</span></div>
-      <div class="concept-body">
-        <p>The most important progression in jazz. Moves through all three harmonic functions. In C major: <strong>Dm7 – G7 – Cmaj7</strong>.</p>
-        <p>The roots move by 4ths (D→G→C) — the strongest root motion in tonal music. The bass does most of the harmonic work just by moving in 4ths.</p>
-        <div class="concept-tip"><div class="concept-tip-label">Practice tip</div><div class="concept-tip-text">Learn ii–V–I in all 12 keys. It appears in almost every jazz standard and is the foundation of chord substitution.</div></div>
-      </div>
-    </div>
-    <div class="concept-card">
-      <div class="concept-header" onclick="toggleConcept(this)"><span class="concept-title">Voice leading</span><span class="concept-toggle">+</span></div>
-      <div class="concept-body">
-        <p><strong>Voice leading</strong> is how individual notes move between chords. Good voice leading means each note moves by the smallest interval possible — often just a semitone or tone.</p>
-        <p>The guide tones (3rd and 7th) are the most important voice leading voices. In a ii–V–I in C: the 7th of Dm7 (C) moves down a semitone to become the 3rd of G7 (B). The 7th of G7 (F) moves down a semitone to become the 3rd of Cmaj7 (E).</p>
-        <div class="concept-example"><div class="concept-example-label">Guide tone voice leading: Dm7 → G7 → Cmaj7</div><div class="concept-example-text">3rd: F → F → E (stays, then steps down)<br>7th: C → B → B (steps down, stays)</div></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="theory-chapter" id="ch-modes">
-    <button class="chapter-back" onclick="closeChapter()">All chapters</button>
-    <div class="chapter-title">Modes</div>
-    <div class="chapter-intro">Modes are scales derived from the major scale by starting on a different degree. Each mode has the same notes as its parent major scale but a different tonal centre — and therefore a different character.</div>
-    <div class="concept-card">
-      <div class="concept-header" onclick="toggleConcept(this)"><span class="concept-title">The seven modes</span><span class="concept-toggle">+</span></div>
-      <div class="concept-body">
-        <table class="interval-table">
-          <tr><th>Mode</th><th>Degree</th><th>Character</th></tr>
-          <tr><td>Ionian</td><td>I</td><td>The major scale. Bright, resolved.</td></tr>
-          <tr><td>Dorian</td><td>II</td><td>Minor with raised 6th. Bittersweet, jazzy.</td></tr>
-          <tr><td>Phrygian</td><td>III</td><td>Minor with flattened 2nd. Dark, Spanish.</td></tr>
-          <tr><td>Lydian</td><td>IV</td><td>Major with raised 4th. Dreamy, floating.</td></tr>
-          <tr><td>Mixolydian</td><td>V</td><td>Major with flattened 7th. Bluesy, driving.</td></tr>
-          <tr><td>Aeolian</td><td>VI</td><td>Natural minor. Dark, introspective.</td></tr>
-          <tr><td>Locrian</td><td>VII</td><td>Diminished feel. Unstable, rarely used alone.</td></tr>
-        </table>
-      </div>
-    </div>
-    <div class="concept-card">
-      <div class="concept-header" onclick="toggleConcept(this)"><span class="concept-title">How to think about modes practically</span><span class="concept-toggle">+</span></div>
-      <div class="concept-body">
-        <p>Think of modes as <strong>altered major or minor scales</strong> — just know what's different.</p>
-        <table class="interval-table">
-          <tr><th>Mode</th><th>Think of it as...</th></tr>
-          <tr><td>Dorian</td><td>Minor scale with a raised 6th</td></tr>
-          <tr><td>Phrygian</td><td>Minor scale with a flattened 2nd</td></tr>
-          <tr><td>Lydian</td><td>Major scale with a raised 4th (#4)</td></tr>
-          <tr><td>Mixolydian</td><td>Major scale with a flattened 7th (b7)</td></tr>
-        </table>
-        <p><strong>Dorian</strong> is the most useful minor mode for jazz — the raised 6th avoids the dark tension of Aeolian and sits naturally over minor 7th chords.</p>
-        <div class="concept-tip"><div class="concept-tip-label">In Key Hub</div><div class="concept-tip-text">Tap any degree in the chord map and look at the green Mode flag — it shows the mode that starts on that root note.</div></div>
-      </div>
-    </div>
-    <div class="concept-card">
-      <div class="concept-header" onclick="toggleConcept(this)"><span class="concept-title">Modal vs. tonal playing</span><span class="concept-toggle">+</span></div>
-      <div class="concept-body">
-        <p>In <strong>tonal</strong> playing, you're always moving toward or away from a home chord. Progressions create tension and resolution.</p>
-        <p>In <strong>modal</strong> playing, you stay on one chord or drone for a long time and explore the colour of the mode. The tension/resolution cycle is suspended — the sound of the mode itself is the point. Miles Davis's "So What" is the archetypal example: two chords, each held for eight bars — D Dorian and Eb Dorian.</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="theory-chapter" id="ch-voicings">
-    <button class="chapter-back" onclick="closeChapter()">All chapters</button>
-    <div class="chapter-title">Voicings &amp; Inversions</div>
-    <div class="chapter-intro">A voicing is the specific arrangement of notes in a chord — which notes go in which hand, in which order, in which register. Same chord, different voicing = completely different feel.</div>
-    <div class="concept-card">
-      <div class="concept-header" onclick="toggleConcept(this)"><span class="concept-title">Inversions</span><span class="concept-toggle">+</span></div>
-      <div class="concept-body">
-        <p>An <strong>inversion</strong> is when a note other than the root is the lowest note of the chord.</p>
-        <table class="interval-table">
-          <tr><th>Position</th><th>Lowest note</th><th>Example (C major)</th></tr>
-          <tr><td>Root position</td><td>Root</td><td>C E G</td></tr>
-          <tr><td>1st inversion</td><td>3rd</td><td>E G C</td></tr>
-          <tr><td>2nd inversion</td><td>5th</td><td>G C E</td></tr>
-        </table>
-        <p>Inversions are used for <strong>smooth bass movement</strong> — if your bass moves by step rather than jumping, the progression sounds more connected.</p>
-      </div>
-    </div>
-    <div class="concept-card">
-      <div class="concept-header" onclick="toggleConcept(this)"><span class="concept-title">Close vs. open voicings</span><span class="concept-toggle">+</span></div>
-      <div class="concept-body">
-        <p><strong>Close voicing</strong>: all notes within one octave. Full and direct, but can sound dense in lower registers.</p>
-        <p><strong>Open voicing</strong>: notes spread across more than an octave. More spacious and resonant.</p>
-        <p><strong>Drop-2</strong>: take a close voicing, then drop the second-highest note down an octave. The most common open voicing technique in jazz piano.</p>
-        <div class="concept-example"><div class="concept-example-label">Cmaj7 — close vs drop-2</div><div class="concept-example-text">Close (top to bottom): B G E C<br>Drop-2 (drop G an octave): B E C G<br>→ LH: C G / RH: E B</div></div>
-      </div>
-    </div>
-    <div class="concept-card">
-      <div class="concept-header" onclick="toggleConcept(this)"><span class="concept-title">Shell voicings</span><span class="concept-toggle">+</span></div>
-      <div class="concept-body">
-        <p>A <strong>shell voicing</strong> uses only root, 3rd, and 7th. The 5th is omitted — it adds almost no harmonic information.</p>
-        <p>Root and 7th go in the left hand (defining the frame), 3rd in the right. Those three notes tell the complete harmonic story. Extensions (9th, 11th, 13th) are then added in the right hand above the shell.</p>
-        <div class="concept-tip"><div class="concept-tip-label">Your voicing</div><div class="concept-tip-text">LH: root alone. RH: 7th–9th–3rd–5th. Root in LH is stable and low; all the colour sits in a tight RH cluster above it. This is the "Root + upper structure" voicing in Key Hub.</div></div>
-      </div>
-    </div>
-    <div class="concept-card">
-      <div class="concept-header" onclick="toggleConcept(this)"><span class="concept-title">Quartal voicings</span><span class="concept-toggle">+</span></div>
-      <div class="concept-body">
-        <p>Instead of stacking thirds, stack <strong>fourths</strong>. This gives a more ambiguous, modern sound — the voicing doesn't strongly imply a specific chord quality, which creates openness.</p>
-        <p>McCoy Tyner and Herbie Hancock both use quartal voicings extensively. They work particularly well in modal contexts.</p>
-        <div class="concept-example"><div class="concept-example-label">Quartal stack from D (D Dorian)</div><div class="concept-example-text">D – G – C – F (stacked 4ths)<br>Implies Dm7, but also Cmaj9, Fmaj13... deliberately ambiguous.</div></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="theory-chapter" id="ch-progressions">
-    <button class="chapter-back" onclick="closeChapter()">All chapters</button>
-    <div class="chapter-title">Progressions &amp; Movement</div>
-    <div class="chapter-intro">A progression is a sequence of chords that creates harmonic motion. The tension and resolution between chords — and the bass movement underneath — determines how it feels.</div>
-    <div class="concept-card">
-      <div class="concept-header" onclick="toggleConcept(this)"><span class="concept-title">Root motion by interval</span><span class="concept-toggle">+</span></div>
-      <div class="concept-body">
-        <table class="interval-table">
-          <tr><th>Root motion</th><th>Feel</th><th>Example</th></tr>
-          <tr><td>Down a 5th / up a 4th</td><td>Strongest resolution. Feels inevitable.</td><td>G → C (V → I)</td></tr>
-          <tr><td>Down a 3rd</td><td>Smooth, connected. Tonic-function move.</td><td>C → Am (I → vi)</td></tr>
-          <tr><td>Up a step</td><td>Forward momentum without strong resolution.</td><td>C → Dm (I → ii)</td></tr>
-          <tr><td>Down a semitone</td><td>Chromatic tension, dramatic resolution.</td><td>Db → C</td></tr>
-        </table>
-      </div>
-    </div>
-    <div class="concept-card">
-      <div class="concept-header" onclick="toggleConcept(this)"><span class="concept-title">Passing notes between chords</span><span class="concept-toggle">+</span></div>
-      <div class="concept-body">
-        <p>A <strong>passing note</strong> is a non-chord tone that fills the stepwise movement between two chord tones. It creates melodic connection between harmony changes.</p>
-        <p><strong>Diatonic passing notes</strong> come from the scale and sound gentle. <strong>Chromatic passing notes</strong> come from outside the scale and create more tension — they're the backbone of bebop melodic lines.</p>
-        <p>The most idiomatic use: approach the root or 3rd of the next chord by a semitone from below or above. This is the <strong>chromatic approach note</strong>.</p>
-        <div class="concept-tip"><div class="concept-tip-label">In Key Hub</div><div class="concept-tip-text">The Passing notes shown under each progression show the chromatic or diatonic note between adjacent chord roots. Use them as approach notes in your RH melody.</div></div>
-      </div>
-    </div>
-    <div class="concept-card">
-      <div class="concept-header" onclick="toggleConcept(this)"><span class="concept-title">Cadences</span><span class="concept-toggle">+</span></div>
-      <div class="concept-body">
-        <table class="interval-table">
-          <tr><th>Cadence</th><th>Movement</th><th>Feel</th></tr>
-          <tr><td>Perfect (authentic)</td><td>V → I</td><td>Complete resolution. Full stop.</td></tr>
-          <tr><td>Plagal</td><td>IV → I</td><td>"Amen" cadence. Soft, final.</td></tr>
-          <tr><td>Imperfect</td><td>anything → V</td><td>Half-close. A question mark.</td></tr>
-          <tr><td>Deceptive</td><td>V → vi</td><td>Expected I, gets vi. Surprise — phrase continues.</td></tr>
-        </table>
-        <p>The <strong>deceptive cadence</strong> (V→vi) withholds resolution at the last moment. The vi shares two notes with I, so it partially satisfies while keeping motion going.</p>
-      </div>
-    </div>
-    <div class="concept-card">
-      <div class="concept-header" onclick="toggleConcept(this)"><span class="concept-title">Arpeggios and broken chords</span><span class="concept-toggle">+</span></div>
-      <div class="concept-body">
-        <p>Playing chord tones one at a time adds melodic movement without changing harmony. The classic Alberti bass — root, 5th, 3rd, 5th — creates momentum under a sustained melody.</p>
-        <p>Jazz arpeggios are less symmetrical. Starting on the 7th or 9th rather than the root creates forward motion — you're already in the colour of the chord and working back to the anchor.</p>
-        <p>The bebop descent pattern: <strong>9–7–5–3–root</strong> is a fundamental jazz lick shape. Descend from a high extension through the chord tones to the root, then use that root as a springboard to the next chord.</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="theory-chapter" id="ch-modulation">
-    <button class="chapter-back" onclick="closeChapter()">All chapters</button>
-    <div class="chapter-title">Modulation &amp; Pivot Chords</div>
-    <div class="chapter-intro">Modulation is moving from one key to another. Done well, it sounds purposeful and surprising at the same time. The pivot chord technique is the smoothest way to move between keys.</div>
-    <div class="concept-card">
-      <div class="concept-header" onclick="toggleConcept(this)"><span class="concept-title">What is a pivot chord?</span><span class="concept-toggle">+</span></div>
-      <div class="concept-body">
-        <p>A <strong>pivot chord</strong> belongs to both the current key and the destination key. You play it with one meaning, then reinterpret it in the new key and move on. The listener doesn't hear a seam.</p>
-        <div class="concept-example"><div class="concept-example-label">C major → G major via pivot</div><div class="concept-example-text">Am = vi in C major (tonic function)<br>Am = ii in G major (subdominant function)<br>→ Play Am, follow with D7 → G. The Am reframes retrospectively.</div></div>
-      </div>
-    </div>
-    <div class="concept-card">
-      <div class="concept-header" onclick="toggleConcept(this)"><span class="concept-title">Relative major / minor — the smoothest modulation</span><span class="concept-toggle">+</span></div>
-      <div class="concept-body">
-        <p>Moving between a major key and its relative minor uses no pivot chord at all — they share the same notes. The shift is purely perceptual: which note feels like home changes, but nothing in the scale changes.</p>
-        <p>To establish the new tonal centre: land on the new tonic repeatedly, and introduce the harmonic minor raised 7th to create pull toward it. In C major → A minor, the raised G# in E7 signals A minor clearly.</p>
-      </div>
-    </div>
-    <div class="concept-card">
-      <div class="concept-header" onclick="toggleConcept(this)"><span class="concept-title">Using Key Hub for modulation</span><span class="concept-toggle">+</span></div>
-      <div class="concept-body">
-        <p>When you tap a chord and see <strong>Also in</strong> pills, those are your potential pivot chords. The Roman numeral shown tells you its function in the new key.</p>
-        <p>The most useful pivots have a <strong>different function</strong> in each key — tonic in one becoming subdominant or dominant in another creates the strongest sense of motion.</p>
-        <table class="interval-table">
-          <tr><th>Pivot chord</th><th>In C major</th><th>In G major</th><th>Effect</th></tr>
-          <tr><td>Am</td><td>vi (tonic)</td><td>ii (subdominant)</td><td>Smooth — relaxed to preparing resolution</td></tr>
-          <tr><td>G</td><td>V (dominant)</td><td>I (tonic)</td><td>Strong — V becomes home</td></tr>
-        </table>
-        <div class="concept-tip"><div class="concept-tip-label">Try it now</div><div class="concept-tip-text">Go to C Major → tap the vi chord (Am) → tap "A Minor" in the Also in pills. The Am was vi in C, now it's i in A minor. That's a modulation.</div></div>
-      </div>
-    </div>
-    <div class="concept-card">
-      <div class="concept-header" onclick="toggleConcept(this)"><span class="concept-title">Circle of Fifths modulation</span><span class="concept-toggle">+</span></div>
-      <div class="concept-body">
-        <p>Moving one step around the circle — to a key one 5th away — is the most natural modulation. The two keys share six of seven notes (only one note changes by a semitone). This is why adjacent keys on the circle feel closely related.</p>
-        <p>Moving further around the circle introduces more distance and surprise. Moving six steps (tritone key) creates maximum contrast — C major and F# major share only one note.</p>
-        <p>Jazz standards often make rapid ii–V–I modulations cycling through several keys in quick succession before arriving at the main tonal centre — each ii–V–I is self-contained and resolves cleanly.</p>
-      </div>
-    </div>
-  </div>
-
-</div>
-```
-
   </div>
   <nav class="bottom-nav">
-    <button class="nav-btn" onclick="showScreen('home')"><div class="icon-home"></div>Keys</button>
-    <button class="nav-btn active" onclick="showScreen('theory')"><div class="icon-theory"><span></span><span></span><span></span></div>Theory</button>
+    <button class="nav-btn" onclick="showScreen('home')"><div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M3 12L12 3l9 9"/><path d="M9 21V12h6v9"/></svg></div>Keys</button>
+    <button class="nav-btn" onclick="showScreen('builder')"><div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M17.5 14v6M14.5 17h6"/></svg></div>Build</button>
+    <button class="nav-btn active" onclick="showScreen('theory')"><div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="15" y2="12"/><line x1="3" y1="18" x2="18" y2="18"/></svg></div>Theory</button>
   </nav>
 </div>
 
+<div class="modal-overlay" id="save-modal">
+  <div class="modal-box"><div class="modal-title">Name this progression</div><input class="modal-input" id="prog-name-input" type="text" placeholder="e.g. Gm jazz ballad" maxlength="40"><div class="modal-btns"><button class="modal-btn" onclick="closeModal()">Cancel</button><button class="modal-btn confirm" onclick="confirmSave()">Save</button></div></div>
+</div>
 <script>
-const COF_PAIRS=[
-  {major:'C',minor:'A',sig:'0 acc.'},{major:'G',minor:'E',sig:'1♯'},{major:'D',minor:'B',sig:'2♯'},
-  {major:'A',minor:'F#',sig:'3♯'},{major:'E',minor:'C#',sig:'4♯'},{major:'B',minor:'G#',sig:'5♯'},
-  {major:'F#',minor:'D#',sig:'6♯'},{major:'Db',minor:'Bb',sig:'5♭'},{major:'Ab',minor:'F',sig:'4♭'},
-  {major:'Eb',minor:'C',sig:'3♭'},{major:'Bb',minor:'G',sig:'2♭'},{major:'F',minor:'D',sig:'1♭'},
-];
+const COF_PAIRS=[{major:'C',minor:'A',sig:'0 acc.'},{major:'G',minor:'E',sig:'1♯'},{major:'D',minor:'B',sig:'2♯'},{major:'A',minor:'F#',sig:'3♯'},{major:'E',minor:'C#',sig:'4♯'},{major:'B',minor:'G#',sig:'5♯'},{major:'F#',minor:'D#',sig:'6♯'},{major:'Db',minor:'Bb',sig:'5♭'},{major:'Ab',minor:'F',sig:'4♭'},{major:'Eb',minor:'C',sig:'3♭'},{major:'Bb',minor:'G',sig:'2♭'},{major:'F',minor:'D',sig:'1♭'}];
 const FUNC_MAJOR=['Tonic','Subdom','Tonic','Subdom','Dom','Tonic','Dom'];
 const FUNC_MINOR=['Tonic','Subdom','Tonic','Subdom','Dom','Subdom','Subtonic'];
 const MODES_MAJOR=['Ionian','Dorian','Phrygian','Lydian','Mixolydian','Aeolian','Locrian'];
 const MODES_MINOR=['Aeolian','Locrian','Ionian','Dorian','Phrygian','Lydian','Mixolydian'];
-const MODE_DESC={Ionian:'Major scale. Bright, resolved.',Dorian:'Minor with raised 6th. Jazz-friendly, bittersweet.',Phrygian:'Minor with flattened 2nd. Dark, Spanish character.',Lydian:'Major with raised 4th. Dreamy, floating.',Mixolydian:'Major with flattened 7th. Bluesy, driving.',Aeolian:'Natural minor. Dark, introspective.',Locrian:'Diminished feel. Unstable, tense.'};
+const MODE_DESC={Ionian:'Major scale. Bright, resolved.',Dorian:'Minor with raised 6th. Jazz-friendly.',Phrygian:'Minor with flattened 2nd. Dark, Spanish.',Lydian:'Major with raised 4th. Dreamy.',Mixolydian:'Major with flattened 7th. Bluesy.',Aeolian:'Natural minor. Dark, introspective.',Locrian:'Diminished feel. Unstable.'};
+const KEYS={
+  C_major:{name:'C Major',type:'major',notes:['C','D','E','F','G','A','B'],rh:[1,2,3,1,2,3,4],lh:[5,4,3,2,1,3,2],romans:['I','ii','iii','IV','V','vi','vii°'],quals:['M','m','m','M','M','m','d']},
+  G_major:{name:'G Major',type:'major',notes:['G','A','B','C','D','E','F#'],rh:[1,2,3,1,2,3,4],lh:[5,4,3,2,1,3,2],romans:['I','ii','iii','IV','V','vi','vii°'],quals:['M','m','m','M','M','m','d']},
+  D_major:{name:'D Major',type:'major',notes:['D','E','F#','G','A','B','C#'],rh:[1,2,3,1,2,3,4],lh:[5,4,3,2,1,3,2],romans:['I','ii','iii','IV','V','vi','vii°'],quals:['M','m','m','M','M','m','d']},
+  A_major:{name:'A Major',type:'major',notes:['A','B','C#','D','E','F#','G#'],rh:[1,2,3,1,2,3,4],lh:[5,4,3,2,1,3,2],romans:['I','ii','iii','IV','V','vi','vii°'],quals:['M','m','m','M','M','m','d']},
+  E_major:{name:'E Major',type:'major',notes:['E','F#','G#','A','B','C#','D#'],rh:[1,2,3,1,2,3,4],lh:[5,4,3,2,1,3,2],romans:['I','ii','iii','IV','V','vi','vii°'],quals:['M','m','m','M','M','m','d']},
+  B_major:{name:'B Major',type:'major',notes:['B','C#','D#','E','F#','G#','A#'],rh:[1,2,3,1,2,3,4],lh:[4,3,2,1,4,3,2],romans:['I','ii','iii','IV','V','vi','vii°'],quals:['M','m','m','M','M','m','d']},
+  'F#_major':{name:'F# Major',type:'major',notes:['F#','G#','A#','B','C#','D#','E#'],rh:[2,3,4,1,2,3,1],lh:[4,3,2,1,3,2,1],romans:['I','ii','iii','IV','V','vi','vii°'],quals:['M','m','m','M','M','m','d']},
+  Db_major:{name:'Db Major',type:'major',notes:['Db','Eb','F','Gb','Ab','Bb','C'],rh:[2,3,1,2,3,4,1],lh:[3,2,1,4,3,2,1],romans:['I','ii','iii','IV','V','vi','vii°'],quals:['M','m','m','M','M','m','d']},
+  Ab_major:{name:'Ab Major',type:'major',notes:['Ab','Bb','C','Db','Eb','F','G'],rh:[3,4,1,2,3,1,2],lh:[3,2,1,4,3,2,1],romans:['I','ii','iii','IV','V','vi','vii°'],quals:['M','m','m','M','M','m','d']},
+  Eb_major:{name:'Eb Major',type:'major',notes:['Eb','F','G','Ab','Bb','C','D'],rh:[3,1,2,3,4,1,2],lh:[3,2,1,4,3,2,1],romans:['I','ii','iii','IV','V','vi','vii°'],quals:['M','m','m','M','M','m','d']},
+  Bb_major:{name:'Bb Major',type:'major',notes:['Bb','C','D','Eb','F','G','A'],rh:[4,1,2,3,1,2,3],lh:[3,2,1,4,3,2,1],romans:['I','ii','iii','IV','V','vi','vii°'],quals:['M','m','m','M','M','m','d']},
+  F_major:{name:'F Major',type:'major',notes:['F','G','A','Bb','C','D','E'],rh:[1,2,3,4,1,2,3],lh:[5,4,3,2,1,3,2],romans:['I','ii','iii','IV','V','vi','vii°'],quals:['M','m','m','M','M','m','d']},
+  A_minor:{name:'A Minor',type:'minor',notes:['A','B','C','D','E','F','G'],rh:[1,2,3,1,2,3,4],lh:[5,4,3,2,1,3,2],romans:['i','ii°','III','iv','v','VI','VII'],quals:['m','d','M','m','m','M','M'],vh:{chord:'E7',notes:'E G# B D'}},
+  E_minor:{name:'E Minor',type:'minor',notes:['E','F#','G','A','B','C','D'],rh:[1,2,3,1,2,3,4],lh:[5,4,3,2,1,3,2],romans:['i','ii°','III','iv','v','VI','VII'],quals:['m','d','M','m','m','M','M'],vh:{chord:'B7',notes:'B D# F# A'}},
+  B_minor:{name:'B Minor',type:'minor',notes:['B','C#','D','E','F#','G','A'],rh:[1,2,3,1,2,3,4],lh:[4,3,2,1,4,3,2],romans:['i','ii°','III','iv','v','VI','VII'],quals:['m','d','M','m','m','M','M'],vh:{chord:'F#7',notes:'F# A# C# E'}},
+  'F#_minor':{name:'F# Minor',type:'minor',notes:['F#','G#','A','B','C#','D','E'],rh:[2,3,1,2,3,1,2],lh:[4,3,2,1,3,2,1],romans:['i','ii°','III','iv','v','VI','VII'],quals:['m','d','M','m','m','M','M'],vh:{chord:'C#7',notes:'C# E# G# B'}},
+  'C#_minor':{name:'C# Minor',type:'minor',notes:['C#','D#','E','F#','G#','A','B'],rh:[3,4,1,2,3,1,2],lh:[3,2,1,4,3,2,1],romans:['i','ii°','III','iv','v','VI','VII'],quals:['m','d','M','m','m','M','M'],vh:{chord:'G#7',notes:'G# B# D# F#'}},
+  'G#_minor':{name:'G# Minor',type:'minor',notes:['G#','A#','B','C#','D#','E','F#'],rh:[3,4,1,2,3,1,2],lh:[4,3,2,1,3,2,1],romans:['i','ii°','III','iv','v','VI','VII'],quals:['m','d','M','m','m','M','M'],vh:{chord:'D#7',notes:'D# F## A# C#'}},
+  'D#_minor':{name:'D# Minor',type:'minor',notes:['D#','E#','F#','G#','A#','B','C#'],rh:[3,4,1,2,3,1,2],lh:[3,2,1,4,3,2,1],romans:['i','ii°','III','iv','v','VI','VII'],quals:['m','d','M','m','m','M','M'],vh:{chord:'A#7',notes:'A# C## E# G#'}},
+  Bb_minor:{name:'Bb Minor',type:'minor',notes:['Bb','C','Db','Eb','F','Gb','Ab'],rh:[4,1,2,3,1,2,3],lh:[2,1,3,2,1,3,2],romans:['i','ii°','III','iv','v','VI','VII'],quals:['m','d','M','m','m','M','M'],vh:{chord:'F7',notes:'F A C Eb'}},
+  F_minor:{name:'F Minor',type:'minor',notes:['F','G','Ab','Bb','C','Db','Eb'],rh:[1,2,3,4,1,2,3],lh:[5,4,3,2,1,3,2],romans:['i','ii°','III','iv','v','VI','VII'],quals:['m','d','M','m','m','M','M'],vh:{chord:'C7',notes:'C E G Bb'}},
+  C_minor:{name:'C Minor',type:'minor',notes:['C','D','Eb','F','G','Ab','Bb'],rh:[1,2,3,1,2,3,4],lh:[5,4,3,2,1,3,2],romans:['i','ii°','III','iv','v','VI','VII'],quals:['m','d','M','m','m','M','M'],vh:{chord:'G7',notes:'G B D F'}},
+  G_minor:{name:'G Minor',type:'minor',notes:['G','A','Bb','C','D','Eb','F'],rh:[1,2,3,1,2,3,4],lh:[5,4,3,2,1,3,2],romans:['i','ii°','III','iv','v','VI','VII'],quals:['m','d','M','m','m','M','M'],vh:{chord:'D7',notes:'D F# A C'}},
+  D_minor:{name:'D Minor',type:'minor',notes:['D','E','F','G','A','Bb','C'],rh:[1,2,3,1,2,3,4],lh:[5,4,3,2,1,3,2],romans:['i','ii°','III','iv','v','VI','VII'],quals:['m','d','M','m','m','M','M'],vh:{chord:'A7',notes:'A C# E G'}},
+};
+const SONGS={
+  C_major:[{t:'Let It Be',a:'The Beatles'},{t:'Imagine',a:'John Lennon'},{t:'Clocks',a:'Coldplay'},{t:'Piano Man',a:'Billy Joel'},{t:'Bohemian Rhapsody',a:'Queen'},{t:'Don\'t Stop Believin\'',a:'Journey'},{t:'With or Without You',a:'U2'},{t:'Misty',a:'Erroll Garner'},{t:'Happy Birthday',a:'Traditional'},{t:'Waterloo',a:'ABBA'}],
+  G_major:[{t:'Sweet Home Chicago',a:'Robert Johnson'},{t:'Good Riddance',a:'Green Day'},{t:'Brown Eyed Girl',a:'Van Morrison'},{t:'Knockin\' on Heaven\'s Door',a:'Bob Dylan'},{t:'Country Roads',a:'John Denver'},{t:'Thinking Out Loud',a:'Ed Sheeran'},{t:'Every Breath You Take',a:'The Police'},{t:'Autumn Leaves',a:'Jazz Standard'},{t:'La Vie en Rose',a:'Édith Piaf'},{t:'Dancing in the Moonlight',a:'Toploader'}],
+  D_major:[{t:'Sweet Home Alabama',a:'Lynyrd Skynyrd'},{t:'Losing My Religion',a:'R.E.M.'},{t:'Crocodile Rock',a:'Elton John'},{t:'Here Comes the Sun',a:'The Beatles'},{t:'Shake It Off',a:'Taylor Swift'},{t:'Africa',a:'Toto'},{t:'Viva la Vida',a:'Coldplay'},{t:'All of Me',a:'John Legend'},{t:'Girl from Ipanema',a:'Jobim'},{t:'Yellow',a:'Coldplay'}],
+  A_major:[{t:'Sweet Child O\' Mine',a:'Guns N\' Roses'},{t:'Yesterday',a:'The Beatles'},{t:'Take on Me',a:'a-ha'},{t:'Summer of \'69',a:'Bryan Adams'},{t:'Tiny Dancer',a:'Elton John'},{t:'Can\'t Help Falling in Love',a:'Elvis Presley'},{t:'Mr. Brightside',a:'The Killers'},{t:'Body and Soul',a:'Jazz Standard'},{t:'Uptown Funk',a:'Bruno Mars'},{t:'Perfect',a:'Ed Sheeran'}],
+  E_major:[{t:'Bittersweet Symphony',a:'The Verve'},{t:'Born to Run',a:'Bruce Springsteen'},{t:'Jump',a:'Van Halen'},{t:'Dancing Queen',a:'ABBA'},{t:'Shallow',a:'Lady Gaga'},{t:'Shape of You',a:'Ed Sheeran'},{t:'Fix You',a:'Coldplay'},{t:'Isn\'t She Lovely',a:'Stevie Wonder'},{t:'Come Together',a:'The Beatles'},{t:'I\'m a Believer',a:'The Monkees'}],
+  B_major:[{t:'Something',a:'The Beatles'},{t:'Human',a:'The Killers'},{t:'Blinding Lights',a:'The Weeknd'},{t:'More Than Words',a:'Extreme'},{t:'Roxanne',a:'The Police'},{t:'All the Small Things',a:'Blink-182'},{t:'Titanium',a:'David Guetta'},{t:'So What',a:'Miles Davis'},{t:'My Generation',a:'The Who'},{t:'Creep',a:'Radiohead'}],
+  'F#_major':[{t:'Purple Rain',a:'Prince'},{t:'When Doves Cry',a:'Prince'},{t:'I Will Always Love You',a:'Whitney Houston'},{t:'My Heart Will Go On',a:'Celine Dion'},{t:'Under the Bridge',a:'RHCP'},{t:'Patience',a:'Guns N\' Roses'},{t:'Careless Whisper',a:'George Michael'},{t:'Nights in White Satin',a:'Moody Blues'},{t:'Truly Madly Deeply',a:'Savage Garden'},{t:'Breathe',a:'Faith Hill'}],
+  Db_major:[{t:'Let\'s Stay Together',a:'Al Green'},{t:'As',a:'Stevie Wonder'},{t:'Ribbon in the Sky',a:'Stevie Wonder'},{t:'Thriller',a:'Michael Jackson'},{t:'Man in the Mirror',a:'Michael Jackson'},{t:'Mercy Mercy Me',a:'Marvin Gaye'},{t:'Overjoyed',a:'Stevie Wonder'},{t:'Georgia on My Mind',a:'Ray Charles'},{t:'I\'d Rather Go Blind',a:'Etta James'},{t:'Killing Me Softly',a:'Roberta Flack'}],
+  Ab_major:[{t:'Hello',a:'Adele'},{t:'Someone Like You',a:'Adele'},{t:'Rolling in the Deep',a:'Adele'},{t:'The Scientist',a:'Coldplay'},{t:'Skyfall',a:'Adele'},{t:'Beautiful',a:'Christina Aguilera'},{t:'How Deep Is Your Love',a:'Bee Gees'},{t:'Lean on Me',a:'Bill Withers'},{t:'What\'s Going On',a:'Marvin Gaye'},{t:'Endless Love',a:'Diana Ross'}],
+  Eb_major:[{t:'Superstition',a:'Stevie Wonder'},{t:'Sir Duke',a:'Stevie Wonder'},{t:'Master Blaster',a:'Stevie Wonder'},{t:'Brick House',a:'Commodores'},{t:'Higher Ground',a:'Stevie Wonder'},{t:'My Favorite Things',a:'Coltrane version'},{t:'Blue Train',a:'John Coltrane'},{t:'What Is Hip',a:'Tower of Power'},{t:'Chameleon',a:'Herbie Hancock'},{t:'Watermelon Man',a:'Herbie Hancock'}],
+  Bb_major:[{t:'Stand by Me',a:'Ben E. King'},{t:'Can\'t Take My Eyes Off You',a:'Frankie Valli'},{t:'I Got You',a:'James Brown'},{t:'What\'d I Say',a:'Ray Charles'},{t:'Cissy Strut',a:'The Meters'},{t:'The Thrill Is Gone',a:'B.B. King'},{t:'Mercy Mercy Mercy',a:'Cannonball Adderley'},{t:'Autumn Leaves',a:'Jazz Standard (Bb)'},{t:'Straight No Chaser',a:'Thelonious Monk'},{t:'Soul Man',a:'Sam & Dave'}],
+  F_major:[{t:'Hey Jude',a:'The Beatles'},{t:'Let Her Go',a:'Passenger'},{t:'Just the Way You Are',a:'Bruno Mars'},{t:'I\'m Yours',a:'Jason Mraz'},{t:'No Woman No Cry',a:'Bob Marley'},{t:'Riptide',a:'Vance Joy'},{t:'Fly Me to the Moon',a:'Jazz Standard'},{t:'Summertime',a:'Gershwin'},{t:'Watermelon Sugar',a:'Harry Styles'},{t:'Wonderful Tonight',a:'Eric Clapton'}],
+  A_minor:[{t:'Stairway to Heaven',a:'Led Zeppelin'},{t:'Sultans of Swing',a:'Dire Straits'},{t:'Smooth',a:'Santana'},{t:'The Sound of Silence',a:'Simon & Garfunkel'},{t:'Black Magic Woman',a:'Santana'},{t:'Scarborough Fair',a:'Traditional'},{t:'All Along the Watchtower',a:'Jimi Hendrix'},{t:'Moondance',a:'Van Morrison'},{t:'Venus',a:'Shocking Blue'},{t:'Hit the Road Jack',a:'Ray Charles'}],
+  E_minor:[{t:'Nothing Else Matters',a:'Metallica'},{t:'House of the Rising Sun',a:'The Animals'},{t:'Comfortably Numb',a:'Pink Floyd'},{t:'Mad World',a:'Tears for Fears'},{t:'Paint It Black',a:'Rolling Stones'},{t:'Billie Jean',a:'Michael Jackson'},{t:'Seven Nation Army',a:'White Stripes'},{t:'Paranoid Android',a:'Radiohead'},{t:'Summertime Sadness',a:'Lana Del Rey'},{t:'One',a:'Metallica'}],
+  B_minor:[{t:'Hotel California',a:'Eagles'},{t:'Wish You Were Here',a:'Pink Floyd'},{t:'Riders on the Storm',a:'The Doors'},{t:'Wake Me Up',a:'Avicii'},{t:'Latch',a:'Sam Smith'},{t:'Diamonds',a:'Rihanna'},{t:'Numb',a:'Linkin Park'},{t:'Bohemian Rhapsody (verse)',a:'Queen'},{t:'La Grange',a:'ZZ Top'},{t:'Fast Car',a:'Tracy Chapman'}],
+  'F#_minor':[{t:'Roxanne',a:'The Police'},{t:'Every Breath You Take',a:'The Police'},{t:'Shape of My Heart',a:'Sting'},{t:'Creep',a:'Radiohead'},{t:'Torn',a:'Natalie Imbruglia'},{t:'Iris',a:'Goo Goo Dolls'},{t:'If I Ain\'t Got You',a:'Alicia Keys'},{t:'Say Something',a:'A Great Big World'},{t:'Someone You Loved',a:'Lewis Capaldi'},{t:'Gravity',a:'John Mayer'}],
+  'C#_minor':[{t:'Moonlight Sonata',a:'Beethoven'},{t:'Radioactive',a:'Imagine Dragons'},{t:'Rather Be',a:'Clean Bandit'},{t:'Love Story',a:'Taylor Swift'},{t:'Demons',a:'Imagine Dragons'},{t:'Take Me to Church',a:'Hozier'},{t:'A Sky Full of Stars',a:'Coldplay'},{t:'Clarity',a:'Zedd'},{t:'Hall of Fame',a:'The Script'},{t:'Clocks (verse)',a:'Coldplay'}],
+  'G#_minor':[{t:'Bad Romance',a:'Lady Gaga'},{t:'Poker Face',a:'Lady Gaga'},{t:'Cry Me a River',a:'Justin Timberlake'},{t:'Toxic',a:'Britney Spears'},{t:'Umbrella',a:'Rihanna'},{t:'Wicked Game',a:'Chris Isaak'},{t:'Black Hole Sun',a:'Soundgarden'},{t:'Minor Swing',a:'Django Reinhardt'},{t:'Soldier of Fortune',a:'Deep Purple'},{t:'Rolling in the Deep (verse)',a:'Adele'}],
+  'D#_minor':[{t:'Chandelier',a:'Sia'},{t:'Elastic Heart',a:'Sia'},{t:'Sweet Dreams',a:'Eurythmics'},{t:'Gimme! Gimme! Gimme!',a:'ABBA'},{t:'Voyage',a:'ABBA'},{t:'I Follow Rivers',a:'Lykke Li'},{t:'Blue (Da Ba Dee)',a:'Eiffel 65'},{t:'Fur Elise',a:'Beethoven (Eb minor)'},{t:'Running',a:'Naughty Boy'},{t:'Wildest Dreams',a:'Taylor Swift'}],
+  Bb_minor:[{t:'Crazy in Love',a:'Beyoncé'},{t:'Single Ladies',a:'Beyoncé'},{t:'Halo',a:'Beyoncé'},{t:'Irreplaceable',a:'Beyoncé'},{t:'Purple Rain',a:'Prince'},{t:'Sign O\' the Times',a:'Prince'},{t:'When Doves Cry (verse)',a:'Prince'},{t:'I Feel Good',a:'James Brown'},{t:'Papa\'s Got a Brand New Bag',a:'James Brown'},{t:'Superstition (Am centre)',a:'Stevie Wonder'}],
+  F_minor:[{t:'In the Air Tonight',a:'Phil Collins'},{t:'Enjoy the Silence',a:'Depeche Mode'},{t:'Personal Jesus',a:'Depeche Mode'},{t:'Breathe',a:'Pink Floyd'},{t:'Time',a:'Pink Floyd'},{t:'Money',a:'Pink Floyd'},{t:'One More Time',a:'Daft Punk'},{t:'Get Lucky',a:'Daft Punk'},{t:'Comfortably Numb (chorus)',a:'Pink Floyd'},{t:'Harder Better Faster',a:'Daft Punk'}],
+  C_minor:[{t:'Beethoven\'s 5th',a:'Beethoven'},{t:'Eye of the Tiger',a:'Survivor'},{t:'Don\'t You (Forget About Me)',a:'Simple Minds'},{t:'99 Luftballons',a:'Nena'},{t:'Redemption Song',a:'Bob Marley'},{t:'Don\'t Fear the Reaper',a:'Blue Öyster Cult'},{t:'Mr. Brightside (verse)',a:'The Killers'},{t:'Get Lucky (key area)',a:'Daft Punk'},{t:'Eleanor Rigby',a:'The Beatles'},{t:'Losing My Religion',a:'R.E.M.'}],
+  G_minor:[{t:'Greensleeves',a:'Traditional'},{t:'Eleanor Rigby',a:'The Beatles'},{t:'Oye Como Va',a:'Santana'},{t:'Evil Ways',a:'Santana'},{t:'Autumn Leaves (Gm)',a:'Jazz Standard'},{t:'Summertime (Gm)',a:'Gershwin'},{t:'Mercy',a:'Kanye West'},{t:'Forgot About Dre',a:'Dr. Dre'},{t:'Nuthin\' But a G Thang',a:'Dr. Dre'},{t:'Moanin\'',a:'Art Blakey'}],
+  D_minor:[{t:'Smoke on the Water',a:'Deep Purple'},{t:'Immigrant Song',a:'Led Zeppelin'},{t:'Sunshine of Your Love',a:'Cream'},{t:'Hit the Road Jack',a:'Ray Charles'},{t:'Scarborough Fair',a:'Simon & Garfunkel'},{t:'So What (Dm section)',a:'Miles Davis'},{t:'Hells Bells',a:'AC/DC'},{t:'What Is Life',a:'George Harrison'},{t:'Back in Black',a:'AC/DC'},{t:'Master of Puppets',a:'Metallica'}],
+};
+const COF_MAJ=['C','G','D','A','E','B','F#','Db','Ab','Eb','Bb','F'];
+const COF_MIN=['A','E','B','F#','C#','G#','D#','Bb','F','C','G','D'];
+const ALL_IDS=Object.keys(KEYS);
+function getTones(kid,deg,ext){const n=KEYS[kid].notes,a=[n[deg],n[(deg+2)%7],n[(deg+4)%7],n[(deg+6)%7],n[(deg+1)%7]];return a.slice(0,ext===0?3:ext===1?4:5);}
+function qlabel(q){return{M:'Major',m:'Minor',d:'Diminished'}[q]||q;}
+function csym(root,q,ext){return root+(q==='M'?'':q==='m'?'m':'°')+(ext===1?'7':ext===2?'9':'');}
+function revLookup(rn,q){const r=[];ALL_IDS.forEach(kid=>{KEYS[kid].notes.forEach((n,i)=>{if(n===rn&&KEYS[kid].quals[i]===q)r.push({kid,roman:KEYS[kid].romans[i]});});});return r;}
+const CHROM=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+const ENHAR={Db:'C#',Eb:'D#',Fb:'E',Gb:'F#',Ab:'G#',Bb:'A#',Cb:'B','E#':'F','B#':'C'};
+function ni(n){return CHROM.indexOf(ENHAR[n]||n);}
+function passingNotes(a,b,kn){
+  const fi=ni(a),ti=ni(b);if(fi<0||ti<0||fi===ti)return[];
+  const up=(ti-fi+12)%12,dn=(fi-ti+12)%12,res=[];
+  if(up===1||dn===1)return[];
+  if(up<=4){for(let s=1;s<up;s++){const c=CHROM[(fi+s)%12];res.push({note:c,type:kn.some(n=>(ENHAR[n]||n)===c)?'diatonic':'chromatic',dir:'↑'});}}
+  else if(dn<=4){for(let s=1;s<dn;s++){const c=CHROM[(fi-s+12)%12];res.push({note:c,type:kn.some(n=>(ENHAR[n]||n)===c)?'diatonic':'chromatic',dir:'↓'});}}
+  else{const c=CHROM[(ti-1+12)%12];res.push({note:c,type:kn.some(n=>(ENHAR[n]||n)===c)?'diatonic':'chromatic',dir:'→'});}
+  return res;
+}
+function voicings(ts){
+  const[r,t3,t5,t7,t9]=ts,e=ts.length,vs=[];
+  if(e===3){vs.push({n:'Close position',lh:r,rh:r+' '+t3+' '+t5,tip:'Root in LH, full triad in RH.'});vs.push({n:'Open / spread',lh:r+' '+t5,rh:t3+' '+r,tip:'Root and 5th wide in LH.'});vs.push({n:'1st inversion spread',lh:r+' '+t3,rh:t5+' '+r,tip:'Softer than root position.'});vs.push({n:'Root + upper pair',lh:r,rh:t3+' '+t5,tip:'Root alone in LH.',y:true});}
+  if(e===4){vs.push({n:'Close position',lh:r,rh:t3+' '+t5+' '+t7,tip:'All four tones in RH.'});vs.push({n:'Shell voicing',lh:r+' '+t7,rh:t3+' '+t5,tip:'Root + 7th in LH; 3rd and 5th in RH.'});vs.push({n:'Drop-2',lh:r+' '+t5,rh:t7+' '+t3,tip:'Second voice dropped an octave.'});vs.push({n:'Root + upper cluster',lh:r,rh:t7+' '+t3+' '+t5,tip:'Root alone in LH.',y:true});}
+  if(e===5){vs.push({n:'Shell + 9th',lh:r+' '+t7,rh:t3+' '+t9,tip:'Drop the 5th. Classic jazz shell.'});vs.push({n:'Spread voicing',lh:r+' '+t7,rh:t9+' '+t3+' '+t5,tip:'9th on top. Luminous quality.'});vs.push({n:'Quartal hint',lh:r+' '+t7,rh:t9+' '+t5+' '+t3,tip:'Stack RH from 9th down.'});vs.push({n:'Root + upper structure',lh:r,rh:t7+' '+t9+' '+t3+' '+t5,tip:'RH: 7th → 9th → 3rd → 5th.',y:true});}
+  return vs;
+}
+function arpeggios(ts){
+  const[r,t3,t5,t7,t9]=ts,e=ts.length,ar=[];
+  if(e===3){ar.push({n:'Ascending',s:r+' – '+t3+' – '+t5+' – '+r,tip:'Classic ascending broken chord.'});ar.push({n:'Descending',s:r+' – '+t5+' – '+t3+' – '+r,tip:'Approach next chord from above.'});ar.push({n:'Angular',s:r+' – '+t5+' – '+t3+' – '+t5,tip:'Skip the 3rd going up.'});ar.push({n:'Alberti-style',s:r+' – '+t5+' – '+t3+' – '+t5+' (repeating)',tip:'Classic LH accompaniment.'});}
+  if(e===4){ar.push({n:'Ascending',s:r+' – '+t3+' – '+t5+' – '+t7+' – '+r,tip:'Full 4-note arpeggio.'});ar.push({n:'Jazz waltz',s:r+' – '+t5+' – '+t7+' – '+t3+' – '+t5,tip:'Root to 5th, up through 7th to 3rd.'});ar.push({n:'Shell first',s:r+' – '+t7+' – '+t3+' – '+t5,tip:'Shell tones, then fill.'});ar.push({n:'Descend from 7th',s:t7+' – '+t5+' – '+t3+' – '+r,tip:'Lead into next chord below.'});}
+  if(e===5){ar.push({n:'Ascending 9th run',s:r+' – '+t3+' – '+t5+' – '+t7+' – '+t9,tip:'Full 5-note run.'});ar.push({n:'9th figure',s:t7+' – '+t9+' – '+t3+' – '+t5+' – '+r,tip:'9th as melodic peak.'});ar.push({n:'Skip pattern',s:r+' – '+t5+' – '+t9+' – '+t3+' – '+t7,tip:'Shell then colour.'});ar.push({n:'Bebop descent',s:t9+' – '+t7+' – '+t5+' – '+t3+' – '+r,tip:'Descend into next chord.'});}
+  return ar;
+}
+const CHROM_KEYS=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+function transposeKey(dir){
+  if(!curKey)return;
+  const root=KEYS[curKey].notes[0];
+  const norm=ENHAR[root]||root;
+  const idx=CHROM_KEYS.indexOf(norm);
+  if(idx<0)return;
+  const newNote=CHROM_KEYS[(idx+dir+12)%12];
+  const type=KEYS[curKey].type;
+  const match=ALL_IDS.find(k=>KEYS[k].type===type&&(KEYS[k].notes[0]===newNote||(ENHAR[KEYS[k].notes[0]]||KEYS[k].notes[0])===newNote));
+  if(match)enterKey(match);
+}
+let curKey=null,selDeg=null,curPExt=0,curHand='rh';
+let favourites=[];
+try{favourites=JSON.parse(localStorage.getItem('kh_favs')||'[]');}catch(e){favourites=[];}
+let builderKey='C_major',builderExt=0,builderProg=[];
+function showScreen(name){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  const map={home:'screen-home',key:'screen-key',builder:'screen-builder',theory:'screen-theory'};
+  if(map[name])document.getElementById(map[name]).classList.add('active');
+  document.querySelectorAll('.nav-btn').forEach(b=>{
+    const t=b.textContent.trim().toLowerCase();
+    if((name==='home'&&t==='keys')||(name==='builder'&&t==='build')||(name==='theory'&&t==='theory'))b.classList.add('active');
+  });
+  if(name==='builder'){renderBuilderKeyPicker();renderBuilderChordMap();renderSaved();}
+  if(name==='theory')document.getElementById('theory-scroll').scrollTop=0;
+}
+function enterKey(kid){
+  curKey=kid;selDeg=null;curPExt=0;
+  renderKeyView(kid);
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById('screen-key').classList.add('active');
+  document.getElementById('key-scroll').scrollTop=0;
+}
+document.getElementById('key-scroll').addEventListener('scroll',function(){
+  document.getElementById('back-to-top').classList.toggle('visible',this.scrollTop>300);
+});
+function saveFavs(){try{localStorage.setItem('kh_favs',JSON.stringify(favourites));}catch(e){}}
+function toggleFav(kid){
+  const idx=favourites.indexOf(kid);
+  if(idx>=0)favourites.splice(idx,1);else favourites.push(kid);
+  saveFavs();renderHome();
+}
+function renderFavs(){
+  const sec=document.getElementById('fav-section'),grid=document.getElementById('fav-grid');
+  if(favourites.length===0){sec.style.display='none';return;}
+  sec.style.display='';grid.innerHTML='';
+  favourites.forEach(kid=>{
+    if(!KEYS[kid])return;
+    const c=document.createElement('div');c.className='fav-card';
+    c.innerHTML='<span class="fav-name">'+KEYS[kid].name+'</span><button class="fav-remove" onclick="event.stopPropagation();toggleFav(\''+kid+'\')">✕</button>';
+    c.onclick=()=>enterKey(kid);grid.appendChild(c);
+  });
+}
+function renderHome(){
+  renderFavs();
+  const g=document.getElementById('key-grid');g.innerHTML='';
+  COF_PAIRS.forEach(p=>{
+    const mj=p.major+'_major',mn=p.minor+'_minor';
+    const mjF=favourites.includes(mj),mnF=favourites.includes(mn);
+    const c=document.createElement('div');c.className='key-card';
+    c.innerHTML='<div style="display:flex;align-items:flex-start;justify-content:space-between"><button class="kc-major-btn" data-k="'+mj+'"><div class="kc-major">'+p.major+' Major</div><div class="kc-sig">'+p.sig+'</div></button><button class="kc-fav-btn'+(mjF?' starred':'')+'" onclick="event.stopPropagation();toggleFav(\''+mj+'\')" title="Favourite">★</button></div><hr class="kc-div"><div style="display:flex;align-items:center;justify-content:space-between"><button class="kc-minor-btn" data-k="'+mn+'"><div class="kc-minor">'+p.minor+' minor</div></button><button class="kc-fav-btn'+(mnF?' starred':'')+'" onclick="event.stopPropagation();toggleFav(\''+mn+'\')" title="Favourite">★</button></div>';
+    c.querySelector('.kc-major-btn').onclick=e=>{const k=e.currentTarget.dataset.k;if(KEYS[k])enterKey(k);};
+    c.querySelector('.kc-minor-btn').onclick=e=>{const k=e.currentTarget.dataset.k;if(KEYS[k])enterKey(k);};
+    g.appendChild(c);
+  });
+}
+function renderKeyView(kid){
+  const key=KEYS[kid];
+  document.getElementById('kv-name').textContent=key.name;
+  document.getElementById('kv-kicker').textContent=key.type==='major'?'Major Key':'Natural Minor Key';
+  renderChordMap(kid);closePanel();renderProgressions(kid);renderSongs(kid);renderRelated(kid);
+}
+function setHand(hand){curHand=hand;document.querySelectorAll('.fing-tog').forEach(b=>b.classList.toggle('active',b.dataset.hand===hand));if(curKey)renderChordMap(curKey);}
+function renderChordMap(kid){
+  const key=KEYS[kid],funcs=key.type==='major'?FUNC_MAJOR:FUNC_MINOR,fing=curHand==='rh'?key.rh:key.lh;
+  const row=document.getElementById('chord-map-row');row.innerHTML='';
+  key.notes.forEach((n,i)=>{
+    const q=key.quals[i],sym=csym(n,q,0);
+    const sev=getTones(kid,i,1)[3],nin=getTones(kid,i,2)[4];
+    const triad=getTones(kid,i,0);
+    const card=document.createElement('div');card.className='chord-card'+(selDeg===i?' selected':'');
+    const tH=triad.map((t,ti)=>'<span class="cc-note'+(ti===0?' root-note':'')+'">'+t+'</span>'+(ti<2?'<span class="cc-note-sep">·</span>':'')).join('');
+    card.innerHTML='<div class="cc-sym">'+sym+'</div><div class="cc-meta">'+key.romans[i]+'<br>'+funcs[i]+'<br><span style="font-weight:600">'+fing[i]+'</span></div><div class="cc-notes-wrap"><div class="cc-note-row">'+tH+'</div><div class="cc-row-label lbl-7">7</div><div class="cc-note-row"><span class="cc-note seventh-note">'+sev+'</span></div><div class="cc-row-label lbl-9">9</div><div class="cc-note-row"><span class="cc-note ninth-note">'+nin+'</span></div></div>';
+    card.onclick=()=>onCard(kid,i);
+    row.appendChild(card);
+  });
+}
+function onCard(kid,deg){
+  if(selDeg===deg){selDeg=null;closePanel();renderChordMap(kid);return;}
+  selDeg=deg;curPExt=0;renderChordMap(kid);openPanel(kid,deg,curPExt);
+  setTimeout(()=>document.getElementById('chord-panel').scrollIntoView({behavior:'smooth',block:'start'}),60);
+}
+function closePanel(){const p=document.getElementById('chord-panel');p.classList.remove('open');p.innerHTML='';}
+function togCls(e){return e===0?'on-triad':e===1?'on-seventh':'on-ninth';}
+function openPanel(kid,deg,ext){
+  const key=KEYS[kid],q=key.quals[deg],ts=getTones(kid,deg,ext),sym=csym(key.notes[deg],q,ext);
+  const isVm=key.type==='minor'&&deg===4;
+  const funcs=key.type==='major'?FUNC_MAJOR:FUNC_MINOR;
+  const mode=(key.type==='major'?MODES_MAJOR:MODES_MINOR)[deg];
+  const tri=ts.slice(0,3),extTs=ts.slice(3);
+  let chips=tri.map(t=>'<span class="chip triad">'+t+'</span>').join('');
+  if(extTs.length){chips+='<span class="chip-plus">+</span>';chips+=extTs.map((t,i)=>'<span class="chip '+(i===0?'ext':'nin')+'">'+t+'</span>').join('');}
+  const pills=revLookup(key.notes[deg],q).filter(r=>r.kid!==kid).slice(0,8).map(r=>'<button class="cp-key-pill" onclick="enterKey(\''+r.kid+'\')">'+KEYS[r.kid].name+' <span style="opacity:.6;font-size:9px">'+r.roman+'</span></button>').join('');
+  const[r,t3,t5]=tri;
+  const invs=[{l:'1st inv',n:t3+'  '+t5+'  '+r},{l:'2nd inv',n:t5+'  '+r+'  '+t3}].map(v=>'<div class="cp-inv"><span class="inv-label">'+v.l+'</span><span class="inv-notes">'+v.n+'</span></div>').join('');
+  const mFlag='<div class="mode-flag"><div class="mode-flag-label">Mode from this root</div><div class="mode-flag-text">'+key.notes[deg]+' '+mode+'</div><div class="mode-flag-desc">'+(MODE_DESC[mode]||'')+'</div></div>';
+  let hFlag='';if(isVm&&key.vh)hFlag='<div class="harm-flag"><div class="harm-label">Harmonic minor option</div><div class="harm-text">v → <strong>'+key.vh.chord+'</strong> · '+key.vh.notes+'</div></div>';
+  const vH=voicings(ts).map(v=>'<div class="vc-card'+(v.y?' yours':'')+'"><div class="vc-name">'+v.n+(v.y?'<span class="vc-tag">Your voicing</span>':'')+'</div><div class="vc-hands"><div class="vc-hand"><span class="vc-hand-lbl">LH</span><span class="vc-hand-notes">'+v.lh+'</span></div><div class="vc-hand"><span class="vc-hand-lbl">RH</span><span class="vc-hand-notes">'+v.rh+'</span></div></div><div class="vc-tip">'+v.tip+'</div></div>').join('');
+  const aH=arpeggios(ts).map(a=>'<div class="arp-card"><div class="arp-name">'+a.n+'</div><div class="arp-seq">'+a.s+'</div><div class="arp-tip">'+a.tip+'</div></div>').join('');
+  const p=document.getElementById('chord-panel');
+  p.innerHTML='<div class="cp-body"><div class="cp-row1"><div class="cp-name">'+sym+'</div><div class="cp-qual">'+qlabel(q)+' · '+funcs[deg]+'</div></div><div class="cp-toggles"><button class="cp-tog '+(ext===0?togCls(0):'')+'" data-e="0">Triad</button><button class="cp-tog '+(ext===1?togCls(1):'')+'" data-e="1">7th</button><button class="cp-tog '+(ext===2?togCls(2):'')+'" data-e="2">9th</button></div><div class="cp-tones">'+chips+'</div>'+(pills?'<div class="cp-keys-row"><span class="cp-keys-label">Also in</span>'+pills+'</div>':'')+'<hr class="cp-hr"><div class="cp-sublabel">Inversions</div><div class="cp-invs">'+invs+'</div>'+mFlag+hFlag+'</div><div class="voicing-wrap"><div class="vc-header"><div class="vc-title">Voicings</div><div class="vc-badge">LH · RH</div></div><div class="vc-list">'+vH+'</div></div><div class="arp-wrap"><div class="arp-header"><div class="arp-title">Arpeggio &amp; Broken Chord Patterns</div></div><div class="arp-list">'+aH+'</div></div>';
+  p.querySelectorAll('.cp-tog').forEach(b=>b.onclick=()=>{curPExt=+b.dataset.e;openPanel(kid,selDeg,curPExt);});
+  p.classList.add('open');
+}
+function renderProgressions(kid){
+  const key=KEYS[kid],n=key.notes,q=key.quals,cn=i=>csym(n[i],q[i],0);
+  const list=document.getElementById('prog-list');list.innerHTML='';
+  const progs=key.type==='major'?[
+    {r:'ii – V – I',c:[1,4,0],feel:'Jazz'},{r:'I – IV – V – I',c:[0,3,4,0],feel:'Classic'},
+    {r:'I – V – vi – IV',c:[0,4,5,3],feel:'Pop'},{r:'iii – vi – ii – V',c:[2,5,1,4],feel:'Jazz cycle'},
+    {r:'I – vi – IV – V',c:[0,5,3,4],feel:'50s'},{r:'IV – I – V – vi',c:[3,0,4,5],feel:'Anthemic'},
+    {r:'I – III – IV – iv',c:[0,2,3,3],feel:'Modal mix'},{r:'ii – IV – I – V',c:[1,3,0,4],feel:'Gospel'},
+  ]:[
+    {r:'ii° – V – i',c:[1,4,0],feel:'Jazz minor'},{r:'i – VII – VI – VII',c:[0,6,5,6],feel:'Driving'},
+    {r:'i – iv – v',c:[0,3,4],feel:'Modal'},{r:'i – VI – III – VII',c:[0,5,2,6],feel:'Ballad'},
+    {r:'i – iv – VII – III',c:[0,3,6,2],feel:'Descending'},{r:'i – VII – VI – v',c:[0,6,5,4],feel:'Andalusian'},
+    {r:'i – III – VII – VI',c:[0,2,6,5],feel:'Epic'},{r:'iv – i – v – i',c:[3,0,4,0],feel:'Ceremonial'},
+  ];
+  progs.forEach((p,pi)=>{
+    const cN=p.c.map(i=>cn(i)),cR=p.c.map(i=>n[i]);
+    const pi2=[];
+    for(let i=0;i<cR.length-1;i++)passingNotes(cR[i],cR[i+1],key.notes).forEach(x=>pi2.push('<span class="pass-item">'+cN[i]+' '+x.dir+' '+cN[i+1]+': <strong>'+x.note+'</strong> <span style="opacity:.6">'+x.type+'</span></span>'));
+    const row=document.createElement('div');row.className='prog-row';
+    const did='pd'+pi+Date.now();
+    const hasPass=pi2.length>0;
+    row.innerHTML='<div class="prog-summary" onclick="toggleProgDetail(\''+did+'\',this)"><div class="prog-top"><span class="prog-roman">'+p.r+'</span><span class="prog-feel">'+p.feel+'</span></div><div class="prog-chords">'+cN.join('  –  ')+'</div>'+(hasPass?'<div class="prog-expand-hint" id="h'+did+'">Tap for passing notes ›</div>':'')+'</div>'+(hasPass?'<div class="prog-detail" id="'+did+'"><div class="passing-row"><span class="pass-label">Passing</span>'+pi2.join('')+'</div></div>':'');
+    list.appendChild(row);
+  });
+}
+function toggleProgDetail(id,summary){
+  const d=document.getElementById(id),h=document.getElementById('h'+id);
+  if(!d)return;
+  const open=d.classList.toggle('open');
+  if(h)h.textContent=open?'Tap to hide ↑':'Tap for passing notes ›';
+}
+function renderSongs(kid){
+  const list=document.getElementById('songs-list');list.innerHTML='';
+  const songs=SONGS[kid]||[];
+  if(!songs.length){list.innerHTML='<div style="font-size:13px;color:#ccc;padding:8px 0">No songs listed yet.</div>';return;}
+  songs.forEach((s,i)=>{
+    const row=document.createElement('div');row.className='song-row';
+    row.innerHTML='<span class="song-num">'+(i+1)+'</span><span class="song-title">'+s.t+'</span><span class="song-artist">'+s.a+'</span>';
+    list.appendChild(row);
+  });
+}
+function renderRelated(kid){
+  const key=KEYS[kid],name=key.name.split(' ')[0],out=[];
+  if(key.type==='major'){
+    const pi=COF_PAIRS.findIndex(p=>p.major===name);if(pi>=0)out.push({label:'Relative minor',id:COF_PAIRS[pi].minor+'_minor'});
+    const mi=COF_MAJ.indexOf(name);if(mi>=0){out.push({label:'← Flatter',id:COF_MAJ[(mi+11)%12]+'_major'});out.push({label:'Sharper →',id:COF_MAJ[(mi+1)%12]+'_major'});}
+  }else{
+    const pi=COF_PAIRS.findIndex(p=>p.minor===name);if(pi>=0)out.push({label:'Relative major',id:COF_PAIRS[pi].major+'_major'});
+    const mi=COF_MIN.indexOf(name);if(mi>=0){out.push({label:'← Flatter',id:COF_MIN[(mi+11)%12]+'_minor'});out.push({label:'Sharper →',id:COF_MIN[(mi+1)%12]+'_minor'});}
+  }
+  const g=document.getElementById('related-grid');g.innerHTML='';
+  out.filter(r=>KEYS[r.id]).forEach(r=>{
+    const c=document.createElement('div');c.className='rel-card';
+    c.innerHTML='<div class="rel-relation">'+r.label+'</div><div class="rel-name">'+KEYS[r.id].name+'</div>';
+    c.onclick=()=>enterKey(r.id);g.appendChild(c);
+  });
+}
+function openChapter(id){document.getElementById('theory-index-wrap').style.display='none';document.querySelectorAll('.theory-chapter').forEach(c=>c.classList.remove('open'));document.getElementById('ch-'+id).classList.add('open');document.getElementById('theory-scroll').scrollTop=0;}
+function closeChapter(){document.querySelectorAll('.theory-chapter').forEach(c=>c.classList.remove('open'));document.getElementById('theory-index-wrap').style.display='';document.getElementById('theory-scroll').scrollTop=0;}
+function toggleConcept(header){const body=header.nextElementSibling,tog=header.querySelector('.concept-toggle'),isOpen=body.classList.contains('open');body.classList.toggle('open',!isOpen);tog.classList.toggle('open',!isOpen);}
+function renderBuilderKeyPicker(){
+  const row=document.getElementById('builder-key-row');row.innerHTML='';
+  ALL_IDS.forEach(kid=>{
+    const b=document.createElement('button');b.className='bk-pill'+(kid===builderKey?' active':'');
+    b.textContent=KEYS[kid].name;
+    b.onclick=()=>{builderKey=kid;renderBuilderKeyPicker();renderBuilderChordMap();renderBuilderRecs();};
+    row.appendChild(b);
+  });
+}
+function setBuilderExt(ext){
+  builderExt=ext;
+  document.querySelectorAll('.bext-tog').forEach(b=>b.classList.toggle('active',+b.dataset.ext===ext));
+  renderBuilderChordMap();
+}
+function renderBuilderChordMap(){
+  const key=KEYS[builderKey],funcs=key.type==='major'?FUNC_MAJOR:FUNC_MINOR;
+  const row=document.getElementById('builder-chord-map');row.innerHTML='';
+  key.notes.forEach((n,i)=>{
+    const q=key.quals[i],sym=csym(n,q,builderExt),ts=getTones(builderKey,i,builderExt),triad=ts.slice(0,3);
+    const card=document.createElement('div');card.className='chord-card';
+    const tH=triad.map((t,ti)=>'<span class="cc-note'+(ti===0?' root-note':'')+'">'+t+'</span>'+(ti<2?'<span class="cc-note-sep">·</span>':'')).join('');
+    card.innerHTML='<div class="cc-sym">'+sym+'</div><div class="cc-meta">'+key.romans[i]+'<br>'+funcs[i]+'</div><div class="cc-notes-wrap"><div class="cc-note-row">'+tH+'</div></div>';
+    card.onclick=()=>addChord(builderKey,i,builderExt);
+    row.appendChild(card);
+  });
+}
+function addChord(kid,deg,ext){
+  const isPivot=builderProg.length>0&&builderProg[builderProg.length-1].kid!==kid;
+  builderProg.push({kid,deg,ext,pivot:isPivot});
+  renderTape();renderBuilderRecs();
+}
+function renderTape(){
+  const tape=document.getElementById('builder-tape');tape.innerHTML='';
+  if(!builderProg.length){tape.innerHTML='<span class="builder-tape-empty">Tap a chord below to start</span>';return;}
+  builderProg.forEach((item,idx)=>{
+    const key=KEYS[item.kid],sym=csym(key.notes[item.deg],key.quals[item.deg],item.ext);
+    const div=document.createElement('div');div.className='tape-chord'+(item.pivot?' pivot-marker':'');
+    div.innerHTML='<span class="tape-chord-sym">'+sym+'</span><span class="tape-chord-key">'+key.name+'</span>'+(item.ext>0?'<span class="tape-chord-ext">'+(item.ext===1?'7th':'9th')+'</span>':'')+'<button class="tape-chord-remove" onclick="removeChord('+idx+')">✕</button>';
+    tape.appendChild(div);
+  });
+  tape.scrollLeft=tape.scrollWidth;
+}
+function removeChord(idx){builderProg.splice(idx,1);renderTape();renderBuilderRecs();}
+function undoLast(){if(builderProg.length){builderProg.pop();renderTape();renderBuilderRecs();}}
+function clearProgression(){builderProg=[];renderTape();document.getElementById('builder-recs').style.display='none';}
+function renderBuilderRecs(){
+  const wrap=document.getElementById('builder-recs');
+  if(!builderProg.length){wrap.style.display='none';return;}
+  wrap.style.display='';
+  const last=builderProg[builderProg.length-1];
+  const key=KEYS[last.kid],funcs=key.type==='major'?FUNC_MAJOR:FUNC_MINOR;
+  const strong=[],colour=[],pivots=[];
+  key.notes.forEach((n,i)=>{
+    if(i===last.deg)return;
+    const sym=csym(n,key.quals[i],builderExt),f=funcs[i],lf=funcs[last.deg];
+    if((lf==='Dom'&&f==='Tonic')||(lf==='Subdom'&&f==='Dom')||(lf==='Tonic'&&(f==='Subdom'||f==='Dom')))strong.push({sym,kid:last.kid,deg:i});
+    else colour.push({sym,kid:last.kid,deg:i});
+  });
+  revLookup(key.notes[last.deg],key.quals[last.deg]).filter(r=>r.kid!==last.kid).slice(0,5).forEach(r=>{
+    pivots.push({sym:'→ '+KEYS[r.kid].name,label:'('+r.roman+')',kid:r.kid});
+  });
+  const content=document.getElementById('builder-recs-content');content.innerHTML='';
+  [[strong,'Strong moves',''],[colour,'Colour moves',''],[pivots,'Pivot to new key',' pivot']].forEach(([items,title,cls])=>{
+    if(!items.length)return;
+    const g=document.createElement('div');g.className='rec-group';
+    g.innerHTML='<div class="rec-group-title">'+title+'</div><div class="rec-pills">'+items.map(item=>'<button class="rec-pill'+cls+'" onclick="'+(item.kid&&!item.label?'addChord(\''+item.kid+'\','+item.deg+','+builderExt+')':'pivotTo(\''+item.kid+'\')')+'">'+item.sym+(item.label?' <span style="font-size:10px;opacity:.6">'+item.label+'</span>':'')+'</button>').join('')+'</div>';
+    content.appendChild(g);
+  });
+}
+function pivotTo(kid){builderKey=kid;renderBuilderKeyPicker();renderBuilderChordMap();renderBuilderRecs();}
+function saveProgression(){if(!builderProg.length)return;document.getElementById('prog-name-input').value='';document.getElementById('save-modal').classList.add('open');setTimeout(()=>document.getElementById('prog-name-input').focus(),100);}
+function closeModal(){document.getElementById('save-modal').classList.remove('open');}
+function confirmSave(){
+  const name=document.getElementById('prog-name-input').value.trim()||'Untitled';
+  let saved=[];try{saved=JSON.parse(localStorage.getItem('kh_progs')||'[]');}catch(e){}
+  saved.unshift({id:Date.now(),name,prog:builderProg.slice(),date:new Date().toLocaleDateString()});
+  try{localStorage.setItem('kh_progs',JSON.stringify(saved));}catch(e){}
+  closeModal();renderSaved();
+}
+function renderSaved(){
+  const wrap=document.getElementById('saved-list-wrap');
+  let saved=[];try{saved=JSON.parse(localStorage.getItem('kh_progs')||'[]');}catch(e){}
+  if(!saved.length){wrap.innerHTML='<div class="saved-empty">No saved progressions yet.</div>';return;}
+  wrap.innerHTML='<div class="saved-list">'+saved.map(s=>'<div class="saved-card"><div class="saved-card-name">'+s.name+'</div><div class="saved-card-chords">'+s.prog.map(c=>csym(KEYS[c.kid].notes[c.deg],KEYS[c.kid].quals[c.deg],c.ext)).join(' – ')+'</div><div class="saved-card-meta">'+s.date+' · '+s.prog.length+' chords</div><button class="saved-card-del" onclick="deleteSaved('+s.id+')">✕</button></div>').join('')+'</div>';
+}
+function deleteSaved(id){
+  let saved=[];try{saved=JSON.parse(localStorage.getItem('kh_progs')||'[]');}catch(e){}
+  saved=saved.filter(s=>s.id!==id);
+  try{localStorage.setItem('kh_progs',JSON.stringify(saved));}catch(e){}
+  renderSaved();
+}
+renderHome();
+</script>
+</body>
+</html>
+<script>
+const COF_PAIRS=[{major:'C',minor:'A',sig:'0 acc.'},{major:'G',minor:'E',sig:'1♯'},{major:'D',minor:'B',sig:'2♯'},{major:'A',minor:'F#',sig:'3♯'},{major:'E',minor:'C#',sig:'4♯'},{major:'B',minor:'G#',sig:'5♯'},{major:'F#',minor:'D#',sig:'6♯'},{major:'Db',minor:'Bb',sig:'5♭'},{major:'Ab',minor:'F',sig:'4♭'},{major:'Eb',minor:'C',sig:'3♭'},{major:'Bb',minor:'G',sig:'2♭'},{major:'F',minor:'D',sig:'1♭'}];
+const FUNC_MAJOR=['Tonic','Subdom','Tonic','Subdom','Dom','Tonic','Dom'];
+const FUNC_MINOR=['Tonic','Subdom','Tonic','Subdom','Dom','Subdom','Subtonic'];
+const MODES_MAJOR=['Ionian','Dorian','Phrygian','Lydian','Mixolydian','Aeolian','Locrian'];
+const MODES_MINOR=['Aeolian','Locrian','Ionian','Dorian','Phrygian','Lydian','Mixolydian'];
+const MODE_DESC={Ionian:'Major scale. Bright, resolved.',Dorian:'Minor with raised 6th. Jazz-friendly.',Phrygian:'Minor with flattened 2nd. Dark, Spanish.',Lydian:'Major with raised 4th. Dreamy.',Mixolydian:'Major with flattened 7th. Bluesy.',Aeolian:'Natural minor. Dark, introspective.',Locrian:'Diminished feel. Unstable.'};
 const KEYS={
   C_major:{name:'C Major',type:'major',notes:['C','D','E','F','G','A','B'],rh:[1,2,3,1,2,3,4],lh:[5,4,3,2,1,3,2],romans:['I','ii','iii','IV','V','vi','vii°'],quals:['M','m','m','M','M','m','d']},
   G_major:{name:'G Major',type:'major',notes:['G','A','B','C','D','E','F#'],rh:[1,2,3,1,2,3,4],lh:[5,4,3,2,1,3,2],romans:['I','ii','iii','IV','V','vi','vii°'],quals:['M','m','m','M','M','m','d']},
@@ -733,163 +766,351 @@ const KEYS={
   G_minor:{name:'G Minor',type:'minor',notes:['G','A','Bb','C','D','Eb','F'],rh:[1,2,3,1,2,3,4],lh:[5,4,3,2,1,3,2],romans:['i','ii°','III','iv','v','VI','VII'],quals:['m','d','M','m','m','M','M'],vh:{chord:'D7',notes:'D  F#  A  C'}},
   D_minor:{name:'D Minor',type:'minor',notes:['D','E','F','G','A','Bb','C'],rh:[1,2,3,1,2,3,4],lh:[5,4,3,2,1,3,2],romans:['i','ii°','III','iv','v','VI','VII'],quals:['m','d','M','m','m','M','M'],vh:{chord:'A7',notes:'A  C#  E  G'}},
 };
+const SONGS={
+  C_major:[{t:'Let It Be',a:'The Beatles'},{t:'Imagine',a:'John Lennon'},{t:'Piano Man',a:'Billy Joel'},{t:'Clocks',a:'Coldplay'},{t:'Don\'t Stop Believin\'',a:'Journey'},{t:'With or Without You',a:'U2'},{t:'Bohemian Rhapsody',a:'Queen'},{t:'Misty',a:'Erroll Garner'},{t:'Autumn Leaves',a:'Standard'},{t:'Happy Birthday',a:'Traditional'}],
+  G_major:[{t:'Sweet Home Chicago',a:'Robert Johnson'},{t:'Good Riddance',a:'Green Day'},{t:'Brown Eyed Girl',a:'Van Morrison'},{t:'Country Roads',a:'John Denver'},{t:'Every Breath You Take',a:'The Police'},{t:'Thinking Out Loud',a:'Ed Sheeran'},{t:'Knockin\' on Heaven\'s Door',a:'Bob Dylan'},{t:'Hotel California (intro)',a:'Eagles'},{t:'Despacito',a:'Luis Fonsi'},{t:'Autumn Leaves',a:'Standard'}],
+  D_major:[{t:'Sweet Home Alabama',a:'Lynyrd Skynyrd'},{t:'Here Comes the Sun',a:'The Beatles'},{t:'Crocodile Rock',a:'Elton John'},{t:'Africa',a:'Toto'},{t:'Viva la Vida',a:'Coldplay'},{t:'All of Me',a:'John Legend'},{t:'Shake It Off',a:'Taylor Swift'},{t:'Girl from Ipanema',a:'Jobim'},{t:'Losing My Religion',a:'R.E.M.'},{t:'Living on a Prayer',a:'Bon Jovi'}],
+  A_major:[{t:'Sweet Child O\' Mine',a:'Guns N\' Roses'},{t:'Yesterday',a:'The Beatles'},{t:'Take on Me',a:'a-ha'},{t:'Tiny Dancer',a:'Elton John'},{t:'Summer of \'69',a:'Bryan Adams'},{t:'Can\'t Help Falling in Love',a:'Elvis'},{t:'Mr. Brightside',a:'The Killers'},{t:'Body and Soul',a:'Standard'},{t:'Uptown Funk',a:'Bruno Mars'},{t:'Livin\' on a Prayer',a:'Bon Jovi'}],
+  E_major:[{t:'Bittersweet Symphony',a:'The Verve'},{t:'Dancing Queen',a:'ABBA'},{t:'Born to Run',a:'Bruce Springsteen'},{t:'Shape of You',a:'Ed Sheeran'},{t:'Fix You',a:'Coldplay'},{t:'Shallow',a:'Lady Gaga'},{t:'Isn\'t She Lovely',a:'Stevie Wonder'},{t:'Jump',a:'Van Halen'},{t:'Smells Like Teen Spirit',a:'Nirvana'},{t:'The Chain',a:'Fleetwood Mac'}],
+  B_major:[{t:'Something',a:'The Beatles'},{t:'Human',a:'The Killers'},{t:'Blinding Lights',a:'The Weeknd'},{t:'More Than Words',a:'Extreme'},{t:'Roxanne',a:'The Police'},{t:'Titanium',a:'David Guetta'},{t:'Creep',a:'Radiohead'},{t:'All the Small Things',a:'Blink-182'},{t:'So What',a:'Miles Davis'},{t:'Fly Me to the Moon',a:'Standard'}],
+  'F#_major':[{t:'Purple Rain',a:'Prince'},{t:'When Doves Cry',a:'Prince'},{t:'Nights in White Satin',a:'Moody Blues'},{t:'I Will Always Love You',a:'Whitney Houston'},{t:'My Heart Will Go On',a:'Celine Dion'},{t:'Under the Bridge',a:'RHCP'},{t:'Patience',a:'Guns N\' Roses'},{t:'Careless Whisper',a:'George Michael'},{t:'Truly Madly Deeply',a:'Savage Garden'},{t:'Unchained Melody',a:'Righteous Brothers'}],
+  Db_major:[{t:'Let\'s Stay Together',a:'Al Green'},{t:'As',a:'Stevie Wonder'},{t:'Georgia on My Mind',a:'Ray Charles'},{t:'Thriller',a:'Michael Jackson'},{t:'Man in the Mirror',a:'Michael Jackson'},{t:'Overjoyed',a:'Stevie Wonder'},{t:'Ribbon in the Sky',a:'Stevie Wonder'},{t:'Mercy Mercy Me',a:'Marvin Gaye'},{t:'I\'d Rather Go Blind',a:'Etta James'},{t:'What\'s Going On',a:'Marvin Gaye'}],
+  Ab_major:[{t:'Hello',a:'Adele'},{t:'Someone Like You',a:'Adele'},{t:'Rolling in the Deep',a:'Adele'},{t:'The Scientist',a:'Coldplay'},{t:'Skyfall',a:'Adele'},{t:'Beautiful',a:'Christina Aguilera'},{t:'How Deep Is Your Love',a:'Bee Gees'},{t:'Lean on Me',a:'Bill Withers'},{t:'What\'s Going On',a:'Marvin Gaye'},{t:'I Will Always Love You',a:'Dolly Parton'}],
+  Eb_major:[{t:'Superstition',a:'Stevie Wonder'},{t:'Sir Duke',a:'Stevie Wonder'},{t:'Higher Ground',a:'Stevie Wonder'},{t:'Killing Me Softly',a:'Roberta Flack'},{t:'Brick House',a:'Commodores'},{t:'What Is Hip',a:'Tower of Power'},{t:'My Favorite Things',a:'Coltrane'},{t:'Blue Train',a:'John Coltrane'},{t:'Master Blaster',a:'Stevie Wonder'},{t:'Signed Sealed Delivered',a:'Stevie Wonder'}],
+  Bb_major:[{t:'Can\'t Take My Eyes Off You',a:'Frankie Valli'},{t:'Stand by Me',a:'Ben E. King'},{t:'I Got You',a:'James Brown'},{t:'Cissy Strut',a:'The Meters'},{t:'The Thrill Is Gone',a:'B.B. King'},{t:'Mercy Mercy Mercy',a:'Cannonball Adderley'},{t:'Straight No Chaser',a:'Thelonious Monk'},{t:'Autumn Leaves',a:'Standard'},{t:'What\'d I Say',a:'Ray Charles'},{t:'Soul Man',a:'Sam & Dave'}],
+  F_major:[{t:'Hey Jude',a:'The Beatles'},{t:'Just the Way You Are',a:'Bruno Mars'},{t:'I\'m Yours',a:'Jason Mraz'},{t:'No Woman No Cry',a:'Bob Marley'},{t:'Perfect',a:'Ed Sheeran'},{t:'Riptide',a:'Vance Joy'},{t:'Fly Me to the Moon',a:'Standard'},{t:'Summertime',a:'Gershwin'},{t:'Watermelon Sugar',a:'Harry Styles'},{t:'Let Her Go',a:'Passenger'}],
+  A_minor:[{t:'Stairway to Heaven',a:'Led Zeppelin'},{t:'Sultans of Swing',a:'Dire Straits'},{t:'Smooth',a:'Santana'},{t:'The Sound of Silence',a:'Simon & Garfunkel'},{t:'Black Magic Woman',a:'Santana'},{t:'All Along the Watchtower',a:'Jimi Hendrix'},{t:'Scarborough Fair',a:'Traditional'},{t:'Moondance',a:'Van Morrison'},{t:'Venus',a:'Shocking Blue'},{t:'Losing My Religion',a:'R.E.M.'}],
+  E_minor:[{t:'Nothing Else Matters',a:'Metallica'},{t:'House of the Rising Sun',a:'The Animals'},{t:'Comfortably Numb',a:'Pink Floyd'},{t:'Mad World',a:'Tears for Fears'},{t:'Paint It Black',a:'Rolling Stones'},{t:'Billie Jean',a:'Michael Jackson'},{t:'Seven Nation Army',a:'White Stripes'},{t:'Paranoid Android',a:'Radiohead'},{t:'One',a:'Metallica'},{t:'Summertime Sadness',a:'Lana Del Rey'}],
+  B_minor:[{t:'Hotel California',a:'Eagles'},{t:'Wish You Were Here',a:'Pink Floyd'},{t:'Riders on the Storm',a:'The Doors'},{t:'Bohemian Rhapsody (verse)',a:'Queen'},{t:'Wake Me Up',a:'Avicii'},{t:'Diamonds',a:'Rihanna'},{t:'Numb',a:'Linkin Park'},{t:'Latch',a:'Sam Smith'},{t:'La Grange',a:'ZZ Top'},{t:'Shape of My Heart',a:'Sting'}],
+  'F#_minor':[{t:'Roxanne',a:'The Police'},{t:'Every Breath You Take',a:'The Police'},{t:'Creep',a:'Radiohead'},{t:'Torn',a:'Natalie Imbruglia'},{t:'Iris',a:'Goo Goo Dolls'},{t:'Fast Car',a:'Tracy Chapman'},{t:'If I Ain\'t Got You',a:'Alicia Keys'},{t:'Say Something',a:'A Great Big World'},{t:'Shape of My Heart',a:'Sting'},{t:'With or Without You',a:'U2'}],
+  'C#_minor':[{t:'Moonlight Sonata',a:'Beethoven'},{t:'Radioactive',a:'Imagine Dragons'},{t:'Love Story',a:'Taylor Swift'},{t:'Demons',a:'Imagine Dragons'},{t:'Take Me to Church',a:'Hozier'},{t:'Rather Be',a:'Clean Bandit'},{t:'A Sky Full of Stars',a:'Coldplay'},{t:'Clarity',a:'Zedd'},{t:'Hall of Fame',a:'The Script'},{t:'Clocks',a:'Coldplay'}],
+  'G#_minor':[{t:'Bad Romance',a:'Lady Gaga'},{t:'Poker Face',a:'Lady Gaga'},{t:'Cry Me a River',a:'Justin Timberlake'},{t:'Toxic',a:'Britney Spears'},{t:'Umbrella',a:'Rihanna'},{t:'Wicked Game',a:'Chris Isaak'},{t:'Minor Swing',a:'Django Reinhardt'},{t:'Black Hole Sun',a:'Soundgarden'},{t:'Soldier of Fortune',a:'Deep Purple'},{t:'Rolling in the Deep',a:'Adele'}],
+  'D#_minor':[{t:'Chandelier',a:'Sia'},{t:'Elastic Heart',a:'Sia'},{t:'Sweet Dreams',a:'Eurythmics'},{t:'Gimme! Gimme! Gimme!',a:'ABBA'},{t:'Voyage',a:'ABBA'},{t:'I Follow Rivers',a:'Lykke Li'},{t:'Blue (Da Ba Dee)',a:'Eiffel 65'},{t:'Fur Elise',a:'Beethoven'},{t:'Clair de Lune',a:'Debussy'},{t:'In the Mood',a:'Glenn Miller'}],
+  Bb_minor:[{t:'Crazy in Love',a:'Beyoncé'},{t:'Single Ladies',a:'Beyoncé'},{t:'Halo',a:'Beyoncé'},{t:'Purple Rain',a:'Prince'},{t:'When Doves Cry',a:'Prince'},{t:'Sign O\' the Times',a:'Prince'},{t:'Irreplaceable',a:'Beyoncé'},{t:'Kiss',a:'Prince'},{t:'Papa\'s Got a Brand New Bag',a:'James Brown'},{t:'I Feel Good',a:'James Brown'}],
+  F_minor:[{t:'In the Air Tonight',a:'Phil Collins'},{t:'Enjoy the Silence',a:'Depeche Mode'},{t:'Personal Jesus',a:'Depeche Mode'},{t:'Breathe',a:'Pink Floyd'},{t:'Time',a:'Pink Floyd'},{t:'Money',a:'Pink Floyd'},{t:'One More Time',a:'Daft Punk'},{t:'Get Lucky',a:'Daft Punk'},{t:'Comfortably Numb (chorus)',a:'Pink Floyd'},{t:'Something in the Way',a:'Nirvana'}],
+  C_minor:[{t:'Beethoven\'s 5th Symphony',a:'Beethoven'},{t:'Eye of the Tiger',a:'Survivor'},{t:'Don\'t You (Forget About Me)',a:'Simple Minds'},{t:'99 Luftballons',a:'Nena'},{t:'Mr. Brightside (verses)',a:'The Killers'},{t:'Don\'t Fear the Reaper',a:'Blue Öyster Cult'},{t:'Redemption Song',a:'Bob Marley'},{t:'Superstition',a:'Stevie Wonder'},{t:'Get Lucky',a:'Daft Punk'},{t:'Losing My Religion',a:'R.E.M.'}],
+  G_minor:[{t:'Greensleeves',a:'Traditional'},{t:'Eleanor Rigby',a:'The Beatles'},{t:'Oye Como Va',a:'Santana'},{t:'Evil Ways',a:'Santana'},{t:'Autumn Leaves',a:'Standard'},{t:'Summertime',a:'Gershwin'},{t:'Mercy',a:'Kanye West'},{t:'Forgot About Dre',a:'Dr. Dre'},{t:'Hit \'Em Up Style',a:'Blu Cantrell'},{t:'La Bamba',a:'Traditional'}],
+  D_minor:[{t:'Smoke on the Water',a:'Deep Purple'},{t:'Immigrant Song',a:'Led Zeppelin'},{t:'Hit the Road Jack',a:'Ray Charles'},{t:'Sunshine of Your Love',a:'Cream'},{t:'Scarborough Fair',a:'Simon & Garfunkel'},{t:'Hells Bells',a:'AC/DC'},{t:'What Is Life',a:'George Harrison'},{t:'So What',a:'Miles Davis'},{t:'Back in Black',a:'AC/DC'},{t:'The Thrill Is Gone',a:'B.B. King'}],
+};
 const COF_MAJ=['C','G','D','A','E','B','F#','Db','Ab','Eb','Bb','F'];
 const COF_MIN=['A','E','B','F#','C#','G#','D#','Bb','F','C','G','D'];
 const ALL_IDS=Object.keys(KEYS);
-
-function getTones(kid,deg,ext){const n=KEYS[kid].notes,a=[n[deg],n[(deg+2)%7],n[(deg+4)%7],n[(deg+6)%7],n[(deg+1)%7]];return a.slice(0,ext===0?3:ext===1?4:5);}
-function qlabel(q){return{M:'Major',m:'Minor',d:'Diminished'}[q]||q;}
-function csym(root,q,ext){return root+(q==='M'?'':q==='m'?'m':'°')+(ext===1?'7':ext===2?'9':'');}
-function revLookup(rn,q){const r=[];ALL_IDS.forEach(kid=>{KEYS[kid].notes.forEach((n,i)=>{if(n===rn&&KEYS[kid].quals[i]===q)r.push({kid,roman:KEYS[kid].romans[i]});});});return r;}
 const CHROM=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
 const ENHAR={Db:'C#',Eb:'D#',Fb:'E',Gb:'F#',Ab:'G#',Bb:'A#',Cb:'B','E#':'F','B#':'C'};
+
+function getTones(kid,deg,ext){const n=KEYS[kid].notes,a=[n[deg],n[(deg+2)%7],n[(deg+4)%7],n[(deg+6)%7],n[(deg+1)%7]];return a.slice(0,ext===0?3:ext===1?4:5);}
+function qlabel(q){return{M:‘Major’,m:‘Minor’,d:‘Diminished’}[q]||q;}
+function csym(root,q,ext){return root+(q===‘M’?’’:q===‘m’?‘m’:‘°’)+(ext===1?‘7’:ext===2?‘9’:’’);}
 function ni(n){return CHROM.indexOf(ENHAR[n]||n);}
+function revLookup(rn,q){const r=[];ALL_IDS.forEach(kid=>{KEYS[kid].notes.forEach((n,i)=>{if(n===rn&&KEYS[kid].quals[i]===q)r.push({kid,roman:KEYS[kid].romans[i]});});});return r;}
 function passingNotes(a,b,kn){
-  const fi=ni(a),ti=ni(b);if(fi<0||ti<0||fi===ti)return[];
-  const up=(ti-fi+12)%12,dn=(fi-ti+12)%12,res=[];
-  if(up===1||dn===1)return[];
-  if(up<=4){for(let s=1;s<up;s++){const c=CHROM[(fi+s)%12];res.push({note:c,type:kn.some(n=>(ENHAR[n]||n)===c)?'diatonic':'chromatic',dir:'↑'});}}
-  else if(dn<=4){for(let s=1;s<dn;s++){const c=CHROM[(fi-s+12)%12];res.push({note:c,type:kn.some(n=>(ENHAR[n]||n)===c)?'diatonic':'chromatic',dir:'↓'});}}
-  else{const c=CHROM[(ti-1+12)%12];res.push({note:c,type:kn.some(n=>(ENHAR[n]||n)===c)?'diatonic':'chromatic',dir:'→'});}
-  return res;
+const fi=ni(a),ti=ni(b);if(fi<0||ti<0||fi===ti)return[];
+const up=(ti-fi+12)%12,dn=(fi-ti+12)%12,res=[];
+if(up===1||dn===1)return[];
+if(up<=4){for(let s=1;s<up;s++){const c=CHROM[(fi+s)%12];res.push({note:c,type:kn.some(n=>(ENHAR[n]||n)===c)?‘diatonic’:‘chromatic’,dir:‘↑’});}}
+else if(dn<=4){for(let s=1;s<dn;s++){const c=CHROM[(fi-s+12)%12];res.push({note:c,type:kn.some(n=>(ENHAR[n]||n)===c)?‘diatonic’:‘chromatic’,dir:‘↓’});}}
+else{const c=CHROM[(ti-1+12)%12];res.push({note:c,type:kn.some(n=>(ENHAR[n]||n)===c)?‘diatonic’:‘chromatic’,dir:‘→’});}
+return res;
 }
-function voicings(ts,q){
-  const[r,t3,t5,t7,t9]=ts,e=ts.length,vs=[];
-  if(e===3){vs.push({n:'Close position',lh:r,rh:`${r}  ${t3}  ${t5}`,tip:'Root in LH, full triad in RH.'});vs.push({n:'Open / spread',lh:`${r}  ${t5}`,rh:`${t3}  ${r}`,tip:'Root and 5th wide in LH. 3rd defines quality in RH.'});vs.push({n:'1st inversion spread',lh:`${r}  ${t3}`,rh:`${t5}  ${r}`,tip:'Softer than root position.'});vs.push({n:'Root + upper pair',lh:r,rh:`${t3}  ${t5}`,tip:'Root alone in LH; 3rd and 5th float in RH.',y:true});}
-  if(e===4){vs.push({n:'Close position',lh:r,rh:`${t3}  ${t5}  ${t7}`,tip:'All four tones in RH.'});vs.push({n:'Shell voicing',lh:`${r}  ${t7}`,rh:`${t3}  ${t5}`,tip:'Root + 7th in LH; 3rd and 5th in RH. The jazz standard.'});vs.push({n:'Drop-2',lh:`${r}  ${t5}`,rh:`${t7}  ${t3}`,tip:'Second voice from top dropped an octave.'});vs.push({n:'Root + upper cluster',lh:r,rh:`${t7}  ${t3}  ${t5}`,tip:'Root alone in LH. 7th at the base of the RH cluster.',y:true});}
-  if(e===5){vs.push({n:'Shell + 9th',lh:`${r}  ${t7}`,rh:`${t3}  ${t9}`,tip:'Drop the 5th. Root + 7th in LH; 3rd + 9th in RH.'});vs.push({n:'Spread voicing',lh:`${r}  ${t7}`,rh:`${t9}  ${t3}  ${t5}`,tip:'9th on top. Luminous, open quality.'});vs.push({n:'Quartal hint',lh:`${r}  ${t7}`,rh:`${t9}  ${t5}  ${t3}`,tip:'Stack RH from 9th down. Modern and ambiguous.'});vs.push({n:'Root + upper structure',lh:r,rh:`${t7}  ${t9}  ${t3}  ${t5}`,tip:'Root alone anchors LH. RH: 7th → 9th → 3rd → 5th.',y:true});}
-  return vs;
+function voicings(ts){
+const[r,t3,t5,t7,t9]=ts,e=ts.length,vs=[];
+if(e===3){vs.push({n:‘Close position’,lh:r,rh:`${r}  ${t3}  ${t5}`,tip:‘Root in LH, full triad in RH.’});vs.push({n:‘Open / spread’,lh:`${r}  ${t5}`,rh:`${t3}  ${r}`,tip:‘Root and 5th wide in LH.’});vs.push({n:‘1st inversion spread’,lh:`${r}  ${t3}`,rh:`${t5}  ${r}`,tip:‘Softer than root position.’});vs.push({n:‘Root + upper pair’,lh:r,rh:`${t3}  ${t5}`,tip:‘Root alone in LH.’,y:true});}
+if(e===4){vs.push({n:‘Close position’,lh:r,rh:`${t3}  ${t5}  ${t7}`,tip:‘All four tones in RH.’});vs.push({n:‘Shell voicing’,lh:`${r}  ${t7}`,rh:`${t3}  ${t5}`,tip:‘Root + 7th in LH; 3rd and 5th in RH.’});vs.push({n:‘Drop-2’,lh:`${r}  ${t5}`,rh:`${t7}  ${t3}`,tip:‘Second voice from top dropped an octave.’});vs.push({n:‘Root + upper cluster’,lh:r,rh:`${t7}  ${t3}  ${t5}`,tip:‘Root alone in LH. 7th at base of RH cluster.’,y:true});}
+if(e===5){vs.push({n:‘Shell + 9th’,lh:`${r}  ${t7}`,rh:`${t3}  ${t9}`,tip:‘Drop the 5th. Root + 7th in LH; 3rd + 9th in RH.’});vs.push({n:‘Spread voicing’,lh:`${r}  ${t7}`,rh:`${t9}  ${t3}  ${t5}`,tip:‘9th on top. Luminous quality.’});vs.push({n:‘Quartal hint’,lh:`${r}  ${t7}`,rh:`${t9}  ${t5}  ${t3}`,tip:‘Stack RH from 9th down.’});vs.push({n:‘Root + upper structure’,lh:r,rh:`${t7}  ${t9}  ${t3}  ${t5}`,tip:‘RH: 7th → 9th → 3rd → 5th.’,y:true});}
+return vs;
 }
 function arpeggios(ts){
-  const[r,t3,t5,t7,t9]=ts,e=ts.length,ar=[];
-  if(e===3){ar.push({n:'Ascending',s:`${r} – ${t3} – ${t5} – ${r}`,tip:'Classic ascending broken chord.'});ar.push({n:'Descending',s:`${r} – ${t5} – ${t3} – ${r}`,tip:'Use to close phrases or approach next chord from above.'});ar.push({n:'Root–5th–3rd',s:`${r} – ${t5} – ${t3} – ${t5}`,tip:'Skip the 3rd going up. More angular.'});ar.push({n:'Alberti-style',s:`${r} – ${t5} – ${t3} – ${t5}  (repeating)`,tip:'Classic LH accompaniment under sustained RH melody.'});}
-  if(e===4){ar.push({n:'Ascending',s:`${r} – ${t3} – ${t5} – ${t7} – ${r}`,tip:'Full 4-note arpeggio.'});ar.push({n:'Jazz waltz',s:`${r} – ${t5} – ${t7} – ${t3} – ${t5}`,tip:'Root to 5th, up through 7th to 3rd.'});ar.push({n:'Root–7th–3rd–5th',s:`${r} – ${t7} – ${t3} – ${t5}`,tip:'Shell tones first, then fill.'});ar.push({n:'Descend from 7th',s:`${t7} – ${t5} – ${t3} – ${r}`,tip:'Good for leading into the next chord root below.'});}
-  if(e===5){ar.push({n:'Ascending 9th run',s:`${r} – ${t3} – ${t5} – ${t7} – ${t9}`,tip:'Full 5-note run.'});ar.push({n:'7th–9th–3rd figure',s:`${t7} – ${t9} – ${t3} – ${t5} – ${r}`,tip:'Start on 7th, rise through 9th to 3rd.'});ar.push({n:'Root–5th–9th–3rd',s:`${r} – ${t5} – ${t9} – ${t3} – ${t7}`,tip:'Skips outline the shell then fill with colour.'});ar.push({n:'Bebop descent',s:`${t9} – ${t7} – ${t5} – ${t3} – ${r}`,tip:'Descend from 9th to root into next chord.'});}
-  return ar;
+const[r,t3,t5,t7,t9]=ts,e=ts.length,ar=[];
+if(e===3){ar.push({n:‘Ascending’,s:`${r} – ${t3} – ${t5} – ${r}`,tip:‘Classic ascending broken chord.’});ar.push({n:‘Descending’,s:`${r} – ${t5} – ${t3} – ${r}`,tip:‘Approach next chord from above.’});ar.push({n:‘Root–5th–3rd’,s:`${r} – ${t5} – ${t3} – ${t5}`,tip:‘More angular.’});ar.push({n:‘Alberti-style’,s:`${r} – ${t5} – ${t3} – ${t5} (repeating)`,tip:‘Classic LH accompaniment.’});}
+if(e===4){ar.push({n:‘Ascending’,s:`${r} – ${t3} – ${t5} – ${t7} – ${r}`,tip:‘Full 4-note arpeggio.’});ar.push({n:‘Jazz waltz’,s:`${r} – ${t5} – ${t7} – ${t3} – ${t5}`,tip:‘Root to 5th, up through 7th to 3rd.’});ar.push({n:‘Root–7th–3rd–5th’,s:`${r} – ${t7} – ${t3} – ${t5}`,tip:‘Shell tones first.’});ar.push({n:‘Descend from 7th’,s:`${t7} – ${t5} – ${t3} – ${r}`,tip:‘Lead into next chord below.’});}
+if(e===5){ar.push({n:‘Ascending 9th run’,s:`${r} – ${t3} – ${t5} – ${t7} – ${t9}`,tip:‘Full 5-note run.’});ar.push({n:‘7th–9th–3rd figure’,s:`${t7} – ${t9} – ${t3} – ${t5} – ${r}`,tip:‘9th as melodic peak.’});ar.push({n:‘Root–5th–9th–3rd’,s:`${r} – ${t5} – ${t9} – ${t3} – ${t7}`,tip:‘Shell then colour.’});ar.push({n:‘Bebop descent’,s:`${t9} – ${t7} – ${t5} – ${t3} – ${r}`,tip:‘Descend into next chord.’});}
+return ar;
 }
 
-let curKey=null,selDeg=null,curPExt=0,curMExt=0,curHand='rh';
+let curKey=null,selDeg=null,curPExt=0,curHand=‘rh’;
+let favourites=JSON.parse(localStorage.getItem(‘kh_favs’)||’[]’);
+let builderKey=‘C_major’,builderExt=0,builderProg=[];
 
 function showScreen(name){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  if(name==='home') document.getElementById('screen-home').classList.add('active');
-  else if(name==='theory'){document.getElementById('screen-theory').classList.add('active');document.getElementById('theory-scroll').scrollTop=0;}
+document.querySelectorAll(’.screen’).forEach(s=>s.classList.remove(‘active’));
+document.querySelectorAll(’.nav-btn’).forEach(b=>b.classList.remove(‘active’));
+const map={home:‘screen-home’,key:‘screen-key’,builder:‘screen-builder’,theory:‘screen-theory’};
+document.getElementById(map[name]).classList.add(‘active’);
+document.querySelectorAll(’.nav-btn’).forEach(b=>{
+const t=b.textContent.trim().toLowerCase();
+if((name===‘home’&&t===‘keys’)||(name===‘builder’&&t===‘build’)||(name===‘theory’&&t===‘theory’))b.classList.add(‘active’);
+});
+if(name===‘builder’){renderBuilderKeyPicker();renderBuilderChordMap();renderSaved();}
+if(name===‘theory’)document.getElementById(‘theory-scroll’).scrollTop=0;
 }
-function enterKey(kid){
-  curKey=kid;selDeg=null;curPExt=0;
-  renderKeyView(kid);
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById('screen-key').classList.add('active');
-  document.getElementById('key-scroll').scrollTop=0;
-}
-function setMapExt(ext){
-  curMExt=ext;
-  [['tog-triad','active-triad'],['tog-seventh','active-seventh'],['tog-ninth','active-ninth']].forEach(([id,cls],i)=>{document.getElementById(id).className='map-tog'+(ext===i?' '+cls:'');});
-  if(curKey)renderChordMap(curKey);
-}
-function setHand(hand){curHand=hand;document.querySelectorAll('.fing-tog').forEach(b=>b.classList.toggle('active',b.dataset.hand===hand));if(curKey)renderChordMap(curKey);}
 
-function openChapter(id){document.getElementById('theory-index-wrap').style.display='none';document.querySelectorAll('.theory-chapter').forEach(c=>c.classList.remove('open'));document.getElementById('ch-'+id).classList.add('open');document.getElementById('theory-scroll').scrollTop=0;}
-function closeChapter(){document.querySelectorAll('.theory-chapter').forEach(c=>c.classList.remove('open'));document.getElementById('theory-index-wrap').style.display='';document.getElementById('theory-scroll').scrollTop=0;}
-function toggleConcept(header){const body=header.nextElementSibling,tog=header.querySelector('.concept-toggle'),isOpen=body.classList.contains('open');body.classList.toggle('open',!isOpen);tog.classList.toggle('open',!isOpen);}
+function enterKey(kid){
+curKey=kid;selDeg=null;curPExt=0;
+renderKeyView(kid);
+document.querySelectorAll(’.screen’).forEach(s=>s.classList.remove(‘active’));
+document.getElementById(‘screen-key’).classList.add(‘active’);
+document.getElementById(‘key-scroll’).scrollTop=0;
+}
+
+function transposeKey(dir){
+if(!curKey)return;
+const key=KEYS[curKey],root=key.notes[0],norm=ENHAR[root]||root;
+const idx=CHROM.indexOf(norm);if(idx<0)return;
+const newNote=CHROM[(idx+dir+12)%12];
+const type=key.type;
+const match=ALL_IDS.find(k=>KEYS[k].type===type&&(KEYS[k].notes[0]===newNote||(ENHAR[KEYS[k].notes[0]]||KEYS[k].notes[0])===newNote));
+if(match)enterKey(match);
+}
+
+document.getElementById(‘key-scroll’).addEventListener(‘scroll’,function(){
+document.getElementById(‘back-to-top’).classList.toggle(‘visible’,this.scrollTop>300);
+});
+
+function saveFavs(){localStorage.setItem(‘kh_favs’,JSON.stringify(favourites));}
+function toggleFav(kid){
+const idx=favourites.indexOf(kid);
+if(idx>=0)favourites.splice(idx,1);else favourites.push(kid);
+saveFavs();renderHome();
+}
+function renderFavs(){
+const sec=document.getElementById(‘fav-section’),grid=document.getElementById(‘fav-grid’);
+if(!favourites.length){sec.style.display=‘none’;return;}
+sec.style.display=’’;grid.innerHTML=’’;
+favourites.forEach(kid=>{
+if(!KEYS[kid])return;
+const c=document.createElement(‘div’);c.className=‘fav-card’;
+c.innerHTML=`<span class="fav-name">${KEYS[kid].name}</span><button class="fav-remove" onclick="event.stopPropagation();toggleFav('${kid}')">✕</button>`;
+c.onclick=()=>enterKey(kid);grid.appendChild(c);
+});
+}
 
 function renderHome(){
-  const g=document.getElementById('key-grid');g.innerHTML='';
-  COF_PAIRS.forEach(p=>{
-    const mj=p.major+'_major',mn=p.minor.replace('/','')+'_minor';
-    const c=document.createElement('div');c.className='key-card';
-    c.innerHTML=`<button class="kc-major-btn" data-k="${mj}"><div class="kc-major">${p.major} Major</div><div class="kc-sig">${p.sig}</div></button><hr class="kc-div"><button class="kc-minor-btn" data-k="${mn}"><div class="kc-minor">${p.minor} minor</div></button>`;
-    c.querySelector('.kc-major-btn').onclick=e=>{const k=e.currentTarget.dataset.k;if(KEYS[k])enterKey(k);};
-    c.querySelector('.kc-minor-btn').onclick=e=>{const k=e.currentTarget.dataset.k;if(KEYS[k])enterKey(k);};
-    g.appendChild(c);
-  });
+renderFavs();
+const g=document.getElementById(‘key-grid’);g.innerHTML=’’;
+COF_PAIRS.forEach(p=>{
+const mj=p.major+’_major’,mn=p.minor.replace(’/’,’’)+’_minor’;
+const mjF=favourites.includes(mj),mnF=favourites.includes(mn);
+const c=document.createElement(‘div’);c.className=‘key-card’;
+c.innerHTML=`<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:4px"><button class="kc-major-btn" data-k="${mj}"><div class="kc-major">${p.major} Major</div><div class="kc-sig">${p.sig}</div></button><button class="kc-fav-btn${mjF?' starred':''}" onclick="event.stopPropagation();toggleFav('${mj}')">★</button></div><hr class="kc-div"><div style="display:flex;align-items:center;justify-content:space-between;gap:4px"><button class="kc-minor-btn" data-k="${mn}"><div class="kc-minor">${p.minor} minor</div></button><button class="kc-fav-btn${mnF?' starred':''}" onclick="event.stopPropagation();toggleFav('${mn}')">★</button></div>`;
+c.querySelector(’.kc-major-btn’).onclick=e=>{const k=e.currentTarget.dataset.k;if(KEYS[k])enterKey(k);};
+c.querySelector(’.kc-minor-btn’).onclick=e=>{const k=e.currentTarget.dataset.k;if(KEYS[k])enterKey(k);};
+g.appendChild(c);
+});
 }
+
 function renderKeyView(kid){
-  const key=KEYS[kid];
-  document.getElementById('kv-name').textContent=key.name;
-  document.getElementById('kv-kicker').textContent=key.type==='major'?'Major Key':'Natural Minor Key';
-  renderChordMap(kid);closePanel();renderProgressions(kid);renderRelated(kid);
+const key=KEYS[kid];
+document.getElementById(‘kv-name’).textContent=key.name;
+document.getElementById(‘kv-kicker’).textContent=key.type===‘major’?‘Major Key’:‘Natural Minor Key’;
+renderChordMap(kid);closePanel();renderProgressions(kid);renderSongs(kid);renderRelated(kid);
 }
+function setHand(hand){curHand=hand;document.querySelectorAll(’.fing-tog’).forEach(b=>b.classList.toggle(‘active’,b.dataset.hand===hand));if(curKey)renderChordMap(curKey);}
+
 function renderChordMap(kid){
-  const key=KEYS[kid],funcs=key.type==='major'?FUNC_MAJOR:FUNC_MINOR,fing=curHand==='rh'?key.rh:key.lh;
-  const row=document.getElementById('chord-map-row');row.innerHTML='';
-  key.notes.forEach((n,i)=>{
-    const q=key.quals[i],sym=csym(n,q,0),ts=getTones(kid,i,curMExt),triad=ts.slice(0,3),sev=ts[3],nin=ts[4];
-    const card=document.createElement('div');card.className='chord-card'+(selDeg===i?' selected':'');
-    const tH=triad.map((t,ti)=>`<span class="cc-note${ti===0?' root-note':''}">${t}</span>${ti<2?'<span class="cc-note-sep">·</span>':''}`).join('');
-    let eH='';
-    if(curMExt>=1&&sev)eH+=`<div class="cc-row-label lbl-7">7</div><div class="cc-note-row"><span class="cc-note seventh-note">${sev}</span></div>`;
-    if(curMExt>=2&&nin)eH+=`<div class="cc-row-label lbl-9">9</div><div class="cc-note-row"><span class="cc-note ninth-note">${nin}</span></div>`;
-    card.innerHTML=`<div class="cc-sym">${sym}</div><div class="cc-meta">${key.romans[i]}<br>${funcs[i]}<br><span style="font-weight:600">${fing[i]}</span></div><div class="cc-notes-wrap"><div class="cc-note-row">${tH}</div>${eH}</div>`;
-    card.onclick=()=>onCard(kid,i);
-    row.appendChild(card);
-  });
+const key=KEYS[kid],funcs=key.type===‘major’?FUNC_MAJOR:FUNC_MINOR,fing=curHand===‘rh’?key.rh:key.lh;
+const row=document.getElementById(‘chord-map-row’);row.innerHTML=’’;
+key.notes.forEach((n,i)=>{
+const q=key.quals[i],sym=csym(n,q,0);
+const t3=getTones(kid,i,0),sev=getTones(kid,i,1)[3],nin=getTones(kid,i,2)[4];
+const card=document.createElement(‘div’);card.className=‘chord-card’+(selDeg===i?’ selected’:’’);
+const tH=t3.map((t,ti)=>`<span class="cc-note${ti===0?' root-note':''}">${t}</span>${ti<2?'<span class="cc-note-sep">·</span>':''}`).join(’’);
+card.innerHTML=`<div class="cc-sym">${sym}</div><div class="cc-meta">${key.romans[i]}<br>${funcs[i]}<br><span style="font-weight:600">${fing[i]}</span></div><div class="cc-notes-wrap"><div class="cc-note-row">${tH}</div><div class="cc-row-label lbl-7">7</div><div class="cc-note-row"><span class="cc-note seventh-note">${sev}</span></div><div class="cc-row-label lbl-9">9</div><div class="cc-note-row"><span class="cc-note ninth-note">${nin}</span></div></div>`;
+card.onclick=()=>onCard(kid,i);row.appendChild(card);
+});
 }
+
 function onCard(kid,deg){
-  if(selDeg===deg){selDeg=null;closePanel();renderChordMap(kid);return;}
-  selDeg=deg;curPExt=curMExt;renderChordMap(kid);openPanel(kid,deg,curPExt);
-  setTimeout(()=>document.getElementById('chord-panel').scrollIntoView({behavior:'smooth',block:'start'}),60);
+if(selDeg===deg){selDeg=null;closePanel();renderChordMap(kid);return;}
+selDeg=deg;curPExt=0;renderChordMap(kid);openPanel(kid,deg,curPExt);
+setTimeout(()=>document.getElementById(‘chord-panel’).scrollIntoView({behavior:‘smooth’,block:‘start’}),60);
 }
-function closePanel(){const p=document.getElementById('chord-panel');p.classList.remove('open');p.innerHTML='';}
-function togCls(e){return e===0?'on-triad':e===1?'on-seventh':'on-ninth';}
+function closePanel(){const p=document.getElementById(‘chord-panel’);p.classList.remove(‘open’);p.innerHTML=’’;}
+function togCls(e){return e===0?‘on-triad’:e===1?‘on-seventh’:‘on-ninth’;}
+
 function openPanel(kid,deg,ext){
-  const key=KEYS[kid],q=key.quals[deg],ts=getTones(kid,deg,ext),sym=csym(key.notes[deg],q,ext);
-  const isVm=key.type==='minor'&&deg===4;
-  const funcs=key.type==='major'?FUNC_MAJOR:FUNC_MINOR;
-  const mode=(key.type==='major'?MODES_MAJOR:MODES_MINOR)[deg];
-  const tri=ts.slice(0,3),extTs=ts.slice(3);
-  let chips=tri.map(t=>`<span class="chip triad">${t}</span>`).join('');
-  if(extTs.length){chips+=`<span class="chip-plus">+</span>`;chips+=extTs.map((t,i)=>`<span class="chip ${i===0?'ext':'nin'}">${t}</span>`).join('');}
-  const pills=revLookup(key.notes[deg],q).filter(r=>r.kid!==kid).slice(0,8).map(r=>`<button class="cp-key-pill" onclick="enterKey('${r.kid}')">${KEYS[r.kid].name} <span style="opacity:.6;font-size:9px">${r.roman}</span></button>`).join('');
-  const[r,t3,t5]=tri;
-  const invs=[{l:'1st inv',n:`${t3}  ${t5}  ${r}`},{l:'2nd inv',n:`${t5}  ${r}  ${t3}`}].map(v=>`<div class="cp-inv"><span class="inv-label">${v.l}</span><span class="inv-notes">${v.n}</span></div>`).join('');
-  const mFlag=`<div class="mode-flag"><div class="mode-flag-label">Mode from this root</div><div class="mode-flag-text">${key.notes[deg]} ${mode}</div><div class="mode-flag-desc">${MODE_DESC[mode]||''}</div></div>`;
-  let hFlag='';if(isVm&&key.vh)hFlag=`<div class="harm-flag"><div class="harm-label">Harmonic minor option</div><div class="harm-text">v → <strong>${key.vh.chord}</strong> · ${key.vh.notes}</div></div>`;
-  const vH=voicings(ts,q).map(v=>`<div class="vc-card${v.y?' yours':''}"><div class="vc-name">${v.n}${v.y?'<span class="vc-tag">Your voicing</span>':''}</div><div class="vc-hands"><div class="vc-hand"><span class="vc-hand-lbl">LH</span><span class="vc-hand-notes">${v.lh}</span></div><div class="vc-hand"><span class="vc-hand-lbl">RH</span><span class="vc-hand-notes">${v.rh}</span></div></div><div class="vc-tip">${v.tip}</div></div>`).join('');
-  const aH=arpeggios(ts).map(a=>`<div class="arp-card"><div class="arp-name">${a.n}</div><div class="arp-seq">${a.s}</div><div class="arp-tip">${a.tip}</div></div>`).join('');
-  const p=document.getElementById('chord-panel');
-  p.innerHTML=`<div class="cp-body"><div class="cp-row1"><div class="cp-name">${sym}</div><div class="cp-qual">${qlabel(q)} · ${funcs[deg]}</div></div><div class="cp-toggles"><button class="cp-tog ${ext===0?togCls(0):''}" data-e="0">Triad</button><button class="cp-tog ${ext===1?togCls(1):''}" data-e="1">7th</button><button class="cp-tog ${ext===2?togCls(2):''}" data-e="2">9th</button></div><div class="cp-tones">${chips}</div>${pills?`<div class="cp-keys-row"><span class="cp-keys-label">Also in</span>${pills}</div>`:''}<hr class="cp-hr"><div class="cp-sublabel">Inversions</div><div class="cp-invs">${invs}</div>${mFlag}${hFlag}</div><div class="voicing-wrap"><div class="vc-header"><div class="vc-title">Voicings</div><div class="vc-badge">LH · RH</div></div><div class="vc-list">${vH}</div></div><div class="arp-wrap"><div class="arp-header"><div class="arp-title">Arpeggio &amp; Broken Chord Patterns</div></div><div class="arp-list">${aH}</div></div>`;
-  p.querySelectorAll('.cp-tog').forEach(b=>b.onclick=()=>{const ne=+b.dataset.e;curPExt=ne;openPanel(kid,selDeg,ne);});
-  p.classList.add('open');
+const key=KEYS[kid],q=key.quals[deg],ts=getTones(kid,deg,ext),sym=csym(key.notes[deg],q,ext);
+const isVm=key.type===‘minor’&&deg===4;
+const funcs=key.type===‘major’?FUNC_MAJOR:FUNC_MINOR;
+const mode=(key.type===‘major’?MODES_MAJOR:MODES_MINOR)[deg];
+const tri=ts.slice(0,3),extTs=ts.slice(3);
+let chips=tri.map(t=>`<span class="chip triad">${t}</span>`).join(’’);
+if(extTs.length){chips+=`<span class="chip-plus">+</span>`;chips+=extTs.map((t,i)=>`<span class="chip ${i===0?'ext':'nin'}">${t}</span>`).join(’’);}
+const pills=revLookup(key.notes[deg],q).filter(r=>r.kid!==kid).slice(0,8).map(r=>`<button class="cp-key-pill" onclick="enterKey('${r.kid}')">${KEYS[r.kid].name} <span style="opacity:.6;font-size:9px">${r.roman}</span></button>`).join(’’);
+const[r,t3,t5]=tri;
+const invs=[{l:‘1st inv’,n:`${t3}  ${t5}  ${r}`},{l:‘2nd inv’,n:`${t5}  ${r}  ${t3}`}].map(v=>`<div class="cp-inv"><span class="inv-label">${v.l}</span><span class="inv-notes">${v.n}</span></div>`).join(’’);
+const mFlag=`<div class="mode-flag"><div class="mode-flag-label">Mode from this root</div><div class="mode-flag-text">${key.notes[deg]} ${mode}</div><div class="mode-flag-desc">${MODE_DESC[mode]||''}</div></div>`;
+let hFlag=’’;if(isVm&&key.vh)hFlag=`<div class="harm-flag"><div class="harm-label">Harmonic minor option</div><div class="harm-text">v → <strong>${key.vh.chord}</strong> · ${key.vh.notes}</div></div>`;
+const vH=voicings(ts).map(v=>`<div class="vc-card${v.y?' yours':''}"><div class="vc-name">${v.n}${v.y?'<span class="vc-tag">Your voicing</span>':''}</div><div class="vc-hands"><div class="vc-hand"><span class="vc-hand-lbl">LH</span><span class="vc-hand-notes">${v.lh}</span></div><div class="vc-hand"><span class="vc-hand-lbl">RH</span><span class="vc-hand-notes">${v.rh}</span></div></div><div class="vc-tip">${v.tip}</div></div>`).join(’’);
+const aH=arpeggios(ts).map(a=>`<div class="arp-card"><div class="arp-name">${a.n}</div><div class="arp-seq">${a.s}</div><div class="arp-tip">${a.tip}</div></div>`).join(’’);
+const p=document.getElementById(‘chord-panel’);
+p.innerHTML=`<div class="cp-body"><div class="cp-row1"><div class="cp-name">${sym}</div><div class="cp-qual">${qlabel(q)} · ${funcs[deg]}</div></div><div class="cp-toggles"><button class="cp-tog ${ext===0?togCls(0):''}" data-e="0">Triad</button><button class="cp-tog ${ext===1?togCls(1):''}" data-e="1">7th</button><button class="cp-tog ${ext===2?togCls(2):''}" data-e="2">9th</button></div><div class="cp-tones">${chips}</div>${pills?`<div class="cp-keys-row"><span class="cp-keys-label">Also in</span>${pills}</div>`:''}<hr class="cp-hr"><div class="cp-sublabel">Inversions</div><div class="cp-invs">${invs}</div>${mFlag}${hFlag}</div><div class="voicing-wrap"><div class="vc-header"><div class="vc-title">Voicings</div><div class="vc-badge">LH · RH</div></div><div class="vc-list">${vH}</div></div><div class="arp-wrap"><div class="arp-header"><div class="arp-title">Arpeggio &amp; Broken Chord Patterns</div></div><div class="arp-list">${aH}</div></div>`;
+p.querySelectorAll(’.cp-tog’).forEach(b=>b.onclick=()=>{const ne=+b.dataset.e;curPExt=ne;openPanel(kid,selDeg,ne);});
+p.classList.add(‘open’);
 }
+
 function renderProgressions(kid){
-  const key=KEYS[kid],n=key.notes,q=key.quals,cn=i=>csym(n[i],q[i],0);
-  const list=document.getElementById('prog-list');list.innerHTML='';
-  const progs=key.type==='major'?[
-    {r:'ii – V – I',c:[1,4,0],feel:'Jazz'},{r:'I – IV – V – I',c:[0,3,4,0],feel:'Classic'},
-    {r:'I – V – vi – IV',c:[0,4,5,3],feel:'Pop'},{r:'iii – vi – ii – V',c:[2,5,1,4],feel:'Jazz cycle'},
-    {r:'I – vi – IV – V',c:[0,5,3,4],feel:'50s'},{r:'IV – I – V – vi',c:[3,0,4,5],feel:'Anthemic'},
-    {r:'I – III – IV – iv',c:[0,2,3,3],feel:'Modal mix'},{r:'ii – IV – I – V',c:[1,3,0,4],feel:'Gospel'},
-  ]:[
-    {r:'ii° – V – i',c:[1,4,0],feel:'Jazz minor'},{r:'i – VII – VI – VII',c:[0,6,5,6],feel:'Driving'},
-    {r:'i – iv – v',c:[0,3,4],feel:'Modal'},{r:'i – VI – III – VII',c:[0,5,2,6],feel:'Ballad'},
-    {r:'i – iv – VII – III',c:[0,3,6,2],feel:'Descending'},{r:'i – VII – VI – v',c:[0,6,5,4],feel:'Andalusian'},
-    {r:'i – III – VII – VI',c:[0,2,6,5],feel:'Epic'},{r:'iv – i – v – i',c:[3,0,4,0],feel:'Ceremonial'},
-  ];
-  progs.forEach(p=>{
-    const cN=p.c.map(i=>cn(i)),cR=p.c.map(i=>n[i]);
-    const pi=[];for(let i=0;i<cR.length-1;i++)passingNotes(cR[i],cR[i+1],key.notes).forEach(x=>pi.push(`<span class="pass-item">${cN[i]} ${x.dir} ${cN[i+1]}: <strong>${x.note}</strong> <span style="opacity:.6">${x.type}</span></span>`));
-    const row=document.createElement('div');row.className='prog-row';
-    row.innerHTML=`<div class="prog-top"><span class="prog-roman">${p.r}</span><span class="prog-feel">${p.feel}</span></div><div class="prog-chords">${cN.join('  –  ')}</div>${pi.length?`<div class="passing-row"><span class="pass-label">Passing</span>${pi.join('')}</div>`:''}`;
-    list.appendChild(row);
-  });
+const key=KEYS[kid],n=key.notes,q=key.quals,cn=i=>csym(n[i],q[i],0);
+const list=document.getElementById(‘prog-list’);list.innerHTML=’’;
+const progs=key.type===‘major’?[
+{r:‘ii – V – I’,c:[1,4,0],feel:‘Jazz’},{r:‘I – IV – V – I’,c:[0,3,4,0],feel:‘Classic’},
+{r:‘I – V – vi – IV’,c:[0,4,5,3],feel:‘Pop’},{r:‘iii – vi – ii – V’,c:[2,5,1,4],feel:‘Jazz cycle’},
+{r:‘I – vi – IV – V’,c:[0,5,3,4],feel:‘50s’},{r:‘IV – I – V – vi’,c:[3,0,4,5],feel:‘Anthemic’},
+{r:‘I – III – IV – iv’,c:[0,2,3,3],feel:‘Modal mix’},{r:‘ii – IV – I – V’,c:[1,3,0,4],feel:‘Gospel’},
+]:[
+{r:‘ii° – V – i’,c:[1,4,0],feel:‘Jazz minor’},{r:‘i – VII – VI – VII’,c:[0,6,5,6],feel:‘Driving’},
+{r:‘i – iv – v’,c:[0,3,4],feel:‘Modal’},{r:‘i – VI – III – VII’,c:[0,5,2,6],feel:‘Ballad’},
+{r:‘i – iv – VII – III’,c:[0,3,6,2],feel:‘Descending’},{r:‘i – VII – VI – v’,c:[0,6,5,4],feel:‘Andalusian’},
+{r:‘i – III – VII – VI’,c:[0,2,6,5],feel:‘Epic’},{r:‘iv – i – v – i’,c:[3,0,4,0],feel:‘Ceremonial’},
+];
+progs.forEach(p=>{
+const cN=p.c.map(i=>cn(i)),cR=p.c.map(i=>n[i]);
+const pi=[];
+for(let i=0;i<cR.length-1;i++)passingNotes(cR[i],cR[i+1],key.notes).forEach(x=>pi.push(`<span class="pass-item">${cN[i]} ${x.dir} ${cN[i+1]}: <strong>${x.note}</strong> <span style="opacity:.6">${x.type}</span></span>`));
+const row=document.createElement(‘div’);row.className=‘prog-row’;
+const did=‘pd’+Math.random().toString(36).slice(2);
+row.innerHTML=`<div class="prog-summary" onclick="togglePD('${did}',this)"><div class="prog-top"><span class="prog-roman">${p.r}</span><span class="prog-feel">${p.feel}</span></div><div class="prog-chords">${cN.join('  –  ')}</div>${pi.length?`<div class="prog-expand-hint" id="h${did}">Tap for passing notes ›</div>`:''}</div>${pi.length?`<div class="prog-detail" id="${did}"><div class="passing-row"><span class="pass-label">Passing</span>${pi.join(’’)}</div></div>`:''}`;
+list.appendChild(row);
+});
 }
+function togglePD(id,el){
+const d=document.getElementById(id),h=document.getElementById(‘h’+id);
+if(!d)return;
+const o=d.classList.toggle(‘open’);
+if(h)h.textContent=o?‘Tap to hide ↑’:‘Tap for passing notes ›’;
+}
+
+function renderSongs(kid){
+const list=document.getElementById(‘songs-list’);list.innerHTML=’’;
+const songs=SONGS[kid]||[];
+if(!songs.length){list.innerHTML=’<div style="font-size:13px;color:#ccc;padding:8px 0 16px">No songs listed yet.</div>’;return;}
+songs.forEach((s,i)=>{
+const row=document.createElement(‘div’);row.className=‘song-row’;
+row.innerHTML=`<span class="song-num">${i+1}</span><span class="song-title">${s.t}</span><span class="song-artist">${s.a}</span>`;
+list.appendChild(row);
+});
+}
+
 function renderRelated(kid){
-  const key=KEYS[kid],name=key.name.split(' ')[0],out=[];
-  if(key.type==='major'){
-    const pi=COF_PAIRS.findIndex(p=>p.major===name);if(pi>=0)out.push({label:'Relative minor',id:COF_PAIRS[pi].minor+'_minor'});
-    const mi=COF_MAJ.indexOf(name);if(mi>=0){out.push({label:'← Flatter',id:COF_MAJ[(mi+11)%12]+'_major'});out.push({label:'Sharper →',id:COF_MAJ[(mi+1)%12]+'_major'});}
-  }else{
-    const pi=COF_PAIRS.findIndex(p=>p.minor===name);if(pi>=0)out.push({label:'Relative major',id:COF_PAIRS[pi].major+'_major'});
-    const mi=COF_MIN.indexOf(name);if(mi>=0){out.push({label:'← Flatter',id:COF_MIN[(mi+11)%12]+'_minor'});out.push({label:'Sharper →',id:COF_MIN[(mi+1)%12]+'_minor'});}
-  }
-  const g=document.getElementById('related-grid');g.innerHTML='';
-  out.filter(r=>KEYS[r.id]).forEach(r=>{
-    const c=document.createElement('div');c.className='rel-card';
-    c.innerHTML=`<div class="rel-relation">${r.label}</div><div class="rel-name">${KEYS[r.id].name}</div>`;
-    c.onclick=()=>enterKey(r.id);g.appendChild(c);
-  });
+const key=KEYS[kid],name=key.name.split(’ ‘)[0],out=[];
+if(key.type===‘major’){
+const pi=COF_PAIRS.findIndex(p=>p.major===name);if(pi>=0)out.push({label:‘Relative minor’,id:COF_PAIRS[pi].minor+’_minor’});
+const mi=COF_MAJ.indexOf(name);if(mi>=0){out.push({label:‘← Flatter’,id:COF_MAJ[(mi+11)%12]+’_major’});out.push({label:‘Sharper →’,id:COF_MAJ[(mi+1)%12]+’_major’});}
+}else{
+const pi=COF_PAIRS.findIndex(p=>p.minor===name);if(pi>=0)out.push({label:‘Relative major’,id:COF_PAIRS[pi].major+’_major’});
+const mi=COF_MIN.indexOf(name);if(mi>=0){out.push({label:‘← Flatter’,id:COF_MIN[(mi+11)%12]+’_minor’});out.push({label:‘Sharper →’,id:COF_MIN[(mi+1)%12]+’_minor’});}
 }
+const g=document.getElementById(‘related-grid’);g.innerHTML=’’;
+out.filter(r=>KEYS[r.id]).forEach(r=>{
+const c=document.createElement(‘div’);c.className=‘rel-card’;
+c.innerHTML=`<div class="rel-relation">${r.label}</div><div class="rel-name">${KEYS[r.id].name}</div>`;
+c.onclick=()=>enterKey(r.id);g.appendChild(c);
+});
+}
+
+function openChapter(id){document.getElementById(‘theory-index-wrap’).style.display=‘none’;document.querySelectorAll(’.theory-chapter’).forEach(c=>c.classList.remove(‘open’));document.getElementById(‘ch-’+id).classList.add(‘open’);document.getElementById(‘theory-scroll’).scrollTop=0;}
+function closeChapter(){document.querySelectorAll(’.theory-chapter’).forEach(c=>c.classList.remove(‘open’));document.getElementById(‘theory-index-wrap’).style.display=’’;document.getElementById(‘theory-scroll’).scrollTop=0;}
+function toggleConcept(header){const body=header.nextElementSibling,tog=header.querySelector(’.concept-toggle’),isOpen=body.classList.contains(‘open’);body.classList.toggle(‘open’,!isOpen);tog.classList.toggle(‘open’,!isOpen);}
+
+function renderBuilderKeyPicker(){
+const row=document.getElementById(‘builder-key-row’);row.innerHTML=’’;
+ALL_IDS.forEach(kid=>{
+const b=document.createElement(‘button’);b.className=‘bk-pill’+(kid===builderKey?’ active’:’’);
+b.textContent=KEYS[kid].name;
+b.onclick=()=>{builderKey=kid;renderBuilderKeyPicker();renderBuilderChordMap();renderBuilderRecs();};
+row.appendChild(b);
+});
+}
+function setBuilderExt(ext){
+builderExt=ext;
+document.querySelectorAll(’.bext-tog’).forEach(b=>b.classList.toggle(‘active’,+b.dataset.ext===ext));
+renderBuilderChordMap();
+}
+function renderBuilderChordMap(){
+const key=KEYS[builderKey],funcs=key.type===‘major’?FUNC_MAJOR:FUNC_MINOR;
+const row=document.getElementById(‘builder-chord-map’);row.innerHTML=’’;
+key.notes.forEach((n,i)=>{
+const q=key.quals[i],sym=csym(n,q,builderExt),ts=getTones(builderKey,i,builderExt),triad=ts.slice(0,3);
+const card=document.createElement(‘div’);card.className=‘chord-card’;
+const tH=triad.map((t,ti)=>`<span class="cc-note${ti===0?' root-note':''}">${t}</span>${ti<2?'<span class="cc-note-sep">·</span>':''}`).join(’’);
+card.innerHTML=`<div class="cc-sym">${sym}</div><div class="cc-meta">${key.romans[i]}<br>${funcs[i]}</div><div class="cc-notes-wrap"><div class="cc-note-row">${tH}</div></div>`;
+card.onclick=()=>addChord(builderKey,i,builderExt);
+row.appendChild(card);
+});
+}
+function addChord(kid,deg,ext){
+const isPivot=builderProg.length>0&&builderProg[builderProg.length-1].kid!==kid;
+builderProg.push({kid,deg,ext,pivot:isPivot});
+renderTape();renderBuilderRecs();
+}
+function renderTape(){
+const tape=document.getElementById(‘builder-tape’);tape.innerHTML=’’;
+if(!builderProg.length){tape.innerHTML=’<span class="builder-tape-empty">Tap a chord below to start</span>’;return;}
+builderProg.forEach((item,idx)=>{
+const key=KEYS[item.kid],sym=csym(key.notes[item.deg],key.quals[item.deg],item.ext);
+const div=document.createElement(‘div’);div.className=‘tape-chord’+(item.pivot?’ pivot-marker’:’’);
+div.innerHTML=`<span class="tape-chord-sym">${sym}</span><span class="tape-chord-key">${key.name}</span>${item.ext>0?`<span class="tape-chord-ext">${item.ext===1?‘7th’:‘9th’}</span>`:''}<button class="tape-chord-remove" onclick="removeChord(${idx})">✕</button>`;
+tape.appendChild(div);
+});
+tape.scrollLeft=tape.scrollWidth;
+}
+function removeChord(idx){builderProg.splice(idx,1);renderTape();renderBuilderRecs();}
+function undoLast(){if(builderProg.length){builderProg.pop();renderTape();renderBuilderRecs();}}
+function clearProgression(){builderProg=[];renderTape();document.getElementById(‘builder-recs’).style.display=‘none’;}
+
+function renderBuilderRecs(){
+const wrap=document.getElementById(‘builder-recs’);
+if(!builderProg.length){wrap.style.display=‘none’;return;}
+wrap.style.display=’’;
+const last=builderProg[builderProg.length-1];
+const key=KEYS[last.kid],funcs=key.type===‘major’?FUNC_MAJOR:FUNC_MINOR;
+const strong=[],colour=[],pivots=[];
+key.notes.forEach((n,i)=>{
+if(i===last.deg)return;
+const sym=csym(n,key.quals[i],builderExt),f=funcs[i],lf=funcs[last.deg];
+const isStrong=(lf===‘Dom’&&f===‘Tonic’)||(lf===‘Subdom’&&f===‘Dom’)||(lf===‘Tonic’&&(f===‘Subdom’||f===‘Dom’));
+if(isStrong)strong.push({sym,kid:last.kid,deg:i});else colour.push({sym,kid:last.kid,deg:i});
+});
+revLookup(key.notes[last.deg],key.quals[last.deg]).filter(r=>r.kid!==last.kid).slice(0,4).forEach(r=>{
+pivots.push({sym:KEYS[r.kid].name,label:`(${r.roman})`,kid:r.kid});
+});
+const content=document.getElementById(‘builder-recs-content’);content.innerHTML=’’;
+const mkGroup=(title,items,isPivot)=>{
+if(!items.length)return;
+const g=document.createElement(‘div’);g.className=‘rec-group’;
+const pills=items.map(item=>{
+const cls=‘rec-pill’+(isPivot?’ pivot’:’’);
+const onclick=isPivot?`pivotTo('${item.kid}')`:`addChord('${item.kid}',${item.deg},${builderExt})`;
+return `<button class="${cls}" onclick="${onclick}">${item.sym}${item.label?` <span style="font-size:10px;opacity:.6">${item.label}</span>`:''}`;
+}).join(’’);
+g.innerHTML=`<div class="rec-group-title">${title}</div><div class="rec-pills">${pills}</div>`;
+content.appendChild(g);
+};
+mkGroup(‘Strong moves’,strong,false);
+mkGroup(‘Colour moves’,colour,false);
+mkGroup(‘Pivot to new key’,pivots,true);
+}
+function pivotTo(kid){builderKey=kid;renderBuilderKeyPicker();renderBuilderChordMap();renderBuilderRecs();}
+
+function saveProgression(){if(!builderProg.length)return;document.getElementById(‘prog-name-input’).value=’’;document.getElementById(‘save-modal’).classList.add(‘open’);setTimeout(()=>document.getElementById(‘prog-name-input’).focus(),100);}
+function closeModal(){document.getElementById(‘save-modal’).classList.remove(‘open’);}
+function confirmSave(){
+const name=document.getElementById(‘prog-name-input’).value.trim()||‘Untitled’;
+const saved=JSON.parse(localStorage.getItem(‘kh_progs’)||’[]’);
+saved.unshift({id:Date.now(),name,prog:JSON.parse(JSON.stringify(builderProg)),date:new Date().toLocaleDateString()});
+localStorage.setItem(‘kh_progs’,JSON.stringify(saved));
+closeModal();renderSaved();
+}
+function renderSaved(){
+const wrap=document.getElementById(‘saved-list-wrap’);
+const saved=JSON.parse(localStorage.getItem(‘kh_progs’)||’[]’);
+if(!saved.length){wrap.innerHTML=’<div class="saved-empty">No saved progressions yet.</div>’;return;}
+wrap.innerHTML=’<div class="saved-list">’+saved.map(s=>`<div class="saved-card"><div class="saved-card-name">${s.name}</div><div class="saved-card-chords">${s.prog.map(c=>csym(KEYS[c.kid].notes[c.deg],KEYS[c.kid].quals[c.deg],c.ext)).join(' – ')}</div><div class="saved-card-meta">${s.date} · ${s.prog.length} chords</div><button class="saved-card-del" onclick="deleteSaved(${s.id})">✕</button></div>`).join(’’)+’</div>’;
+}
+function deleteSaved(id){
+const saved=JSON.parse(localStorage.getItem(‘kh_progs’)||’[]’).filter(s=>s.id!==id);
+localStorage.setItem(‘kh_progs’,JSON.stringify(saved));renderSaved();
+}
+
 renderHome();
 </script>
 
